@@ -137,6 +137,9 @@ class discoverPage():
             CloseSessionPopup.click()
             time.sleep(2)
 
+    def example(self):
+        ##
+
     def OpenDate(self):
 
         OpenDate2 = self.driver.find_elements(By.XPATH, self.OpenDateXpath)

@@ -802,6 +802,9 @@ class dashboardPage():
             time.sleep(1)
 
     def deletetoastMsg(self):
+        wait = WebDriverWait(self.driver, 5)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.deleteToastMsgXpath))
+                   )
         delete_toast_msg = self.driver.find_elements(By.XPATH, self.deleteToastMsgXpath)[0].text
         return delete_toast_msg
 

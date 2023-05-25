@@ -13,7 +13,7 @@ import unittest
 
 # Test pass may 15 2023
 
-class TestMethods_Xpanse(unittest.TestCase):
+class TestMethods_sessionNotes(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     Query_1 = "destination.ip: 194.5.249.157 or rule.category: A Network Trojan was detected"

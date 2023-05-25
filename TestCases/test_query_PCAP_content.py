@@ -6,7 +6,7 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg_copy2 import discoverPage
+from PageObject.discover_pg import discoverPage
 import time
 import unittest
 import HtmlTestRunner
@@ -80,6 +80,7 @@ class TestQuery_PCAP_content(unittest.TestCase):
 
         dp = discoverPage(self.driver)
         dp.discover_pg_loads()
+        time.sleep(2)
         dp.openIndex()
         time.sleep(1)
         dp.enter_ECSIndex(self.index)

@@ -19,22 +19,21 @@ class discoverPage():
     ApplyButtonXpath = "//span[contains(text(),'Apply')]"
     IndexNameXpath = "//*/div[1]/div[1]/button[1]/span[1]/span[1]/strong[1]"
     OpenIndexDropdownXpath = "//button[@data-test-subj='indexPattern-switch-link']"
-    #EnterSearchboxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
-    enterFavIndxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
+    enterFavIndxXpath = "//input[@aria-label='Filter options']"
     EnterSearchboxXpath = "//input[@aria-label='Filter options']"
     enterIndexXpath = "//*/span[1]/span[1]/span[1]/mark[1]"
     selectZeekIndexXpath = "//mark[contains(text(),'ecs-zeek')]"
     AddfilterXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
     addfilter2Xpath = "//*/div[1]/div[1]/div[1]/span[1]/span[1]/button[1]/span[1]/span[1]"
     arrowIconXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
-    #enterFieldXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     enterFieldXpath = "//input[@data-test-subj='comboBoxSearchInput']"
     selectFieldXpath = "//*/div[1]/div[1]/div[1]/div[1]/button[2]/span[1]/span[1]/span[1]/span[1]"
     selectField2Xpath = "//mark[@class='euiMark']"
     arrow_iconXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
     select_IsXpath = "//span[@class='euiComboBoxOption__content']"
     select_IsNotXpath = "//*/button[2]/span[1]/span[1]/span[1]/span[1]"
-    enterDropdownXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    # enterDropdownXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    enterDropdownXpath = "//*/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/input[1]"
     enter2ndDropdownXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     clickSaveXpath = "//*/div[2]/div[1]/div[5]/div[1]/button[1]/span[1]/span[1]"
     click_filterXpath = "//*/div[2]/div[1]/div[1]/span[1]/span[1]/button[1]/span[1]/span[1]"
@@ -56,8 +55,7 @@ class discoverPage():
     sen_ipdataxpath = "//*/tbody/tr/td[5]/div[1]/span[1]"
     selectIndexXpath = "//mark[@class='euiMark']"
     removeFilterXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]/button[2]/*[1]"
-    #expand_arrow_iconXpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
-    expand_arrow_iconXpath = "//*/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/span[1]/button[1]"
+    expand_arrow_iconXpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
     table_tabXpath = "//span[contains(text(),'Table')]"
     get_idXpath = "//div[@class='kbnDocViewer__value']"
     ref_listXpath = "//*/div/figure[1]/div[1]/div[1]/div[1]"
@@ -74,13 +72,11 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    addFilterFieldXpath = "//input[contains(@class, 'euiFieldText--fullWidth')]"
-    addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    addFilterFieldXpath = "//input[contains(@class, 'euiFieldNumber--fullWidth')]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"
     getAppXpath = "//tbody/tr/td[3]/div[1]/span[1]"
     ECSIndex_Xpath = "//mark[contains(text(),'ecs-*')]"
-    suricataIndex_xpath = "//mark[contains(text(),'ecs-suricata')]"
     button_15minXpath = "//button[contains(text(),'Last 15 minutes')]"
     button_oneMonthXpath = "//button[contains(text(),'Last 1 month')]"
     openCalenderDateXpath = "//*/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/button[1]"
@@ -89,7 +85,6 @@ class discoverPage():
     absoluteTimeFilterXpath = "//span[contains(text(),'Absolute')]"
     DateFieldXpath = "//input[contains(@class, 'euiFieldText--inGroup')]"
     clickNowXpath = "//button[contains(text(),'now')]"
-    clickTodayXpath = "//button[contains(text(),'Today')]"
     ArrowXpath = "//*/div[3]/div[1]/div[1]/div[1]/span[1]/button[1]"
     pagin_arrowXpath = "//*/div[1]/button[1]/span[1]/span[1]"
     pagin_linkXpath = "//*/div[5]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
@@ -98,7 +93,7 @@ class discoverPage():
     arkimeLinkXpath = "//*/div[2]/div[4]/div[1]/div[1]/div[1]/span[1]/a[1]"
     decoderIndexXpath = "//mark[contains(text(),'decoders-*')]"
     indexnameXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
-    pcapdataXpath = "//mark[contains(text(), 'fj-16-210725.cap')]"
+    pcapdataXpath = "//mark[contains(text(), 'fj-46a-190118.cap')]"
     extractFileXpath = "//mark[contains(text(), 'setcsrss.exe_895a0be4ae10ba436ad9506164a9db00')]"
     clickFieldTovisualXpath = "//span[@class='kbnFieldButton__fieldIcon']/span[1]/*[1]"
     clickVisualizeXpath = "//span[contains(text(),'Visualize')]"
@@ -118,17 +113,6 @@ class discoverPage():
     xdip_xpath = "//*/div/div[5]/div[1]/div[1]/div[1]/span[1]"
     xdestIP2_xpath = "//*/div[2]/div[5]/div[1]/div[1]/div[1]/span[1]/a[1]"
     source_ip_xpath = "//*/div[1]/div[2]/div[7]/div[1]/div[1]/div[1]/span[1]"
-    networkIPBytes_xpath = "//thead/tr[1]/th[3]/span[1]"
-    addedfield2_xpath = "//thead/tr[1]/th[4]/span[1]"
-    firstvalue_xpath = "//*/tbody[1]/tr/td[3]/div[1]/span[1]/mark[1]"
-    secvalue_xpath = "//*/tbody[1]/tr/td[4]/div[1]/span[1]"
-    tablecol_xpath = "//table[1]/tbody/tr/td[4]/div[1]"
-    tablecolde_xpath = "//tbody[1]/tr/td[5]/div[1]/mark[1]"
-    table_pub_xpath = "//tbody/tr/td[5]/div[1]"
-    table_col_dest_xpath = "//tbody/tr/td[6]/div[1]"
-    col_id_xpath = "//thead/tr[1]/th[3]/span[1]/span[1]/button[1]"
-    remove_column_xpath = "//span[contains(text(),'Remove column')]"
-    col7_senFilename_xpath = "//tbody/tr/td[3]/div[1]"
 
 
 
@@ -137,7 +121,7 @@ class discoverPage():
 
 
     def loadingCheck(self):
-        time.sleep(3)
+        time.sleep(5)
         numberOfRetries = 5
         stillLoadingData = False
         while (not bool(stillLoadingData)) and (numberOfRetries > 0):
@@ -152,6 +136,9 @@ class discoverPage():
             CloseSessionPopup = self.driver.find_element(By.XPATH, "//button[@aria-label='Search session complete']")
             CloseSessionPopup.click()
             time.sleep(2)
+
+    def example(self):
+        ##
 
     def OpenDate(self):
 
@@ -227,10 +214,6 @@ class discoverPage():
         selectField = self.driver.find_elements(By.XPATH, self.selectField2Xpath)
         selectField[0].click()
 
-    def select_addfilter_senFilename(self):
-        select_senFilename = self.driver.find_elements(By.XPATH, "//mark[text()='sensor.filename']")
-        select_senFilename[0].click()
-
 
 
     def clickarrow_addfilter(self):
@@ -255,24 +238,11 @@ class discoverPage():
         Enter_dropdown = self.driver.find_elements(By.XPATH, self.enterDropdownXpath)
         Enter_dropdown[0].send_keys(data)
 
-    def enter_addedFilterField(self, addedfilter_field):
-        EnterField = self.driver.find_elements(By.XPATH, self.addFilterFieldXpath)
-        EnterField[0].send_keys(addedfilter_field)
-
 
     def enter_addfilterField(self, field):
         Enter_textbox = self.driver.find_elements(By.XPATH, self.addFilterFieldXpath)
         Enter_textbox[0].send_keys(field)
-
-    def enter_addfilterField2(self, field2):
-        Enter_textbox = self.driver.find_elements(By.XPATH, self.addFilterFieldXpath)
-        Enter_textbox[0].send_keys(field2)
-
-
-    def enter_addfilterField_value(self, addedfilter_val):
-        Enter_textbox = self.driver.find_elements(By.XPATH, self.addedFilterValFieldXpath)
-        Enter_textbox[0].send_keys(addedfilter_val)
-
+        time.sleep(6)
 
 
     def clickSave(self):
@@ -436,19 +406,9 @@ class discoverPage():
         verify_sensorFile = self.driver.find_elements(By.XPATH, self.getSensorFileXpath)
         return verify_sensorFile
 
-    def discover_pg_loads(self):
-        wait = WebDriverWait(self.driver, 30)
-        wait.until(EC.presence_of_element_located((By.XPATH, self.OpenIndexDropdownXpath))
-                  )
-
     def openIndex(self):
         Open_index = self.driver.find_elements(By.XPATH, self.OpenIndexDropdownXpath)
         Open_index[0].click()
-
-    def enter_ECSIndex(self, index):
-        Enter_searchfield = self.driver.find_elements(By.XPATH, self.indexnameXpath)
-        Enter_searchfield[0].send_keys(index)
-        time.sleep(2)
 
     def enterIndex(self, IndexName):
         Enter_index = self.driver.find_elements(By.XPATH, self.enterFavIndxXpath)
@@ -462,10 +422,6 @@ class discoverPage():
     def selectZeek_index(self):
         ecsZeek_option = self.driver.find_elements(By.XPATH, self.selectZeekIndexXpath)
         ecsZeek_option[0].click()
-
-    def selectSuricata_index(self):
-        select_suricata = self.driver.find_elements(By.XPATH, self.suricataIndex_xpath)
-        select_suricata[0].click()
 
 
 
@@ -500,22 +456,6 @@ class discoverPage():
         Absoulte_tab = self.driver.find_elements(By.XPATH, self.absoluteTimeFilterXpath)
         Absoulte_tab[0].click()
 
-    def select_timeFilter(self):
-        select_15minago = self.driver.find_elements(By.XPATH, self.button_15minXpath)
-        select_today = self.driver.find_elements(By.XPATH, self.clickTodayXpath)
-        select_any = self.driver.find_elements(By.XPATH, self.openCalenderDateXpath)
-        if len(self.driver.find_elements(By.XPATH, self.button_15minXpath)) > 0:
-            select_15minago[0].click()
-            time.sleep(1)
-        elif len(self.driver.find_elements(By.XPATH, self.clickTodayXpath)) > 0:
-            select_today[0].click()
-            time.sleep(1)
-        else:
-            select_any[0].click()
-            time.sleep(1)
-
-
-
     def startDate(self, startDateValue):
         startDate_field = self.driver.find_elements(By.XPATH, self.DateFieldXpath)
         startDate_field[0].send_keys(Keys.CONTROL + "a")
@@ -545,14 +485,10 @@ class discoverPage():
         EnterField[0].send_keys(sen_name)
 
 
-    # def enterDropdownDD(self, dd):
-    #     Enter_dropdown = self.driver.find_elements(By.XPATH, self.enterDropdownXpath)
-    #     Enter_dropdown[0].send_keys(dd)
+    def enterDropdownDD(self, dd):
 
-    def verify_networkIP_bytes(self):
-        Verify_added_field = self.driver.find_elements(By.XPATH, self.networkIPBytes_xpath)[0].text
-        assert "network.ip_bytes" == Verify_added_field
-
+        Enter_dropdown = self.driver.find_elements(By.XPATH, self.enterDropdownXpath)
+        Enter_dropdown[0].send_keys(dd)
 
 
     def verifySensorName(self):
@@ -604,13 +540,6 @@ class discoverPage():
         decoders = self.driver.find_elements(By.XPATH, self.selectIndexXpath)
         decoders[0].click()
 
-    def enterKQL1(self, KQL1):
-        enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
-        enterKQL[0].send_keys(Keys.CONTROL + "a")
-        enterKQL[0].send_keys(Keys.DELETE)
-        time.sleep(2)
-        enterKQL[0].send_keys(KQL1)
-
 
     def enterKQL2(self, KQL2):
         enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
@@ -619,16 +548,9 @@ class discoverPage():
         time.sleep(2)
         enterKQL[0].send_keys(KQL2)
 
-
-    def enterKQL3(self, KQL3):
-        enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
-        enterKQL[0].send_keys(Keys.CONTROL + "a")
-        enterKQL[0].send_keys(Keys.DELETE)
-        time.sleep(2)
-        enterKQL[0].send_keys(KQL3)
-
-
     def verifySenName(self, sen_name):
+
+
         sensor_name_data = self.driver.find_elements(By.XPATH, self.sen_name_dataXpath)
 
         for sen in sensor_name_data:
@@ -901,10 +823,6 @@ class discoverPage():
             clickFav_indexOption = self.driver.find_elements(By.XPATH, self.favIndexXpath)
             clickFav_indexOption[0].click()
 
-    def select_sensorName_addfilter(self):
-        select_sensorName = self.driver.find_elements(By.XPATH, "//mark[text()='sensor.name']")
-        select_sensorName[0].click()
-
     def search_ArkimePivot(self, arkime):
         searchfield = self.driver.find_elements(By.XPATH, self.searchfield_rightpanelXpath)
         searchfield[0].send_keys(arkime)
@@ -1010,17 +928,10 @@ class discoverPage():
         searchfield = self.driver.find_elements(By.XPATH, self.searchfield_rightpanelXpath)
         searchfield[0].send_keys(fieldname4)
 
-    def search_searchfield5(self, fieldname5):
-        searchfield = self.driver.find_elements(By.XPATH, self.searchfield_rightpanelXpath)
-        searchfield[0].send_keys(fieldname5)
+    def select_sensorName_addfilter(self):
+        select_sensorName = self.driver.find_elements(By.XPATH, "//mark[text()='sensor.name']")
+        select_sensorName[0].click()
 
-    def search_searchfield6(self, fieldname6):
-        searchfield = self.driver.find_elements(By.XPATH, self.searchfield_rightpanelXpath)
-        searchfield[0].send_keys(fieldname6)
-
-    def click_column1(self):
-        click_column_1 = self.driver.find_elements(By.XPATH, self.col_id_xpath)
-        click_column_1[0].click()
 
 
     def add_searchResults_click_plusicon(self):
@@ -1142,69 +1053,7 @@ class discoverPage():
         searchBox[0].send_keys("_id: " + store_id)
         time.sleep(3)
 
-
-    def verify_addedField2(self):
-        Verify_added_field2 = \
-        self.driver.find_elements(By.XPATH, self.addedfield2_xpath)[0].text
-        assert "_id" == Verify_added_field2
+    def closeTags_modalWindow(self):
+        close_button= self.driver.find_elements(By.XPATH, "//button[@aria-label='Closes this modal window']")
 
 
-    def verify_firstValue(self, networkip_value):
-
-        first_value = self.driver.find_elements(By.XPATH, self.firstvalue_xpath)
-        for cap in first_value:
-            assert networkip_value == cap.text
-
-
-    def verify_secValue(self, _id_value):
-        second_value = self.driver.find_elements(By.XPATH, self.secvalue_xpath)
-        for id in second_value:
-            assert _id_value == id.text
-
-
-    def verify_sensorOutput(self, verify_sensor_output):
-
-        table_col = self.driver.find_elements(By.XPATH, self.tablecol_xpath)
-        for col_dd in table_col:
-            assert verify_sensor_output == col_dd.text
-
-    def verify_ghostData(self, verifydata_ghost):
-
-        table_col_de = self.driver.find_elements(By.XPATH, self.tablecolde_xpath)
-
-        for col2 in table_col_de:
-            assert verifydata_ghost == col2.text
-
-    def verify_sourceip_pub(self, source_ip_pub):
-        table_pub = self.driver.find_elements(By.XPATH, self.table_pub_xpath)
-        for col_3 in table_pub:
-            assert source_ip_pub == col_3.text
-
-
-    def verify_dest_ip_pub(self, destin_ip_pub):
-        table_col_dest = self.driver.find_elements(By.XPATH, self.table_col_dest_xpath)
-        for col_4 in table_col_dest:
-            assert destin_ip_pub == col_4.text
-
-
-
-    def verify_sourceDestIP_pub2(self, source_ip_pub2, destin_ip_pub):
-        table_pub = self.driver.find_elements(By.XPATH, self.table_pub_xpath)
-        table_col_dest = self.driver.find_elements(By.XPATH, self.table_col_dest_xpath)
-        for col_3 in table_pub:
-            for col_4 in table_col_dest:
-                assert (source_ip_pub2 == col_3.text or destin_ip_pub == col_4.text)
-
-
-
-
-
-    def remove_column(self):
-        Remove = self.driver.find_elements(By.XPATH, self.remove_column_xpath)
-        Remove[0].click()
-
-    def verify_sensorFilename_col7(self, sensor_filename):
-
-        table_col_Filename = self.driver.find_elements(By.XPATH, self.col7_senFilename_xpath)
-        for col_7 in table_col_Filename:
-            assert sensor_filename == col_7.text

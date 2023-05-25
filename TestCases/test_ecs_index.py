@@ -6,16 +6,16 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg_copy2 import discoverPage
+from PageObject.discover_pg import discoverPage
 import time
 import unittest
 import HtmlTestRunner
 
-#Test passed may 23 2023 applied
+#Test passed may 25 2023 applied
 #test case, V.1.1 release (Consolidated Field Mapping for ecs-*)
 
 #Moon-154 Test Case
-class TestDelete_tags(unittest.TestCase):
+class Test_ecs_index(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     value = "last"
@@ -104,7 +104,6 @@ class TestDelete_tags(unittest.TestCase):
         dp.selectIsMenu()
         time.sleep(4)
         dp.enter_addfilterField(self.field)
-        # dp.EnterDropdown(self.data)
         time.sleep(8)
         dp.clickSave()
         time.sleep(3)

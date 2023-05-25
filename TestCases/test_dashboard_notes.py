@@ -7,12 +7,12 @@ from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
-from PageObject.discover_pg_copy2 import discoverPage
+from PageObject.discover_pg import discoverPage
 import re
 import time
 import unittest
 
-#test pass may 15 2023
+#test pass may 24 2023 applied discover copy2
 
 class TestMethods_Xpanse(unittest.TestCase):
     username = "analyst"
@@ -36,7 +36,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
         cls.driver.implicitly_wait(14)
-        time.sleep(5)
+        time.sleep(2)
 
     def test_dashboard_notes(self):
         Ip = loginPage(self.driver)

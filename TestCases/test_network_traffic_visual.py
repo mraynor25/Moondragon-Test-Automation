@@ -11,9 +11,10 @@ from PageObject.visualize_pg import visualizePage
 import time
 import unittest
 
+# Test pass may 24 2023 applied discover copy2
 #Fix the test for adding last 5 years line 88 errors chose pie chart
 
-class TestMethods(unittest.TestCase):
+class Test_network_traffic(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     suricata_index = "ecs-suricata"
@@ -70,7 +71,6 @@ class TestMethods(unittest.TestCase):
         dp.numofyear(self.num)
         time.sleep(2)
         dp.clickApply()
-        # self.driver.implicitly_wait(10)
         time.sleep(5)
         dp.searchfield4(self.datasource4)
         time.sleep(2)
@@ -119,19 +119,9 @@ class TestMethods(unittest.TestCase):
         time.sleep(1)
         dap.select_sourceip()
         time.sleep(2)
-        # dap.operator_arrow()
-        # time.sleep(2)
-        # dap.typeFilter_field(self.filter_value)
-        # time.sleep(6)
-        # dap.pressEnter()
-        # time.sleep(1)
-        # dap.operator_arrow()
-        # time.sleep(2)
         dap.selectOperator_menu(self.operator_name)
         dap.selectExist()
         time.sleep(1)
-        # dap.pressEnter()
-        # time.sleep(2)
         dap.click_save_addfilter()
         time.sleep(3)
         toast_msg = dap.get_toastMsg()

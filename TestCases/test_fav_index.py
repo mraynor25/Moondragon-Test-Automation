@@ -17,7 +17,7 @@ import unittest
 import HtmlTestRunner
 
 # index name is not same as CCU
-#Test passed may16 2023
+#Test passed may 24 2023 discover copy2 applied
 
 #Moon-154 Test Case
 class TestfavIndex(unittest.TestCase):

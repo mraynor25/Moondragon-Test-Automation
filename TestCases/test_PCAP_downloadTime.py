@@ -19,7 +19,7 @@ import HtmlTestRunner
 class TestDelete_tags(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
-    IndexName = "ecs-*"
+    index = "ecs-*"
     startDateValue = "Apr 1, 2021 @ 00:00:00.000"
     endDateValue = "Jul 24, 2021 @ 15:00:00.000"
     KQL = "sensor.filename : \"Hancitor-with-Ficker-Stealer-and-Cobalt-Strike.pcap\" AND _id : \"95ypTYcBXz0Qf4-j7VVQ\""
@@ -60,9 +60,11 @@ class TestDelete_tags(unittest.TestCase):
         time.sleep(3)
 
         dp = discoverPage(self.driver)
+        dp.discover_pg_loads()
         dp.openIndex()
         time.sleep(1)
-        dp.enterIndex(self.IndexName)
+        #dp.enterIndex(self.IndexName)
+        dp.enter_ECSIndex(self.index)
         time.sleep(3)
         dp.selectECS_index()
         time.sleep(4)

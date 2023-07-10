@@ -6,7 +6,7 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 import time
 import unittest
 import HtmlTestRunner
@@ -19,18 +19,18 @@ class TestQuery_PCAP_content(unittest.TestCase):
     password = "Welcome2020!"
     index = "ecs-*"
     startDateValue = "Jun 2, 2021 @ 00:00:00.000"
-    KQL1 = "network.ip_bytes: 869 AND  _id: \"wgmpTYcB5emmETbQ8Rdy\""
+    KQL1 = "network.ip_bytes: 216 AND  _id: \"ExVO-YgBA8VWYOo0KVlz\""
     datasource = "network.ip_bytes"
     fieldn1 = "_id"
-    networkip_value = 869
-    _id_value = "wgmpTYcB5emmETbQ8Rdy"
+    networkip_value = 216
+    _id_value = "ExVO-YgBA8VWYOo0KVlz"
     decod = "decoders-*"
     value = "last"
     num = "5"
     year = "y"
-    KQL = "sensor.name: \"fj-16\" AND decoder_name : \"Gh0st\""
+    KQL = "sensor.name: \"dm-01\" AND decoder_name : \"Gh0st\""
     fieldname2 = "sensor.name"
-    verify_sensor_output = "fj-16"
+    verify_sensor_output = "dm-01"
     fieldname3 = "decoder_name"
     verifydata_ghost = "Gh0st"
     IndexName = "ecs-suricata-*"
@@ -42,9 +42,9 @@ class TestQuery_PCAP_content(unittest.TestCase):
     KQL3 = "destination.ip_public: true OR source.ip_public: true"
     source_ip_pub2 = "true"
     fieldname = "sensor.filename"
-    field = "server-activity-with-log4j-attempts.pcap"
+    field = "/mnt/pcap/active/dm/dm-01/23/04/19/2023-04-Unit42-Wireshark-quiz.pcap"
     fieldname6 = "sensor.filename"
-    sensor_filename = "server-activity-with-log4j-attempts.pcap"
+    sensor_filename = "/mnt/pcap/active/dm/dm-01/23/04/19/2023-04-Unit42-Wireshark-quiz.pcap"
     def setUp(cls):
 
         options = Options()
@@ -103,10 +103,10 @@ class TestQuery_PCAP_content(unittest.TestCase):
         time.sleep(1)
         dp.loadingCheck()
         dp.clickUpdateButton()
-        time.sleep(4)
-        dp.loadingCheck()
+        time.sleep(3)
+      #  dp.loadingCheck()
         dp.searchfield(self.datasource)
-        time.sleep(1)
+        time.sleep(2)
         dp.clickPlusIcon()
         time.sleep(2)
 
@@ -115,11 +115,10 @@ class TestQuery_PCAP_content(unittest.TestCase):
         time.sleep(1)
         dp.clearSearchField()
         time.sleep(2)
-        #below search modified
         dp.search_searchfield(self.fieldn1)
         time.sleep(2)
         dp.clickPlusIcon()
-        time.sleep(2)
+        time.sleep(8)
         dp.verify_addedField2()
         time.sleep(1)
         dp.verify_firstValue(self.networkip_value)
@@ -187,8 +186,8 @@ class TestQuery_PCAP_content(unittest.TestCase):
         dp.enterKQL3(self.KQL3)
         time.sleep(3)
         dp.clickUpdateButton()
-        time.sleep(6)
-        dp.verify_sourceDestIP_pub2(self.source_ip_pub2, self.destin_ip_pub)
+        time.sleep(5)
+        dp.verify_sourceDestinIP_pub2(self.source_ip_pub2, self.destin_ip_pub)
         dp.Addfilter()
         time.sleep(2)
         dp.loadingCheck()
@@ -203,23 +202,15 @@ class TestQuery_PCAP_content(unittest.TestCase):
         dp.selectIsMenu()
         time.sleep(1)
         dp.enter_addfilterField(self.field)
-        time.sleep(3)
+        time.sleep(2)
         dp.clickSave()
         time.sleep(2)
         dp.search_searchfield6(self.fieldname6)
         time.sleep(2)
         dp.clickPlusIcon()
-        time.sleep(2)
+        time.sleep(1)
         dp.clickUpdateButton()
         time.sleep(4)
-        dp.click_column1()
-        time.sleep(1)
-        dp.click_column1()
-        time.sleep(1)
-        dp.click_column1()
-        time.sleep(1)
-        dp.click_column1()
-        time.sleep(1)
         dp.verify_sensorFilename_col7(self.sensor_filename)
 
 

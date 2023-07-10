@@ -12,7 +12,7 @@ from PageObject.workspace_pg import workspacePage
 import time
 import unittest
 import HtmlTestRunner
-
+# we no longer have DATA TAG SECTION in the discover as feature is modified OBE
 #Test failed for toast messages adding tag April 21, 2023
 
 #Moon-154 Test Case
@@ -66,7 +66,7 @@ class TestDelete_tags(unittest.TestCase):
         dp.selectYear()
         time.sleep(2)
 
-        # self.driver.execute_script("window.scrollBy(0,1000)", "")
+       # self.driver.execute_script("window.scrollBy(0,1000)", "")
         dp.ExpandRecord()
         time.sleep(2)
         dp.TableTab()
@@ -76,6 +76,7 @@ class TestDelete_tags(unittest.TestCase):
         store_id = dtp.get_ref_id()
         dtp.DataTagTab()
         time.sleep(2)
+        self.driver.execute_script("window.scrollBy(0,500)", "")
         dtp.addNewTag()
         time.sleep(1)
         self.driver.execute_script("window.scrollBy(0,500)", "")
@@ -91,7 +92,8 @@ class TestDelete_tags(unittest.TestCase):
         dtp.verify_entered2Tags(self.tag_1, self.tag_2)
         dtp.LookGood_button()
         time.sleep(4)
-        dp.closeTags_modalWindow()
+        dtp.verify_entered2Tags(self.tag_1, self.tag_2)
+       # dp.closeTags_modalWindow()
         #bug found below with toast messages
        # dtp.verify_entered2Tags(self.tag_1, self.tag_2)
 

@@ -10,8 +10,7 @@ from PageObject.dataView_pg import dataViewPage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
 from PageObject.workspace_pg import workspacePage
-from PageObject.discover_pg import discoverPage
-from selenium.webdriver.common.by import By
+from PageObject.discover_pg1 import discoverPage
 import time
 import unittest
 import HtmlTestRunner
@@ -19,7 +18,7 @@ import HtmlTestRunner
 # index name is not same as CCU
 #Test passed may 24 2023 discover copy2 applied
 
-#Moon-154 Test Case
+#Moon-154 Test Case, Moon-98 User story
 class TestfavIndex(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"

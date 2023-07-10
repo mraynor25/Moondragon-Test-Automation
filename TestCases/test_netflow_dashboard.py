@@ -12,6 +12,7 @@ import unittest
 import HtmlTestRunner
 
 # netflow dashboard is not exist therefore, unable to run this scripts. failed
+# currently working on it
 
 class TestfavIndex(unittest.TestCase):
     username = "analyst"

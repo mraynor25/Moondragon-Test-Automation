@@ -6,9 +6,8 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 from PageObject.arkime_pg import arkimePage
-import time
 import time
 import unittest
 import HtmlTestRunner

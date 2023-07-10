@@ -6,7 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 from PageObject.arkime_pg import arkimePage
 
 from selenium import webdriver

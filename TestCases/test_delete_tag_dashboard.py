@@ -8,13 +8,12 @@ from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
-from PageObject.discover_pg_copy2 import discoverPage
+from PageObject.discover_pg1 import discoverPage
 from PageObject.workspace_pg import workspacePage
-from selenium.webdriver.common.by import By
 import time
 import unittest
 import HtmlTestRunner
-
+# No longer data tags so this test scripts is OBE.no longer usable
 #Test failed OBE because of expand data tag has no data line 79 This test case is OBE
 
 #Moon-154 Test Case
@@ -26,7 +25,7 @@ class TestfavIndex(unittest.TestCase):
     tag_2 = "del_IP2"
     username2 = "analyst2"
     password2 = "Password1!"
-# test failed because of fail to load data tag panel april 24 line 79 failed
+# test failed because of fail to load data tag panel april 24 line 79 failed - data tagging feature is no longer
 
     def setUp(cls):
 

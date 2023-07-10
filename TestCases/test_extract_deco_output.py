@@ -5,17 +5,17 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 from selenium import webdriver
 
 import time
 import unittest
 import HtmlTestRunner
 
-# extract deco output failed due to content.extracted_file field does not exists! 5-8-23
+# TEST failed - extract deco output failed due to content.extracted_file field does not exists! 5-8-23
 # not sure of this - netflow dashboard is not exist therefore, unable to run this scripts. failed
 
-class TestExtract_deco(unittest.TestCase):
+class TestExtract_decoder_output(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     index = "decoders-*"
@@ -100,8 +100,7 @@ class TestExtract_deco(unittest.TestCase):
         time.sleep(8)
         PCAPData = dp.verifyPCAPdata()
         self.assertEqual(PCAP_data, PCAPData, "Search results do not match for PCAP data")
-        # get_extractfile = dp.verifyExtractFile()
-        # self.assertEqual(Extracted_file_data, get_extractfile, "Search results do not match for extracted file data")
+
 
         self.driver.close()
         self.driver.quit()

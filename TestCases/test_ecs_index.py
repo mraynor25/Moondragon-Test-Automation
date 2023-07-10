@@ -6,7 +6,7 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 import time
 import unittest
 import HtmlTestRunner
@@ -28,7 +28,7 @@ class Test_ecs_index(unittest.TestCase):
     datasource = "source"
    # field = "destination"
     sensor = "sensor.name"
-    KQL = "sensor.filename: \"part-2-IcedID-C2-then-Cobalt-Strike-carved-and-sanitized.pcap\" AND source.ip: \"10.1.18.101\""
+    KQL = "sensor.filename: \"/mnt/pcap/active/dm/dm-01/23/04/19/2023-04-Unit42-Wireshark-quiz.pcap\" AND source.ip: \"10.4.19.143\""
     sen_file = "sensor.filename"
     source = "source.ip"
     sen_name = "dm-01"
@@ -88,7 +88,10 @@ class Test_ecs_index(unittest.TestCase):
         time.sleep(2)
         dp.numofyear(self.num)
         time.sleep(2)
-        dp.selectFiveYear()
+        #dp.selectFiveYear()
+        dp.selectDropdown4Year()
+        time.sleep(1)
+        dp.clickApply()
         time.sleep(2)
         dp.Addfilter()
         time.sleep(2)

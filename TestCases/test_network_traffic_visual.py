@@ -5,13 +5,14 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg import discoverPage
+from PageObject.discover_pg1 import discoverPage
 from PageObject.dashboard_pg import dashboardPage
 from PageObject.visualize_pg import visualizePage
 import time
 import unittest
 
 # Test pass may 24 2023 applied discover copy2
+# Rapid pivoting between views of selected traffic
 #Fix the test for adding last 5 years line 88 errors chose pie chart
 
 class Test_network_traffic(unittest.TestCase):

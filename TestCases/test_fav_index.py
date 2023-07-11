@@ -172,7 +172,8 @@ class TestfavIndex(unittest.TestCase):
 
         lp.logout()
         time.sleep(3)
-        self.driver.implicitly_wait(20)
+        lp.waituntilUsername_appear()
+        self.driver.implicitly_wait(5)
         lp.setUsername2(self.username2)
         time.sleep(1)
         lp.setPassword2(self.password2)

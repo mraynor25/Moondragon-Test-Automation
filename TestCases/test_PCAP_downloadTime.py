@@ -63,7 +63,6 @@ class TestDelete_tags(unittest.TestCase):
         dp.discover_pg_loads()
         dp.openIndex()
         time.sleep(1)
-        #dp.enterIndex(self.IndexName)
         dp.enter_ECSIndex(self.index)
         time.sleep(3)
         dp.selectECS_index()

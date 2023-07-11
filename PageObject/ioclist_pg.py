@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+
+
 class IOCListPage():
     # Locators of all the elements
     ioclist_xpath = "//span[text()='IOC Lists']"
@@ -44,7 +46,7 @@ class IOCListPage():
     addFilter_xpath = "//button[@data-test-subj='addFilter']/span[1]/span[1]"
     editAsQuery_xpath = "//span[text()='Edit as Query DSL']"
     moreButton_xpath = "//button[@aria-label='More']"
-    deleteButton_xpath = "//span[text()='Delete List']"
+    deleteButton_xpath = "//span[contains(text(),'Delete List')]"
     downloadListButton_xpath = "//span[text()='Download List']"
     editListButton_xpath = "//span[text()='Edit List']"
     deleteListPopup_xpath = "//*/div[3]/div[1]/div[1]/div[3]/button[2]/span[1]/span[1]"
@@ -117,7 +119,7 @@ class IOCListPage():
             IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
             if IOCName == IOC_title:
                 dailyIOC = \
-                self.driver.find_elements(By.XPATH, "//table[1]/tbody[1]/tr[" + str(iln) + "]/td[2]/div[2]/button[1]")[0].click()
+                self.driver.find_elements(By.XPATH, "//*/tbody[1]/tr[" + str(iln) + "]/td[2]/div[2]/button[1]")[0].click()
                 time.sleep(1)
                 more = self.driver.find_elements(By.XPATH, self.more_xpath)[0].click()
                 time.sleep(2)
@@ -238,6 +240,30 @@ class IOCListPage():
         download_IOC[0].click()
         time.sleep(3)
 
+    def search_IOClist(self, IOC_title):
+        enter_IOCName = self.driver.find_elements(By.XPATH, "//input[@aria-label='Use aria labels when no actual label is in use']")
+        enter_IOCName[0].send_keys(IOC_title)
+
+    def select_IOCName(self):
+        open_IOC = self.driver.find_elements(By.XPATH, "//tbody/tr[1]/td[2]/div[2]/button[1]")
+        open_IOC[0].click()
+
+
+    def remove_IOCList(self):
+        # click more button has a bug. I cannot continue
+        more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)
+        more[0].click()
+        time.sleep(2)
+        delete_list = self.driver.find_elements(By.XPATH, self.deleteButton_xpath)
+        delete_list[0].click()
+        time.sleep(2)
+        delete_list_popup = self.driver.find_elements(By.XPATH, self.deleteListPopup_xpath)
+        delete_list_popup[0].click()
+        wait = WebDriverWait(self.driver, 6)
+        wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@data-test-subj='globalToastList']"), "IOC List deleted successfully"))
+        IOC_delete_toastMsg = self.driver.find_elements(By.XPATH, "//div[@data-test-subj='globalToastList']")[0].text
+        assert IOC_delete_toastMsg == "IOC List deleted successfully"
+
 
     def delete_IOClist(self, IOC_title):
 
@@ -247,7 +273,7 @@ class IOCListPage():
             IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
             if IOCName == IOC_title:
                 dailyIOC = \
-                self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(iln) + "]/td[2]/div[2]/button[1]")[0].click()
+                self.driver.find_elements(By.XPATH, "//*/tbody[1]/tr[" + str(iln) + "]/td[2]/div[2]/button[1]")[0].click()
                 time.sleep(1)
                 more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)[0].click()
                 time.sleep(2)
@@ -260,6 +286,8 @@ class IOCListPage():
                 wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@data-test-subj='globalToastList']"), "IOC List deleted successfully"))
                 IOC_delete_toastMsg = self.driver.find_elements(By.XPATH, "//div[@data-test-subj='globalToastList']")[0].text
                 assert IOC_delete_toastMsg == "IOC List deleted successfully"
+            else:
+                print("Test failed to find IOC saved list")
 
 
     def add_additional_user(self, user):

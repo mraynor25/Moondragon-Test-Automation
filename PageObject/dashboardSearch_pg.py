@@ -1,5 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class dashboardSearchPage():
     # Locators of all the elements
@@ -53,8 +55,11 @@ class dashboardSearchPage():
         SearchDashboard = self.driver.find_elements(By.XPATH, self.searchbox_dashboard_xpath)
         SearchDashboard[0].send_keys(dashboard_name2)
 
-
+#below updated in the lab
     def enterSearchDashboard3(self, dashboard_name3):
+        wait = WebDriverWait(self.driver, 30)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.searchbox_dashboard_xpath))
+                   )
         SearchDashboard = self.driver.find_elements(By.XPATH, self.searchbox_dashboard_xpath)
         SearchDashboard[0].send_keys(dashboard_name3)
 

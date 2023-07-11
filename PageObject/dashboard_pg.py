@@ -98,7 +98,7 @@ class dashboardPage():
     select_addfilterFieldXpath = "//*/button[1]/span[1]/span[1]/span[1]/span[1]/mark[1]"
     addDash2Xpath = "//*/tr[1]/td[1]/div[1]/div[1]/div[1]/div[2]/div[1]"
     addDashNotes2Xpath = "//*/tr[1]/td[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]"
-    addnotesXpath = "//span[text()='Add Note']"
+    addnotesXpath = "//span[contains(text(),'Add Note')]"
     sessionNotesXpath = "//*/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/textarea[1]"
     sessionNotesfieldXpath = "//span[text()='Submit']"
     addedDash1Xpath = "//*/tr[1]/td[1]/div[1]/div[1]/div[1]/div[2]/div[1]"
@@ -533,7 +533,11 @@ class dashboardPage():
         Enter_tag[0].send_keys(Keys.ENTER)
         time.sleep(1)
 
+#add this in the lab wait until
     def findDashNotes(self):
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.findDashXpath))
+                   )
         find_dash_notes = self.driver.find_elements(By.XPATH, self.findDashXpath)[0].text
         return find_dash_notes
 

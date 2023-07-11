@@ -64,9 +64,10 @@ class loginPage():
         return (GetLogoutMsg)
 
     def waituntilUsername_appear(self):
+        wait = WebDriverWait(self.driver, 40)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.textbox_username_xpath))
+                   )
 
-        wait = WebDriverWait(self.driver, 50)
-        wait.until(EC.text_to_be_present_in_element((By.XPATH, self.textbox_username_xpath), "username textbox appeared successfully"))
 
 
 

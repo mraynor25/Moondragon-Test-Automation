@@ -5,7 +5,7 @@ import sys
 sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg1 import discoverPage
+from PageObject.discover_pg import discoverPage
 from selenium import webdriver
 
 import time

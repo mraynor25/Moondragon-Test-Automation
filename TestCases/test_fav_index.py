@@ -10,7 +10,7 @@ from PageObject.dataView_pg import dataViewPage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
 from PageObject.workspace_pg import workspacePage
-from PageObject.discover_pg1 import discoverPage
+from PageObject.discover_pg import discoverPage
 import time
 import unittest
 import HtmlTestRunner

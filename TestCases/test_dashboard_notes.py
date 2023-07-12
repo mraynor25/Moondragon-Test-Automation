@@ -7,7 +7,7 @@ from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
-from PageObject.discover_pg1 import discoverPage
+from PageObject.discover_pg import discoverPage
 import re
 import time
 import unittest

@@ -4,7 +4,7 @@ sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from selenium import webdriver
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.discover_pg1 import discoverPage
+from PageObject.discover_pg import discoverPage
 from PageObject.ioclist_pg import IOCListPage
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options

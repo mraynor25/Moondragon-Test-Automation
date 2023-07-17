@@ -8,7 +8,6 @@ import time
 import unittest
 
 
-
 class discoverPage():
     OpenDateXpath = "//*/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
     DropdownXpath = "//*/fieldset[1]/div[3]/div[1]/div[1]/div[1]/select[1]"

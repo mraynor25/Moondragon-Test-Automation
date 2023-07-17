@@ -114,7 +114,7 @@ class TestMethods_sessionNotes(unittest.TestCase):
         deleteToastMsg = dap.delete_toastMsg()
         assert deleteToastMsg == "Session comment deleted successfully"
         dap.close_analystNotes()
-        time.sleep(1)
+        time.sleep(2)
 
     def tearDown(self):
         dap = dashboardPage(self.driver)

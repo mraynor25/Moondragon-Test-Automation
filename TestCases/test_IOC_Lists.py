@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# bug found in MOre button in tear down section
+# Test passed July 18 2023
 
 
 class Test_IOCList(unittest.TestCase):
@@ -20,7 +20,7 @@ class Test_IOCList(unittest.TestCase):
     username2 = "analyst2"
     password2 = "Welcome2020!"
     index = "ecs-*"
-    IOC_title = "ABC list"
+    IOC_title = "ABC IOC list to view"
     field_data = "source.ip"
     selectors_data = "98.175.230.2"
     field_data2 = "destination.ip"
@@ -31,11 +31,12 @@ class Test_IOCList(unittest.TestCase):
         options = Options()
         options.add_argument('--allow-running-insecure-content')
         options.add_argument('--ignore-certificate-errors')
+        # options.add_argument("--headless=new")
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        cls.driver.implicitly_wait(15)
+        cls.driver.implicitly_wait(5)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(20)
+        cls.driver.implicitly_wait(7)
         print(cls.driver.title)
         time.sleep(5)
 
@@ -134,7 +135,7 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
 
         ip.open_IOCList()
-        time.sleep(6)
+        time.sleep(4)
         ip.verify_IOClist4Buttons(self.IOC_title)
         ip.click_download_IOC()
         time.sleep(2)
@@ -148,14 +149,14 @@ class Test_IOCList(unittest.TestCase):
         Ip.setUsername(self.username)
         Ip.setPassword(self.password)
         Ip.clickLogin()
-        time.sleep(5)
-        Ip.clickdefault()
         time.sleep(3)
+        Ip.clickdefault()
+        time.sleep(1)
 
         hp.clickHambergerMenu()
-        time.sleep(2)
+        time.sleep(1)
         hp.clickDiscover()
-        time.sleep(2)
+        time.sleep(1)
         ip.open_IOCList()
         time.sleep(2)
 
@@ -168,7 +169,14 @@ class Test_IOCList(unittest.TestCase):
         ip.select_IOCName()
         time.sleep(2)
         ip.remove_IOCList()
-        # ip.delete_IOClist(self.IOC_title)
+        time.sleep(2)
+        ip.open_IOCList()
+        time.sleep(2)
+        ip.search_IOClist(self.IOC_title)
+        time.sleep(1)
+
+        ip.verify_deletedIOCList()
+
 
 
 

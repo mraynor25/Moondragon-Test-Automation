@@ -10,38 +10,33 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
+# pass test July 18 2023
 
-# bug found in MOre button in tear down section
 
-
-class Test_IOCList(unittest.TestCase):
+class Test_IOCList_UserRole(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     username2 = "analyst2"
     password2 = "Welcome2020!"
     index = "ecs-*"
-    IOC_title = "ABC list"
-    field_data = "source.ip"
-    selectors_data = "98.175.230.2"
-    field_data2 = "destination.ip"
-    selectors_data2 = "68.105.28.16"
-    notes = "This is my destination ip notes"
+    IOC_title = "The best IOC list top 10"
+    user = "analyst2"
+
+
 
     def setUp(cls):
         options = Options()
         options.add_argument('--allow-running-insecure-content')
         options.add_argument('--ignore-certificate-errors')
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        cls.driver.implicitly_wait(15)
+        cls.driver.implicitly_wait(4)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(20)
+        cls.driver.implicitly_wait(7)
         print(cls.driver.title)
         time.sleep(5)
 
     def test_IOC_list(self):
-
-
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
         Ip.setUsername(self.username)
@@ -60,9 +55,8 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
 
         dp = discoverPage(self.driver)
-        dp.discover_pg_loads()
         dp.open_index_dropdown()
-        time.sleep(1)
+        time.sleep(3)
         dp.enter_ECSIndex(self.index)
         dp.selectECS_index()
         time.sleep(2)
@@ -76,57 +70,32 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
         ip.click_createIOCList()
         time.sleep(2)
-        ip.load_createIOCpg()
         ip.enter_listTitle(self.IOC_title)
         time.sleep(2)
         ip.select_IOCFile()
         time.sleep(3)
+        ip.add_additional_user(self.user)
+        time.sleep(3)
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         ip.click_generateList()
         time.sleep(2)
         ip.verify_toast_Msg()
-        ip.click_copyFilter()
-        time.sleep(2)
         ip.click_saveList()
         time.sleep(1)
         ip.IOCListCreated_ToastMsg()
         ip.close_IOCList()
         time.sleep(2)
 
-        dp.Addfilter()
-        time.sleep(2)
-        dp.click_editAsQyery()
-        time.sleep(3)
-        dp.editAsQueryForm()
-        time.sleep(5)
-        dp.click_saveQuery()
-        time.sleep(2)
-        ip.open_IOCList()
-        time.sleep(2)
-        ip.IOCList_editAppendList(self.IOC_title, self.field_data, self.selectors_data, self.field_data2, self.selectors_data2, self.notes)
-        dp.add_filter()
-        time.sleep(2)
-        dp.click_editAsQyery()
-        time.sleep(3)
-        dp.editAsQueryForm()
-        time.sleep(5)
-        dp.createCustomLabel()
-        time.sleep(2)
-        dp.enterCustomLabel(self.IOC_title)
-        time.sleep(3)
-        dp.click_saveQuery()
-        time.sleep(2)
-
-
         Ip.logout()
-        time.sleep(11)
+        time.sleep(5)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername2(self.username2)
         Ip.setPassword2(self.password2)
         Ip.clickLogin()
-        time.sleep(7)
+        time.sleep(4)
         Ip.clickdefault()
-        time.sleep(5)
+        time.sleep(4)
 
         hp.clickHambergerMenu()
         time.sleep(2)
@@ -134,15 +103,15 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
 
         ip.open_IOCList()
-        time.sleep(6)
-        ip.verify_IOClist4Buttons(self.IOC_title)
-        ip.click_download_IOC()
+        time.sleep(3)
+        ip.search_IOClist(self.IOC_title)
         time.sleep(2)
-
+        ip.iocList_detailButton()
+        time.sleep(2)
+        ip.check_ioclistButton(self.IOC_title)
 
         Ip.logout()
-        time.sleep(2)
-        Ip.waituntilUsername_appear()
+        time.sleep(7)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -150,16 +119,15 @@ class Test_IOCList(unittest.TestCase):
         Ip.clickLogin()
         time.sleep(5)
         Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(5)
 
         hp.clickHambergerMenu()
         time.sleep(2)
         hp.clickDiscover()
         time.sleep(2)
+
         ip.open_IOCList()
         time.sleep(2)
-
-
 
     def tearDown(self):
         ip = IOCListPage(self.driver)
@@ -168,9 +136,12 @@ class Test_IOCList(unittest.TestCase):
         ip.select_IOCName()
         time.sleep(2)
         ip.remove_IOCList()
-        # ip.delete_IOClist(self.IOC_title)
-
-
+        time.sleep(1)
+        ip.open_IOCList()
+        time.sleep(1)
+        ip.search_IOClist(self.IOC_title)
+        time.sleep(1)
+        ip.verify_deletedIOCList()
 
         self.driver.close()
         self.driver.quit()

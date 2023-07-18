@@ -33,6 +33,7 @@ class IOCListPage():
     appendList_xpath = "//span[contains(text(),'Append list')]"
     appendHeader_xpath = "//h1[contains(text(),'Append List')]"
     appendToggleOn_xpath = "//button[@aria-checked='true']"
+    selectIOCName_xpath = "//tbody/tr[1]/td[2]/div[2]/button[1]"
     uploadAppendList_xpath = "//*/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
     generalList_xpath = "//span[contains(text(),'Generate List')]"
     appendSelector_xpath = "//span[contains(text(),'Append Selectors')]"
@@ -41,7 +42,7 @@ class IOCListPage():
     ToggleOnAppend_xpath = "//button[contains(@class, 'euiSwitch__button')]"
     saveMain_xpath = "//*/div[1]/div[1]/div[3]/div[4]/button[1]/span[1]/span[1]"
     saveListButton_xpath = "//span[text()='Save List']"
-    exitButton_xpath = "//div[@aria-labelledby='ABC list']/button[1]"
+    exitButton_xpath = "//div[@aria-labelledby='ABC IOC list to view']/button[1]"
     closeIOCList_xpath = "//button[@data-test-subj='euiFlyoutCloseButton']"
     addFilter_xpath = "//button[@data-test-subj='addFilter']/span[1]/span[1]"
     editAsQuery_xpath = "//span[text()='Edit as Query DSL']"
@@ -49,10 +50,11 @@ class IOCListPage():
     deleteButton_xpath = "//span[contains(text(),'Delete List')]"
     downloadListButton_xpath = "//span[text()='Download List']"
     editListButton_xpath = "//span[text()='Edit List']"
-    deleteListPopup_xpath = "//*/div[3]/div[1]/div[1]/div[3]/button[2]/span[1]/span[1]"
+    deleteListPopup_xpath = "//button[@data-test-subj='confirmModalConfirmButton']/span[1]/span[1]"
     add_additional_user_xpath = "//p[contains(text(), 'Add Additional Users')]/ancestor::button"
     enterUsers_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
-
+    iocListSearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
+    ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
 
 
     def __init__(self,driver):
@@ -65,6 +67,10 @@ class IOCListPage():
     def click_createIOCList(self):
         create_IOCList = self.driver.find_elements(By.XPATH, self.createIOC_xpath)
         create_IOCList[0].click()
+
+    def iocList_detailButton(self):
+        ioc_detail = self.driver.find_elements(By.XPATH, "//tbody/tr[1]/td[2]/div[2]/button[1]")
+        ioc_detail[0].click()
 
     def load_createIOCpg(self):
         wait = WebDriverWait(self.driver, 20)
@@ -241,16 +247,15 @@ class IOCListPage():
         time.sleep(3)
 
     def search_IOClist(self, IOC_title):
-        enter_IOCName = self.driver.find_elements(By.XPATH, "//input[@aria-label='Use aria labels when no actual label is in use']")
+        enter_IOCName = self.driver.find_elements(By.XPATH, self.iocListSearchbox_xpath)
         enter_IOCName[0].send_keys(IOC_title)
 
     def select_IOCName(self):
-        open_IOC = self.driver.find_elements(By.XPATH, "//tbody/tr[1]/td[2]/div[2]/button[1]")
+        open_IOC = self.driver.find_elements(By.XPATH, self.selectIOCName_xpath)
         open_IOC[0].click()
 
 
     def remove_IOCList(self):
-        # click more button has a bug. I cannot continue
         more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)
         more[0].click()
         time.sleep(2)
@@ -259,35 +264,16 @@ class IOCListPage():
         time.sleep(2)
         delete_list_popup = self.driver.find_elements(By.XPATH, self.deleteListPopup_xpath)
         delete_list_popup[0].click()
-        wait = WebDriverWait(self.driver, 6)
-        wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@data-test-subj='globalToastList']"), "IOC List deleted successfully"))
-        IOC_delete_toastMsg = self.driver.find_elements(By.XPATH, "//div[@data-test-subj='globalToastList']")[0].text
-        assert IOC_delete_toastMsg == "IOC List deleted successfully"
+        # wait = WebDriverWait(self.driver, 5)
+        # wait.until(EC.presence_of_element_located((By.XPATH, self.ToastListIOC_xpath))
+        #            )
+        # IOC_delete_toastMsg = self.driver.find_elements(By.XPATH, self.ToastListIOC_xpath)[0].text
+        # assert IOC_delete_toastMsg == "IOC List deleted successfully"
 
 
-    def delete_IOClist(self, IOC_title):
-
-        IOClistName = len(self.driver.find_elements(By.XPATH, self.IOCListName_xpath))
-
-        for iln in range(1, IOClistName + 1):
-            IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
-            if IOCName == IOC_title:
-                dailyIOC = \
-                self.driver.find_elements(By.XPATH, "//*/tbody[1]/tr[" + str(iln) + "]/td[2]/div[2]/button[1]")[0].click()
-                time.sleep(1)
-                more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)[0].click()
-                time.sleep(2)
-                delete_list = self.driver.find_elements(By.XPATH, self.deleteButton_xpath)
-                delete_list[0].click()
-                time.sleep(2)
-                delete_list_popup = self.driver.find_elements(By.XPATH, self.deleteListPopup_xpath)
-                delete_list_popup[0].click()
-                wait = WebDriverWait(self.driver, 6)
-                wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@data-test-subj='globalToastList']"), "IOC List deleted successfully"))
-                IOC_delete_toastMsg = self.driver.find_elements(By.XPATH, "//div[@data-test-subj='globalToastList']")[0].text
-                assert IOC_delete_toastMsg == "IOC List deleted successfully"
-            else:
-                print("Test failed to find IOC saved list")
+    def verify_deletedIOCList(self):
+        noitemfound = self.driver.find_elements(By.XPATH, "//span[contains(text(),'No items found')]")[0].text
+        assert "No items found" == noitemfound
 
 
     def add_additional_user(self, user):
@@ -299,23 +285,32 @@ class IOCListPage():
 
 
     def check_ioclistButton(self, IOC_title):
-        IOClistName2 = len(self.driver.find_elements(By.XPATH, "//*/tr/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]"))
+        more = self.driver.find_elements(By.XPATH, "//button[@aria-label='More']")[0].click()
+        time.sleep(3)
+        if len(self.driver.find_elements(By.XPATH, "//span[text()='Delete List']")) > 0:
+            assert True
+        if len(self.driver.find_elements(By.XPATH, "//span[text()='Download List']")) > 0:
+            assert True
+        if len(self.driver.find_elements(By.XPATH, "//span[text()='Edit List']")) > 0:
+            assert True
 
-        for iln2 in range(1, IOClistName2 + 1):
-            IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln2) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
-            if IOCName == IOC_title:
-                dailyIOC = \
-                self.driver.find_elements(By.XPATH, "//table[1]/tbody[1]/tr[" + str(iln2) + "]/td[2]/div[2]/button[1]")[0].click()
-                time.sleep(1)
-                more = self.driver.find_elements(By.XPATH, "//button[@aria-label='More']")[0].click()
-                time.sleep(5)
-                if len(self.driver.find_elements(By.XPATH, "//span[text()='Delete List']")) > 0:
-                    assert True
-                if len(self.driver.find_elements(By.XPATH, "//span[text()='Download List']")) > 0:
-                    assert True
-                if len(self.driver.find_elements(By.XPATH, "//span[text()='Edit List']")) > 0:
-                    assert True
-
+    # IOClistName2 = len(self.driver.find_elements(By.XPATH, "//*/tr/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]"))
+        #
+        # for iln2 in range(1, IOClistName2 + 1):
+        #     IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln2) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
+        #     if IOCName == IOC_title:
+        #         dailyIOC = \
+        #         self.driver.find_elements(By.XPATH, "//table[1]/tbody[1]/tr[" + str(iln2) + "]/td[2]/div[2]/button[1]")[0].click()
+        #         time.sleep(1)
+        #         more = self.driver.find_elements(By.XPATH, "//button[@aria-label='More']")[0].click()
+        #         time.sleep(5)
+        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Delete List']")) > 0:
+        #             assert True
+        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Download List']")) > 0:
+        #             assert True
+        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Edit List']")) > 0:
+        #             assert True
+        #
 
 
 

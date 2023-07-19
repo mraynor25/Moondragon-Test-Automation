@@ -11,7 +11,6 @@ class IOCListPage():
     ioclist_xpath = "//span[text()='IOC Lists']"
     createIOC_xpath = "//span[text()='Create IOC List']"
     createIOCpg_xpath = "//h1[contains(text(),'Create IOC List')]"
-   # listTitle_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
     listTitle_xpath = "//body/div[7]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
     iocfile_xpath = "//input[@class='euiFilePicker__input']"
     generateList_xpath = "//span[contains(text(), 'Generate')]"
@@ -33,13 +32,16 @@ class IOCListPage():
     appendList_xpath = "//span[contains(text(),'Append list')]"
     appendHeader_xpath = "//h1[contains(text(),'Append List')]"
     appendToggleOn_xpath = "//button[@aria-checked='true']"
-    selectIOCName_xpath = "//tbody/tr[1]/td[2]/div[2]/button[1]"
+   # selectIOCName_xpath = "//tbody/tr[1]/td[2]/div[2]/button[1]"
+    selectIOCName_xpath = "//button[@aria-label='popout']"
     uploadAppendList_xpath = "//*/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
     generalList_xpath = "//span[contains(text(),'Generate List')]"
     appendSelector_xpath = "//span[contains(text(),'Append Selectors')]"
     appendListConfirm_xpath = "//p[contains(text(),'The selected file will be appended to the existing')]"
     appendButton_xpath = "//span[text()='Append']"
     ToggleOnAppend_xpath = "//button[contains(@class, 'euiSwitch__button')]"
+    edit_details_xpath = "//span[contains(text(),'Edit Details')]"
+    enter_desc_xpath = "//textarea[@aria-label='Use aria labels when no actual label is in use']"
     saveMain_xpath = "//*/div[1]/div[1]/div[3]/div[4]/button[1]/span[1]/span[1]"
     saveListButton_xpath = "//span[text()='Save List']"
     exitButton_xpath = "//div[@aria-labelledby='ABC IOC list to view']/button[1]"
@@ -53,7 +55,8 @@ class IOCListPage():
     deleteListPopup_xpath = "//button[@data-test-subj='confirmModalConfirmButton']/span[1]/span[1]"
     add_additional_user_xpath = "//p[contains(text(), 'Add Additional Users')]/ancestor::button"
     enterUsers_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
-    iocListSearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
+   # iocListSearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
+    iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
     ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
 
 
@@ -91,10 +94,11 @@ class IOCListPage():
 
     def verify_toast_Msg(self):
 
-        wait = WebDriverWait(self.driver, 6)
+        wait = WebDriverWait(self.driver, 5)
         wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsg_xpath))
                    )
         toastMsg = self.driver.find_elements(By.XPATH, self.toastMsg_xpath)[0].text
+        print(toastMsg)
 
         if toastMsg == "List Not Saved: List name already exists, try another name":
             assert False
@@ -178,6 +182,18 @@ class IOCListPage():
                     append_button = self.driver.find_elements(By.XPATH, self.appendButton_xpath)
                     append_button[0].click()
                     time.sleep(1)
+                    edit_details = self.driver.find_elements(By.XPATH, self.edit_details_xpath)
+                    edit_details[0].click()
+                    time.sleep(1)
+                    enter_desc = self.driver.find_elements(By.XPATH, self.enter_desc_xpath)
+                    enter_desc[0].send_keys("update ioc list")
+                    time.sleep(1)
+                    enter_username = self.driver.find_elements(By.XPATH, self.enterUsers_xpath)
+                    enter_username[0].send_keys("analyst3")
+                    time.sleep(1)
+                    click_apply = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Apply')]")
+                    click_apply[0].click()
+                    time.sleep(1)
                 else:
                     click_toggleON_append = self.driver.find_element(By.XPATH, self.ToggleOnAppend_xpath)
                     click_toggleON_append[0].click()
@@ -197,6 +213,24 @@ class IOCListPage():
                     append_button = self.driver.find_elements(By.XPATH, self.appendButton_xpath)
                     append_button[0].click()
                     time.sleep(1)
+                    edit_details = self.driver.find_elements(By.XPATH, self.edit_details_xpath)
+                    edit_details[0].click()
+                    time.sleep(1)
+                    enter_desc = self.driver.find_elements(By.XPATH, self.enter_desc_xpath)
+                    enter_desc[0].send_keys("update ioc list")
+                    time.sleep(1)
+                    enter_username = self.driver.find_elements(By.XPATH, self.enterUsers_xpath)
+                    enter_username[0].send_keys("analyst2")
+                    time.sleep(1)
+                    click_apply = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Apply')]")
+                    click_apply[0].click()
+                    time.sleep(1)
+
+                confirm_desc = self.driver.find_elements(By.XPATH, "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[2]")[0].text
+                print(confirm_desc)
+                assert "Description: update ioc list" == confirm_desc
+                confirm_user = self.driver.find_elements(By.XPATH, "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[4]")[0].text
+                assert "Additional Users: analyst3" == confirm_user
 
                 save_main = self.driver.find_elements(By.XPATH, self.saveMain_xpath)
                 save_main[0].click()
@@ -254,11 +288,12 @@ class IOCListPage():
         open_IOC = self.driver.find_elements(By.XPATH, self.selectIOCName_xpath)
         open_IOC[0].click()
 
-
-    def remove_IOCList(self):
+    def click_more(self):
         more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)
         more[0].click()
-        time.sleep(2)
+
+
+    def remove_IOCList(self):
         delete_list = self.driver.find_elements(By.XPATH, self.deleteButton_xpath)
         delete_list[0].click()
         time.sleep(2)

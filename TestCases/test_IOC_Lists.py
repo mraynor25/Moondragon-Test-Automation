@@ -157,17 +157,20 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(1)
         hp.clickDiscover()
         time.sleep(1)
+
         ip.open_IOCList()
+        time.sleep(3)
+        ip.search_IOClist(self.IOC_title)
         time.sleep(2)
 
 
 
     def tearDown(self):
         ip = IOCListPage(self.driver)
-        ip.search_IOClist(self.IOC_title)
-        time.sleep(2)
         ip.select_IOCName()
         time.sleep(2)
+        ip.click_more()
+        time.sleep(1)
         ip.remove_IOCList()
         time.sleep(2)
         ip.open_IOCList()

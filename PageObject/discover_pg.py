@@ -25,16 +25,18 @@ class discoverPage():
     enterIndexXpath = "//*/span[1]/span[1]/span[1]/mark[1]"
     selectZeekIndexXpath = "//mark[contains(text(),'ecs-zeek')]"
     selectSensorIDAddFilterXpath = "//mark[text()='sensor.filename']"
+    discoverQueryHitXpath = "//strong[@data-test-subj='discoverQueryHits']"
     AddfilterXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
     addfilter2Xpath = "//*/div[1]/div[1]/div[1]/span[1]/span[1]/button[1]/span[1]/span[1]"
     arrowIconXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
-    #enterFieldXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     enterFieldXpath = "//input[@data-test-subj='comboBoxSearchInput']"
     selectFieldXpath = "//*/div[1]/div[1]/div[1]/div[1]/button[2]/span[1]/span[1]/span[1]/span[1]"
     selectField2Xpath = "//mark[@class='euiMark']"
     arrow_iconXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
     select_IsXpath = "//span[@class='euiComboBoxOption__content']"
     select_IsNotXpath = "//*/button[2]/span[1]/span[1]/span[1]/span[1]"
+    inspectXpath = "//span[contains(text(), 'Inspect')]"
+    viewInspectXpath = "//span[contains(text(), 'View: Requests')]"
     enterDropdownXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     enter2ndDropdownXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     clickSaveXpath = "//*/div[2]/div[1]/div[5]/div[1]/button[1]/span[1]/span[1]"
@@ -76,7 +78,7 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    addFilterFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    addFilterFieldXpath = "//*/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/input[1]"
     addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"
@@ -227,6 +229,22 @@ class discoverPage():
         time.sleep(4)
         self.driver.find_element(By.XPATH, self.selectZeekIndexXpath).click()
 
+    def countDocHits(self):
+        doc_rec = self.driver.find_elements(By.XPATH, self.discoverQueryHitXpath)[0].text
+        return doc_rec
+
+    def check4DocHitsOver(self, countdoc):
+        # check to see if doc is over 200,000
+        if str(countdoc) >= str("200,000"):
+            assert False
+
+    def click_inspect(self):
+        inspect_button = self.driver.find_elements(By.XPATH, self.inspectXpath)
+        inspect_button[0].click()
+
+    def click_viewInspect(self):
+        view_inspect = self.driver.find_elements(By.XPATH, self.viewInspectXpath)
+        view_inspect[0].click()
 
 
     def Addfilter(self):
@@ -564,13 +582,11 @@ class discoverPage():
 
 
     def enterSensorName(self, sen_name):
-
         EnterField = self.driver.find_elements(By.XPATH, self.enterFieldXpath)
         EnterField[0].send_keys(sen_name)
 
 
     def enterDropdownDD(self, dd):
-
         Enter_dropdown = self.driver.find_elements(By.XPATH, self.enterDropdownXpath)
         Enter_dropdown[0].send_keys(dd)
 
@@ -596,8 +612,6 @@ class discoverPage():
 
 
     def Verify_sensorNameData(self, sen_name_data):
-
-
         sensor_name_data = self.driver.find_elements(By.XPATH, self.sen_name_dataXpath)
 
         for sen in sensor_name_data:

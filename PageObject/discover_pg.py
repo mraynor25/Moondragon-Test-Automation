@@ -102,7 +102,6 @@ class discoverPage():
     ecsArkimeLink_linktext = "Arkime Filename Pivot"
     arkimeLinkXpath = "//*/div[2]/div[4]/div[1]/div[1]/div[1]/span[1]/a[1]"
     decoderIndexXpath = "//mark[contains(text(),'decoders-*')]"
-    #indexnameXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
     indexnameXpath = "//input[@aria-label='Filter options']"
     pcapdataXpath = "//mark[contains(text(), 'fj-16-210725.cap')]"
     extractFileXpath = "//mark[contains(text(), 'setcsrss.exe_895a0be4ae10ba436ad9506164a9db00')]"
@@ -139,7 +138,7 @@ class discoverPage():
     col3_sourceIP_xpath = "//div[contains(text(),'source.ip_public')]"
     col4_destIP_pub_xpath = "//div[contains(text(),'destination.ip_public')]"
     remove_column_xpath = "//span[contains(text(),'Remove column')]"
-   # col7_senFilename_xpath = "//tbody/tr/td[3]/div[1]"
+    #col7_senFilename_xpath = "//tbody/tr/td[3]/div[1]"
     col7_senFilename_xpath = "/table[1]/tbody[1]/tr/td[6]/div[1]/mark[1]"
     editAsQuery = "//span[text()='Edit as Query DSL']"
     editAsQueryForm_xpath = "//textarea[@aria-label='Editor content;Press Alt+F1 for Accessibility Options.']"
@@ -147,6 +146,7 @@ class discoverPage():
     createCustomLabel_xpath = "//button[@data-test-subj='createCustomLabel']"
     customLabel_xpath = "//*/div[2]/div[1]/div[4]/div[2]/div[2]/div[1]/div[1]/input[1]"
     addFilter_xpath = "//button[@data-test-subj='addFilter']/span[1]/span[1]"
+    toastMsg_xpath = "//div[@data-test-subj='globalToastList']"
 
 
 
@@ -202,6 +202,9 @@ class discoverPage():
         select3.select_by_value(year)
 
     def selectYear(self):
+        wait = WebDriverWait(self.driver, 8)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.selectOneYearXpath))
+                   )
         SelectYear = self.driver.find_elements(By.XPATH, self.selectOneYearXpath)
         SelectYear[0].click()
 
@@ -233,7 +236,7 @@ class discoverPage():
         doc_rec = self.driver.find_elements(By.XPATH, self.discoverQueryHitXpath)[0].text
         return doc_rec
 
-    def check4DocHitsOver(self, countdoc):
+    def check4DocHitsOverlimit(self, countdoc):
         # check to see if doc is over 200,000
         if str(countdoc) >= str("200,000"):
             assert False
@@ -1252,12 +1255,9 @@ class discoverPage():
             assert sensor_filename == col_7.text
 
 
-
-
     def click_editAsQyery(self):
         click_editasQuery = self.driver.find_elements(By.XPATH, self.editAsQuery)
         click_editasQuery[0].click()
-
 
 
     def editAsQueryForm(self):
@@ -1281,6 +1281,18 @@ class discoverPage():
     def add_filter(self):
         click_addFilter = self.driver.find_elements(By.XPATH, self.addFilter_xpath)
         click_addFilter[0].click()
+
+    def confirmToastMsg(self, toast_msg):
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsg_xpath))
+                   )
+        # wait = WebDriverWait(self.driver, 6)
+        # wait.until(EC.text_to_be_present_in_element((By.XPATH, self.toastMsg_xpath), toast_msg))
+        # ToastMsg = self.driver.find_elements(By.XPATH, self.toastMsg_xpath)[0].text
+
+
+
+
 
 
 

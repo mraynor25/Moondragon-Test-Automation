@@ -42,6 +42,9 @@ class IOCListPage():
     ToggleOnAppend_xpath = "//button[contains(@class, 'euiSwitch__button')]"
     edit_details_xpath = "//span[contains(text(),'Edit Details')]"
     enter_desc_xpath = "//textarea[@aria-label='Use aria labels when no actual label is in use']"
+    applyButton_xpath = "//span[contains(text(),'Apply')]"
+    confirmDesc_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[2]"
+    confirmUser_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[4]"
     saveMain_xpath = "//*/div[1]/div[1]/div[3]/div[4]/button[1]/span[1]/span[1]"
     saveListButton_xpath = "//span[text()='Save List']"
     exitButton_xpath = "//div[@aria-labelledby='ABC IOC list to view']/button[1]"
@@ -55,7 +58,6 @@ class IOCListPage():
     deleteListPopup_xpath = "//button[@data-test-subj='confirmModalConfirmButton']/span[1]/span[1]"
     add_additional_user_xpath = "//p[contains(text(), 'Add Additional Users')]/ancestor::button"
     enterUsers_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
-   # iocListSearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
     iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
     ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
 
@@ -191,7 +193,7 @@ class IOCListPage():
                     enter_username = self.driver.find_elements(By.XPATH, self.enterUsers_xpath)
                     enter_username[0].send_keys("analyst3")
                     time.sleep(1)
-                    click_apply = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Apply')]")
+                    click_apply = self.driver.find_elements(By.XPATH, self.applyButton_xpath)
                     click_apply[0].click()
                     time.sleep(1)
                 else:
@@ -222,14 +224,14 @@ class IOCListPage():
                     enter_username = self.driver.find_elements(By.XPATH, self.enterUsers_xpath)
                     enter_username[0].send_keys("analyst2")
                     time.sleep(1)
-                    click_apply = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Apply')]")
+                    click_apply = self.driver.find_elements(By.XPATH, "")
                     click_apply[0].click()
                     time.sleep(1)
 
-                confirm_desc = self.driver.find_elements(By.XPATH, "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[2]")[0].text
+                confirm_desc = self.driver.find_elements(By.XPATH, self.confirmDesc_xpath)[0].text
                 print(confirm_desc)
                 assert "Description: update ioc list" == confirm_desc
-                confirm_user = self.driver.find_elements(By.XPATH, "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/li[4]")[0].text
+                confirm_user = self.driver.find_elements(By.XPATH, self.confirmUser_xpath)[0].text
                 assert "Additional Users: analyst3" == confirm_user
 
                 save_main = self.driver.find_elements(By.XPATH, self.saveMain_xpath)

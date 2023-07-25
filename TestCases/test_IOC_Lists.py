@@ -101,9 +101,11 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(5)
         dp.click_saveQuery()
         time.sleep(2)
+
         ip.open_IOCList()
         time.sleep(2)
         ip.IOCList_editAppendList(self.IOC_title, self.field_data, self.selectors_data, self.field_data2, self.selectors_data2, self.notes)
+
         dp.add_filter()
         time.sleep(2)
         dp.click_editAsQyery()
@@ -135,7 +137,7 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
 
         ip.open_IOCList()
-        time.sleep(4)
+        time.sleep(3)
         ip.verify_IOClist4Buttons(self.IOC_title)
         ip.click_download_IOC()
         time.sleep(2)
@@ -177,7 +179,6 @@ class Test_IOCList(unittest.TestCase):
         time.sleep(2)
         ip.search_IOClist(self.IOC_title)
         time.sleep(1)
-
         ip.verify_deletedIOCList()
 
 

@@ -2,6 +2,8 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+
 
 
 class bulkQueryPage():
@@ -19,10 +21,20 @@ class bulkQueryPage():
     looksgoodButton_xpath = "//span[contains(text(),'Looks Good')]"
     bulkAddTag_xpath = "//button[contains(text(),'Bulk Add Tag')]"
     addexistingTagHeader_xpath = "//h1[contains(text(), 'Add Existing Tag')]"
+    deleteexistingTagHeader_xpath = "//h1[contains(text(),'Delete Existing Tag')]"
     tagname_option_xpath = "//mark[contains(text(),'sample bulk query')]"
     tagname_option_xpath2 = "//mark[contains(text(),'sample bulk')]"
     addTagButton_xpath = "//span[contains(text(),'Add Tag/s')]"
     closeButton_xpath = "//span[contains(text(),'Close')]"
+    closeInspector_xpath = "//button[@aria-label='Close Inspector']"
+    open_dropdown_xpath = "//button[@aria-label='Open list of options']"
+    addedTag_xpath = "//*/div[2]/p[1]/dl[2]/dd[1]/li[1]"
+    added2ndTag_xpath = "//*/div[2]/p[1]/dl[2]/dd[1]/li[2]"
+    showTagDocTable_xpath = "//tbody/tr/td[3]/div[1]"
+    deleteTag_xpath = "//button[contains(text(),'Delete Tag')]"
+    delete_Tags_xpath = "//span[contains(text(),'Delete Tag/s')]"
+    selectedTag_xpath = "//mark[@class='euiMark']"
+
 
 
 
@@ -101,9 +113,27 @@ class bulkQueryPage():
         select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath2)
         select_tagname[0].click()
 
+    def verifyNoTagName(self, bulkTag_name):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(bulkTag_name)
+        if len(self.driver.find_elements(By.XPATH, self.selectedTag_xpath)) > 0:
+            assert False
+
+    def verifyNoTagName2(self, bulkTag_name2):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(bulkTag_name2)
+        if len(self.driver.find_elements(By.XPATH, self.selectedTag_xpath)) > 0:
+            assert False
+
+
+
     def click_addExistingPopup(self):
         addExisting = self.driver.find_elements(By.XPATH, self.addexistingTagHeader_xpath)
         addExisting[0].click()
+
+    def click_deleteExistingPopup(self):
+        deleteExisting = self.driver.find_elements(By.XPATH, self.deleteexistingTagHeader_xpath)
+        deleteExisting[0].click()
 
     def enterTagName2(self, bulkTag_name2):
         tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
@@ -117,9 +147,9 @@ class bulkQueryPage():
         addTagButton[0].click()
 
     def verifyAddedTag(self, bulkTag_name, bulkTag_name2):
-        addedTag = self.driver.find_elements(By.XPATH, "//*/div[2]/p[1]/dl[2]/dd[1]/li[1]")[0].text
+        addedTag = self.driver.find_elements(By.XPATH, self.addedTag_xpath)[0].text
         assert addedTag == bulkTag_name
-        added2ndTag = self.driver.find_elements(By.XPATH, "//*/div[2]/p[1]/dl[2]/dd[1]/li[2]")[0].text
+        added2ndTag = self.driver.find_elements(By.XPATH, self.added2ndTag_xpath)[0].text
         assert added2ndTag == bulkTag_name2
 
     def click_close(self):
@@ -127,14 +157,27 @@ class bulkQueryPage():
         closeButton[0].click()
 
     def verifyAddedTag2(self, bulkTag_name2):
-        addedTag = self.driver.find_elements(By.XPATH, "//*/div[2]/p[1]/dl[2]/dd[1]/li[1]")[0].text
+        addedTag = self.driver.find_elements(By.XPATH, self.addedTag_xpath)[0].text
         assert addedTag == bulkTag_name2
 
     def verify_addedBulkTag(self):
-        showTags = self.driver.find_elements(By.XPATH, "//tbody/tr/td[3]/div[1]")
-        for t in showTags:
-            added_tags = self.driver.find_elements(By.XPATH, "//tbody/tr["+str(t)+"]/td[3]/div[1]")[0].text
+        showTags = self.driver.find_elements(By.XPATH, self.showTagDocTable_xpath)
+        for tag in showTags:
+            added_tags = self.driver.find_elements(By.XPATH, "//tbody/tr["+str(tag)+"]/td[3]/div[1]")[0].text
             print(added_tags)
+
+
+    def close_inspector(self):
+        closeInspector = self.driver.find_elements(By.XPATH, self.closeInspector_xpath)
+        closeInspector[0].click()
+
+    def click_deleteTag(self):
+        delete_tag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
+        delete_tag[0].click()
+
+    def click_delete_Tags(self):
+        deleteTags = self.driver.find_elements(By.XPATH, self.delete_Tags_xpath)
+        deleteTags[0].click()
 
 
 

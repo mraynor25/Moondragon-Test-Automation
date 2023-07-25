@@ -17,10 +17,21 @@ class DatatagPage():
     getTagInfoXpath = "//*/div/figure[1]/figcaption[1]/div[1]/div[2]/div[1]/div[2]/span[1]/span[1]/span[1]"
     fieldToRefXpath = "//button[@class='euiSuperSelectControl']"
     refMenuXpath = "//div[contains(text(),'related.ip')]"
-    checkToapplyAllXpath = "//label[contains(text(),'C​h​e​c​k​ ​t​o​ ​A​p​p​l​y​ ​t​o​ ​A​L​L​ ​O​c​c​')]"
     ref_id_className = "kbnDocViewer__value"
     tag_infoXpath = "//*/div/figure[1]/figcaption[1]/div[1]/div[2]/div[1]/div[2]/span[1]/span[1]/span[1]"
     tagslist_xpath = "//*/div[2]/div[1]/div[3]/div[1]/figure[1]/div[1]/div[1]/p[1]"
+    searchBox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1]"
+    searchButton_xpath = "//span[contains(text(),'Search')]"
+    bulkTagName_xpath = "//tbody/tr[1]/td[1]/div[1]"
+    settingIcon_xpath = "//button[@aria-label='Actions']"
+    edit_xpath = "//span[contains(text(),'Edit')]"
+    view_xpath = "//span[contains(text(),'View')]"
+    delete_xpath = "//span[contains(text(),'Delete')]"
+    toggleOnDelete_xpath = "//button[@aria-checked='true']"
+    deleteTag_xpath = "//span[contains(text(),'Delete Tag')]"
+    togglebutton_xpath = "//*/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/button[1]"
+    noitme_xpath = "//div[contains(text(),'No Items')]"
+    clear_field_xpath = "//button[@aria-label='Clear input']"
 
 
 
@@ -165,13 +176,6 @@ class DatatagPage():
         select_menu[0].click()
 
 
-    def checkbox_occr(self):
-        checkbox_occurance = self.driver.find_elements(By.XPATH, self.checkToapplyAllXpath)
-        if checkbox_occurance[0].is_selected():
-            print("Checkbox all occurance already selected")
-        else:
-            checkbox_occurance[0].click()
-
 
     def verifyTag_notfound(self, tag_1, tag_2):
         taginfo = self.driver.find_elements(By.XPATH, self.tag_infoXpath)
@@ -187,6 +191,67 @@ class DatatagPage():
                 tag_list = self.driver.find_elements(By.XPATH, "//div[" + str(tag_name) + "]/figure[1]/figcaption[1]/div[1]/div[2]/div[1]/div[2]/span[1]/span[1]/span[1]")[0].text
                 assert ListOfTag != tag_list
                 break
+
+
+    def searchTags_dataMgnt(self, bulkTag_name):
+        enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
+        enter_searchbox[0].send_keys(bulkTag_name)
+
+    def searchTags_dataMgnt2(self, bulkTag_name2):
+        enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
+        enter_searchbox[0].send_keys(bulkTag_name2)
+
+    def click_searchButton(self):
+        search_button = self.driver.find_elements(By.XPATH, self.searchButton_xpath)
+        search_button[0].click()
+
+    def verify_tagname(self, bulkTag_name):
+        tagname = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
+        assert tagname == bulkTag_name
+
+    def verify_tagname2(self, bulkTag_name2):
+        tagname2 = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
+        assert tagname2 == bulkTag_name2
+
+    def click_settingIcon(self):
+        setting_icon = self.driver.find_elements(By.XPATH, self.settingIcon_xpath)
+        setting_icon[0].click()
+
+    def verifyButtons4owner(self):
+        if len(self.driver.find_elements(By.XPATH, self.edit_xpath)) > 0:
+            assert True
+        if len(self.driver.find_elements(By.XPATH, self.view_xpath)) > 0:
+            assert True
+        if len(self.driver.find_elements(By.XPATH, self.delete_xpath)) > 0:
+            assert True
+
+    def click_deleteButton(self):
+        deleteButton = self.driver.find_elements(By.XPATH, self.delete_xpath)
+        deleteButton[0].click()
+
+    def togglecheck_completeDelete(self):
+        if len(self.driver.find_elements(By.XPATH, self.toggleOnDelete_xpath)) > 0:
+            deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
+            deleteTag[0].click()
+        else:
+            toggle_on = self.driver.find_elements(By.XPATH, self.togglebutton_xpath)
+            toggle_on[0].click()
+            time.sleep(1)
+            deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
+            deleteTag[0].click()
+
+    def verify_noItems(self):
+        noItem = self.driver.find_elements(By.XPATH, self.noitme_xpath)[0].text
+        assert noItem == "No Items"
+
+
+    def clear_searchbox(self):
+        clear_field = self.driver.find_elements(By.XPATH, self.clear_field_xpath)
+        clear_field[0].click()
+
+
+
+
 
 
 

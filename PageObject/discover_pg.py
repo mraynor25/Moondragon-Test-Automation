@@ -146,7 +146,10 @@ class discoverPage():
     createCustomLabel_xpath = "//button[@data-test-subj='createCustomLabel']"
     customLabel_xpath = "//*/div[2]/div[1]/div[4]/div[2]/div[2]/div[1]/div[1]/input[1]"
     addFilter_xpath = "//button[@data-test-subj='addFilter']/span[1]/span[1]"
+    analystTagTable_xpath = "//tbody/tr/td[3]/div[1]"
     toastMsg_xpath = "//div[@data-test-subj='globalToastList']"
+    refreshButton_xpath = "//span[contains(text(),'Refresh')]"
+    noResultsMatchesdoc_xpath = "//h2[contains(text(),'No results match your search criteria')]"
 
 
 
@@ -425,6 +428,11 @@ class discoverPage():
 
         for sen in sensor_name_data:
             self.assertEqual(sen.text, sen_name, "Test failed, sensor name is not returned correctly")
+
+    def clear_KQLfield(self):
+        enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
+        enterKQL[0].send_keys(Keys.CONTROL + "a")
+        enterKQL[0].send_keys(Keys.DELETE)
 
     def enterQuery(self, KQL):
         enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
@@ -1289,6 +1297,45 @@ class discoverPage():
         # wait = WebDriverWait(self.driver, 6)
         # wait.until(EC.text_to_be_present_in_element((By.XPATH, self.toastMsg_xpath), toast_msg))
         # ToastMsg = self.driver.find_elements(By.XPATH, self.toastMsg_xpath)[0].text
+
+    def click_refresh(self):
+        refresh_button = self.driver.find_elements(By.XPATH, self.refreshButton_xpath)
+        refresh_button[0].click()
+
+    def verify_analyst_tags(self, analyst_tag_name):
+        analyst_tags = len(self.driver.find_elements(By.XPATH, self.analystTagTable_xpath))
+
+        for tags in range(1, analyst_tags + 2):
+            ana_tags = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tags) + "]/td[3]/div[1]")[0].text
+            # print(ana_tags)
+            assert ana_tags == analyst_tag_name
+            break
+
+    def verify_analystTagsNotExist(self, analyst_tag_name):
+        if self.driver.find_elements(By.XPATH, self.noResultsMatchesdoc_xpath):
+            assert True
+
+        if len(self.driver.find_elements(By.XPATH, self.analystTagTable_xpath)) > 0:
+            analyst_tags = len(self.driver.find_elements(By.XPATH, self.analystTagTable_xpath))
+            for tags in range(1, analyst_tags + 2):
+                ana_tags = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tags) + "]/td[3]/div[1]")[0].text
+                # print(ana_tags)
+                assert ana_tags != analyst_tag_name
+                break
+
+
+
+    def open_AddedFilter(self):
+        addedFilter = self.driver.find_elements(By.CLASS_NAME, "globalFilterLabel__value")
+        addedFilter[0].click()
+        time.sleep(1)
+        edit_filter = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Edit filter')]")
+        edit_filter[0].click()
+
+    def select_isNOt_addedfilter(self):
+        isNot = self.driver.find_elements(By.XPATH, "//span[contains(text(),'is not')]")
+        isNot[0].click()
+
 
 
 

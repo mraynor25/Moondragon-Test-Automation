@@ -60,6 +60,7 @@ class IOCListPage():
     enterUsers_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
     iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
     ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
+    noitemfound_xpath = "//span[contains(text(),'No items found')]"
 
 
     def __init__(self,driver):
@@ -309,7 +310,7 @@ class IOCListPage():
 
 
     def verify_deletedIOCList(self):
-        noitemfound = self.driver.find_elements(By.XPATH, "//span[contains(text(),'No items found')]")[0].text
+        noitemfound = self.driver.find_elements(By.XPATH, self.noitemfound_xpath)[0].text
         assert "No items found" == noitemfound
 
 

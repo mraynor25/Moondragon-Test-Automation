@@ -2,8 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-
+from selenium.webdriver.support.ui import Select
 
 
 class IOCListPage():
@@ -19,6 +18,7 @@ class IOCListPage():
     savelist_xpath = "//*/div[3]/div[1]/div[1]/div[5]/div[1]/div[1]/button[1]"
     close_IOClist_xpath = "//button[@data-test-subj='euiFlyoutCloseButton']"
     IOCListName_xpath = "//*/tr/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]"
+    iocDetail_xpath = "//tbody/tr[1]/td[2]/div[2]/button[1]"
     more_xpath = "//button[@aria-label='More']"
     editList_xpath = "//span[text()='Edit List']"
     addSelector_xpath = "//span[text()='Add selectors']"
@@ -32,7 +32,6 @@ class IOCListPage():
     appendList_xpath = "//span[contains(text(),'Append list')]"
     appendHeader_xpath = "//h1[contains(text(),'Append List')]"
     appendToggleOn_xpath = "//button[@aria-checked='true']"
-   # selectIOCName_xpath = "//tbody/tr[1]/td[2]/div[2]/button[1]"
     selectIOCName_xpath = "//button[@aria-label='popout']"
     uploadAppendList_xpath = "//*/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]"
     generalList_xpath = "//span[contains(text(),'Generate List')]"
@@ -61,6 +60,12 @@ class IOCListPage():
     iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
     ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
     noitemfound_xpath = "//span[contains(text(),'No items found')]"
+    iocListsearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
+    iocNameReturn_xpath = "//span[@class='euiListGroupItem__label']"
+    iocUserOption_xpath = "//select[@class='euiSelect euiSelect--inGroup']"
+    iocFirstResult_xpath = "//*/tr[1]/td[1]/div[1]/span[1]"
+    ioc_headerName_xpath = "//body/div[7]/div[3]/div[1]/div[1]/h2[1]"
+    ioc_closeDetail_xpath = "//button[@aria-label='Close this dialog']"
 
 
     def __init__(self,driver):
@@ -75,8 +80,9 @@ class IOCListPage():
         create_IOCList[0].click()
 
     def iocList_detailButton(self):
-        ioc_detail = self.driver.find_elements(By.XPATH, "//tbody/tr[1]/td[2]/div[2]/button[1]")
+        ioc_detail = self.driver.find_elements(By.XPATH, self.iocDetail_xpath)
         ioc_detail[0].click()
+
 
     def load_createIOCpg(self):
         wait = WebDriverWait(self.driver, 20)
@@ -225,7 +231,7 @@ class IOCListPage():
                     enter_username = self.driver.find_elements(By.XPATH, self.enterUsers_xpath)
                     enter_username[0].send_keys("analyst2")
                     time.sleep(1)
-                    click_apply = self.driver.find_elements(By.XPATH, "")
+                    click_apply = self.driver.find_elements(By.XPATH, self.applyButton_xpath)
                     click_apply[0].click()
                     time.sleep(1)
 
@@ -323,33 +329,48 @@ class IOCListPage():
 
 
     def check_ioclistButton(self, IOC_title):
-        more = self.driver.find_elements(By.XPATH, "//button[@aria-label='More']")[0].click()
+        more = self.driver.find_elements(By.XPATH, self.moreButton_xpath)[0].click()
         time.sleep(3)
-        if len(self.driver.find_elements(By.XPATH, "//span[text()='Delete List']")) > 0:
+        if len(self.driver.find_elements(By.XPATH, self.deleteButton_xpath)) > 0:
             assert True
-        if len(self.driver.find_elements(By.XPATH, "//span[text()='Download List']")) > 0:
+        if len(self.driver.find_elements(By.XPATH, self.downloadListButton_xpath)) > 0:
             assert True
-        if len(self.driver.find_elements(By.XPATH, "//span[text()='Edit List']")) > 0:
+        if len(self.driver.find_elements(By.XPATH, self.editListButton_xpath)) > 0:
             assert True
 
-    # IOClistName2 = len(self.driver.find_elements(By.XPATH, "//*/tr/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]"))
-        #
-        # for iln2 in range(1, IOClistName2 + 1):
-        #     IOCName = self.driver.find_elements(By.XPATH, "//*/tr[" + str(iln2) + "]/td[1]/div[2]/span[1]/span[1]/span[1]/li[1]/span[1]/span[1]")[0].text
-        #     if IOCName == IOC_title:
-        #         dailyIOC = \
-        #         self.driver.find_elements(By.XPATH, "//table[1]/tbody[1]/tr[" + str(iln2) + "]/td[2]/div[2]/button[1]")[0].click()
-        #         time.sleep(1)
-        #         more = self.driver.find_elements(By.XPATH, "//button[@aria-label='More']")[0].click()
-        #         time.sleep(5)
-        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Delete List']")) > 0:
-        #             assert True
-        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Download List']")) > 0:
-        #             assert True
-        #         if len(self.driver.find_elements(By.XPATH, "//span[text()='Edit List']")) > 0:
-        #             assert True
-        #
 
+    def enter_IOCSearchList(self,  IOC_title):
+        ioc_searchbox = self.driver.find_elements(By.XPATH, self.iocListsearchbox_xpath)
+        ioc_searchbox[0].send_keys(IOC_title)
+
+    def verify_IOCSearchResults(self, IOC_title):
+        ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
+        assert ioc_name_return == IOC_title
+
+
+
+    def select_ioclistDropdown_option(self, IOC_dropdown):
+        ioc_user_option = self.driver.find_element(By.XPATH, self.iocUserOption_xpath)
+        select = Select(ioc_user_option)
+        select.select_by_value(IOC_dropdown)
+
+    def select_ioclistDropdown_option2(self, IOC_dropdown2):
+        ioc_user_option = self.driver.find_element(By.XPATH, self.iocUserOption_xpath)
+        select = Select(ioc_user_option)
+        select.select_by_value(IOC_dropdown2)
+
+    def verify_IOCSearchNoResults(self, no_results):
+        ioc_results = self.driver.find_elements(By.XPATH, self.iocFirstResult_xpath)[0].text
+        assert ioc_results == no_results
+
+    def verify_ioc_header(self, IOC_title):
+        ioc_titleheader = self.driver.find_elements(By.XPATH, self.ioc_headerName_xpath)[0].text
+        print(ioc_titleheader)
+        assert IOC_title == ioc_titleheader
+
+    def close_IOC_detail(self):
+        close_detail = self.driver.find_elements(By.XPATH, self.ioc_closeDetail_xpath)
+        close_detail[0].click()
 
 
 

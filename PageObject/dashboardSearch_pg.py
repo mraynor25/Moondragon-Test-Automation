@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class dashboardSearchPage():
     # Locators of all the elements
 
-    searchbox_dashboard_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    searchbox_dashboard_xpath = "//input[@data-test-subj='tableListSearchBox']"
     link_suricata_xpath = "//a[contains(text(),'Suricata [MOONDRAGON]')]"
     welcomeDashLinktext = "*Welcome [MOONDRAGON]"
     httpLinkXpath = "//a[contains(text(),'HTTP [MOONDRAGON]')]"

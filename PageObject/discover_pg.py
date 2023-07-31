@@ -175,7 +175,7 @@ class discoverPage():
             time.sleep(2)
 
     def discover_pg_loads(self):
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(self.driver, 25)
         wait.until(EC.presence_of_element_located((By.XPATH, self.OpenIndexDropdownXpath))
                    )
 

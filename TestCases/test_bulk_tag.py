@@ -34,6 +34,8 @@ Added Successfully"""
     KQL = "analyst_tag = sample bulk query AND analyst_tag = sample bulk"
     analyst_tag_name = "sample bulk query, sample bulk"
 
+    # test passed july 26 2023
+
 
     def setUp(cls):
         options = Options()

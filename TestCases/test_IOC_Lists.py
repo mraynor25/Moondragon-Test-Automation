@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed July 18 2023
+# Test passed July 28 2023
 
 
 class Test_IOCList(unittest.TestCase):
@@ -52,7 +52,7 @@ class Test_IOCList(unittest.TestCase):
         Ip.clickLogin()
         time.sleep(3)
         Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(2)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -81,7 +81,7 @@ class Test_IOCList(unittest.TestCase):
         ip.enter_listTitle(self.IOC_title)
         time.sleep(2)
         ip.select_IOCFile()
-        time.sleep(3)
+        time.sleep(2)
         ip.click_generateList()
         time.sleep(2)
         ip.verify_toast_Msg()
@@ -98,7 +98,7 @@ class Test_IOCList(unittest.TestCase):
         dp.click_editAsQyery()
         time.sleep(3)
         dp.editAsQueryForm()
-        time.sleep(5)
+        time.sleep(3)
         dp.click_saveQuery()
         time.sleep(2)
 
@@ -111,7 +111,7 @@ class Test_IOCList(unittest.TestCase):
         dp.click_editAsQyery()
         time.sleep(3)
         dp.editAsQueryForm()
-        time.sleep(5)
+        time.sleep(3)
         dp.createCustomLabel()
         time.sleep(2)
         dp.enterCustomLabel(self.IOC_title)
@@ -121,7 +121,7 @@ class Test_IOCList(unittest.TestCase):
 
 
         Ip.logout()
-        time.sleep(11)
+        time.sleep(10)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername2(self.username2)

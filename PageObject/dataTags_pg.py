@@ -30,7 +30,7 @@ class DatatagPage():
     toggleOnDelete_xpath = "//button[@aria-checked='true']"
     deleteTag_xpath = "//span[contains(text(),'Delete Tag')]"
     togglebutton_xpath = "//*/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/button[1]"
-    noitme_xpath = "//div[contains(text(),'No Items')]"
+    noitem_xpath = "//div[contains(text(),'No Items')]"
     clear_field_xpath = "//button[@aria-label='Clear input']"
 
 
@@ -241,7 +241,8 @@ class DatatagPage():
             deleteTag[0].click()
 
     def verify_noItems(self):
-        noItem = self.driver.find_elements(By.XPATH, self.noitme_xpath)[0].text
+        noItem = self.driver.find_elements(By.XPATH, self.noitem_xpath)[0].text
+        print(noItem)
         assert noItem == "No Items"
 
 

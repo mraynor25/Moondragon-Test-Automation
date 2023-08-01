@@ -65,7 +65,7 @@ class IOCListPage():
     iocUserOption_xpath = "//select[@class='euiSelect euiSelect--inGroup']"
     iocFirstResult_xpath = "//*/tr[1]/td[1]/div[1]/span[1]"
     ioc_headerName_xpath = "//body/div[7]/div[3]/div[1]/div[1]/h2[1]"
-    ioc_closeDetail_xpath = "//button[@aria-label='Close this dialog']"
+    ioc_closeDetail_xpath = "//body/div[7]/div[3]/div[1]/button[1]"
 
 
     def __init__(self,driver):
@@ -236,7 +236,6 @@ class IOCListPage():
                     time.sleep(1)
 
                 confirm_desc = self.driver.find_elements(By.XPATH, self.confirmDesc_xpath)[0].text
-                print(confirm_desc)
                 assert "Description: update ioc list" == confirm_desc
                 confirm_user = self.driver.find_elements(By.XPATH, self.confirmUser_xpath)[0].text
                 assert "Additional Users: analyst3" == confirm_user
@@ -347,6 +346,8 @@ class IOCListPage():
         ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
         assert ioc_name_return == IOC_title
 
+    def verify_ioclistDropdown(self, IOC_dropdown3):
+
 
 
     def select_ioclistDropdown_option(self, IOC_dropdown):
@@ -365,7 +366,6 @@ class IOCListPage():
 
     def verify_ioc_header(self, IOC_title):
         ioc_titleheader = self.driver.find_elements(By.XPATH, self.ioc_headerName_xpath)[0].text
-        print(ioc_titleheader)
         assert IOC_title == ioc_titleheader
 
     def close_IOC_detail(self):

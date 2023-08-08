@@ -58,9 +58,6 @@ class dashboardPage():
     operatorArrowXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
     selectOperatorXpath = "//*/div[6]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]"
     typeValueXpath = "//*/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
-    #saveButtonXpath = "//span[contains(text(),'Save')]"
-    #saveButtonXpath = "//button[@data-test-subj='savedQueryFormSaveButton']"
-    #saveButtonXpath = "//button[@data-test-subj='saveFilter']"
     saveButtonXpath = "//span[contains(text(),'Save')]"
     savedToastMsg_IpruleQuery = "//span[contains(text(),'Your query \"dest_IP_rule_query\" was saved')]"
     getTitleXpath = "//*/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/ul[1]/li/div[2]"
@@ -123,7 +120,9 @@ class dashboardPage():
     get_destinIPXpath = "//*/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[1]/div[2]/div[1]/div[1]"
     ruleQuery_alertMsgXpath = "//span[contains(text(),'Your query \"Rule_Query\" was saved')]"
     ruleQueryXpath = "//span[contains(text(),'Rule_Query')]"
+    SensorQueryXpath = "//span[contains(text(),'sensor_query')]"
     delete_ruleQueryXpath = "//*[@title='Delete saved query Rule_Query']"
+    delete_sensorQueryXpath = "//*[@title='Delete saved query sensor_query']"
     table_colXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/kbn-agg-table-group[1]/table[1]/tbody[1]/tr[1]/td[1]/kbn-agg-table[1]/paginated-table[1]/paginate[1]/div[1]/table[1]/tbody[1]/tr/td[1]/div[1]/span[1]"
     table_col2Xpath = "//*/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/kbn-agg-table-group[1]/table[1]/tbody[1]/tr[1]/td[1]/kbn-agg-table[1]/paginated-table[1]/paginate[1]/div[1]/table[1]/tbody[1]/tr/td[1]/div[1]/span[1]"
     sourcePortXpath = "//*/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[2]/div[2]/div[1]/div[1]"
@@ -247,10 +246,22 @@ class dashboardPage():
         saveQ_button[0].click()
 
     def toastMsg(self):
+
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsgXpath))
+                   )
+
         toast_message = self.driver.find_elements(By.XPATH, self.toastMsgXpath)[0].text
         assert toast_message == "Your query \"IP_Trojan_Query\" was saved"
-        print(toast_message)
 
+    def toastMsg2(self, toast_msg):
+
+        wait = WebDriverWait(self.driver, 5)
+        wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Your query \"sensor_query\" was saved')]"))
+                   )
+
+        toast_message2 = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Your query \"sensor_query\" was saved')]")[0].text
+        assert toast_message2 == toast_msg
 
     def shareButton(self):
         clickshare = self.driver.find_elements(By.XPATH, self.shareButtonXpath)
@@ -299,15 +310,12 @@ class dashboardPage():
             nextpg = self.driver.find_elements(By.XPATH, "//*/div[3]/div[1]/div[2]/div[1]/nav[1]/button[" + str(total_pg) + "]")
             nextpg[0].click()
             time.sleep(3)
-            clickRunquery = self.driver.find_elements(By.XPATH, self.ruleQueryXpath)
+            clickRunquery = self.driver.find_elements(By.XPATH, self.SensorQueryXpath)
             clickRunquery[0].click()
-            time.sleep(2)
         else:
-            self.driver.find_elements(By.XPATH, self.delete_ruleQueryXpath)[0].click()
-            time.sleep(3)
-            clickRunquery = self.driver.find_elements(By.XPATH, self.ruleQueryXpath)
+            clickRunquery = self.driver.find_elements(By.XPATH, self.SensorQueryXpath)
             clickRunquery[0].click()
-            time.sleep(2)
+
 
     def verifyQuery(self):
         Verifyquery = self.driver.find_elements(By.XPATH, self.enterQueryXpath)[0].text
@@ -334,6 +342,14 @@ class dashboardPage():
     def deleteIcon(self):
         clickdeleteIcon1 = self.driver.find_elements(By.XPATH, self.deleteicon1Xpath)
         if clickdeleteIcon1[0].get_attribute('title') == "Delete saved query IP_Trojan_Query":
+            clickdeleteIcon1[0].click()
+            time.sleep(3)
+            deleteButton = self.driver.find_elements(By.XPATH, self.delete_savedQueryButton)
+            deleteButton[0].click()
+
+    def deleteIcon2(self):
+        clickdeleteIcon1 = self.driver.find_elements(By.XPATH, self.deleteicon1Xpath)
+        if clickdeleteIcon1[0].get_attribute('title') == "Delete saved query sensor_query":
             clickdeleteIcon1[0].click()
             time.sleep(3)
             deleteButton = self.driver.find_elements(By.XPATH, self.delete_savedQueryButton)

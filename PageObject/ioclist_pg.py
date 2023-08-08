@@ -346,8 +346,6 @@ class IOCListPage():
         ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
         assert ioc_name_return == IOC_title
 
-    def verify_ioclistDropdown(self, IOC_dropdown3):
-
 
 
     def select_ioclistDropdown_option(self, IOC_dropdown):

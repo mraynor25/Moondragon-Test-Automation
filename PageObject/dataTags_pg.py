@@ -34,8 +34,6 @@ class DatatagPage():
     clear_field_xpath = "//button[@aria-label='Clear input']"
 
 
-
-
     def __init__(self, driver):
         self.driver = driver
 
@@ -224,6 +222,14 @@ class DatatagPage():
             assert True
         if len(self.driver.find_elements(By.XPATH, self.delete_xpath)) > 0:
             assert True
+
+    def verifyButtons4AdditionalUser(self):
+        if len(self.driver.find_elements(By.XPATH, self.edit_xpath)) > 0:
+            assert False
+        if len(self.driver.find_elements(By.XPATH, self.view_xpath)) > 0:
+            assert True
+        if len(self.driver.find_elements(By.XPATH, self.delete_xpath)) > 0:
+            assert False
 
     def click_deleteButton(self):
         deleteButton = self.driver.find_elements(By.XPATH, self.delete_xpath)

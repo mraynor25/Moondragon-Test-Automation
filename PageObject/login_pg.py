@@ -31,6 +31,9 @@ class loginPage():
             click_Elastic_login[0].click()
 
     def setUsername(self, username):
+        wait = WebDriverWait(self.driver, 9)
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, self.textbox_username_className))
+                   )
         EnterUsername2 = self.driver.find_element(By.CLASS_NAME, self.textbox_username_className)
         EnterUsername2.clear()
         EnterUsername2.send_keys(username)

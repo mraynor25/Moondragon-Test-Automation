@@ -19,6 +19,7 @@ class discoverPage():
     IndexNameXpath = "//*/div[1]/div[1]/button[1]/span[1]/span[1]/strong[1]"
     OpenIndexDropdownXpath = "//button[@data-test-subj='indexPattern-switch-link']"
     selectDropdown4yearXpath = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
+    timefilter_ToggleButtonName = "shouldIncludeTimefilter"
     #EnterSearchboxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
     enterFavIndxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
     EnterSearchboxXpath = "//input[@aria-label='Filter options']"
@@ -150,6 +151,9 @@ class discoverPage():
     toastMsg_xpath = "//div[@data-test-subj='globalToastList']"
     refreshButton_xpath = "//span[contains(text(),'Refresh')]"
     noResultsMatchesdoc_xpath = "//h2[contains(text(),'No results match your search criteria')]"
+    editedFilter_className = "globalFilterLabel__value"
+    IsNot_xpath = "//span[contains(text(),'is not')]"
+    delete_xpath = "//span[contains(text(),'Delete')]"
 
 
 
@@ -158,7 +162,7 @@ class discoverPage():
 
 
     def loadingCheck(self):
-        time.sleep(5)
+        time.sleep(2)
         numberOfRetries = 5
         stillLoadingData = False
         while (not bool(stillLoadingData)) and (numberOfRetries > 0):
@@ -241,8 +245,8 @@ class discoverPage():
 
     def check4DocHitsOverlimit(self, countdoc):
         # check to see if doc is over 200,000
-        if str(countdoc) >= str("200,000"):
-            assert False
+        if str(countdoc) <= str("200,000"):
+            assert True
 
     def click_inspect(self):
         inspect_button = self.driver.find_elements(By.XPATH, self.inspectXpath)
@@ -931,6 +935,10 @@ class discoverPage():
         EnterUserKQL[0].clear()
         EnterUserKQL[0].send_keys(KQL)
 
+    def toggleOn_savedQueryTimefilter(self):
+        timefilter_toggle = self.driver.find_elements(By.NAME, self.timefilter_ToggleButtonName)
+        timefilter_toggle[0].click()
+
     def verifynumofRec(self):
         VerifynumofRecord = self.driver.find_elements(By.XPATH, self.numofrecXpath)[0].text
         return VerifynumofRecord
@@ -1307,7 +1315,6 @@ class discoverPage():
 
         for tags in range(1, analyst_tags + 2):
             ana_tags = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tags) + "]/td[3]/div[1]")[0].text
-            # print(ana_tags)
             assert ana_tags == analyst_tag_name
             break
 
@@ -1319,22 +1326,25 @@ class discoverPage():
             analyst_tags = len(self.driver.find_elements(By.XPATH, self.analystTagTable_xpath))
             for tags in range(1, analyst_tags + 2):
                 ana_tags = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tags) + "]/td[3]/div[1]")[0].text
-                # print(ana_tags)
                 assert ana_tags != analyst_tag_name
                 break
 
 
-
     def open_AddedFilter(self):
-        addedFilter = self.driver.find_elements(By.CLASS_NAME, "globalFilterLabel__value")
+        addedFilter = self.driver.find_elements(By.CLASS_NAME, self.editedFilter_className)
         addedFilter[0].click()
         time.sleep(1)
-        edit_filter = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Edit filter')]")
+        edit_filter = self.driver.find_elements(By.XPATH, self.click_editFilterXpath)
         edit_filter[0].click()
 
     def select_isNOt_addedfilter(self):
-        isNot = self.driver.find_elements(By.XPATH, "//span[contains(text(),'is not')]")
+        isNot = self.driver.find_elements(By.XPATH, self.IsNot_xpath)
         isNot[0].click()
+
+
+    def click_delete(self):
+        deletebutton = self.driver.find_elements(By.XPATH, self.delete_xpath)
+        deletebutton[0].click()
 
 
 

@@ -121,6 +121,13 @@ class bulkQueryPage():
         selectTagName = self.driver.find_elements(By.XPATH, self.tagname_opt_xpath)
         selectTagName[0].click()
 
+    def verify_tagNameNotExist(self, bulkTag_name):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(bulkTag_name)
+        time.sleep(1)
+        if len(self.driver.find_elements(By.XPATH, self.tagname_opt_xpath)) > 0:
+            assert False
+
     def verifyNoTagName(self, bulkTag_name):
         tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
         tag_name_dropdown[0].send_keys(bulkTag_name)

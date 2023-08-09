@@ -1,6 +1,8 @@
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 
@@ -32,6 +34,7 @@ class DatatagPage():
     togglebutton_xpath = "//*/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/button[1]"
     noitem_xpath = "//div[contains(text(),'No Items')]"
     clear_field_xpath = "//button[@aria-label='Clear input']"
+    close_modal_xpath = "//button[@aria-label='Closes this modal window']"
 
 
     def __init__(self, driver):
@@ -199,9 +202,18 @@ class DatatagPage():
         enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
         enter_searchbox[0].send_keys(bulkTag_name2)
 
-    def click_searchButton(self):
-        search_button = self.driver.find_elements(By.XPATH, self.searchButton_xpath)
-        search_button[0].click()
+    def waitSearchbutton_display(self):
+        wait = WebDriverWait(self.driver, 7)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.searchButton_xpath))
+                   )
+
+    def click_SearchButton(self):
+        click_search = self.driver.find_elements(By.XPATH, self.searchButton_xpath)
+        click_search[0].click()
+
+    def create_dataTag(self):
+        click_dataTag = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Create Data Tag')]")
+        click_dataTag[0].click()
 
     def verify_tagname(self, bulkTag_name):
         tagname = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
@@ -231,9 +243,24 @@ class DatatagPage():
         if len(self.driver.find_elements(By.XPATH, self.delete_xpath)) > 0:
             assert False
 
+    def click_viewButton(self):
+        viewButton = self.driver.find_elements(By.XPATH, "//span[contains(text(),'View')]")
+        viewButton[0].click()
+
+
     def click_deleteButton(self):
         deleteButton = self.driver.find_elements(By.XPATH, self.delete_xpath)
         deleteButton[0].click()
+
+    def verify_viewTag(self):
+        tag_name = self.driver.find_elements(By.XPATH, "//*/div[1]/div[1]/div[1]/div[1]/h1[1]")[0].text
+        assert "Viewing: sensor tag" == tag_name
+        ownner_info = self.driver.find_elements(By.XPATH, "//*/div[1]/div[2]/div[1]/dl[1]/dt[1]")[0].text
+        assert "Owner: analyst" == ownner_info
+        user_info = self.driver.find_elements(By.XPATH, "//dd[contains(text(),'analyst2')]")[0].text
+        assert "analyst2" == user_info
+
+
 
     def togglecheck_completeDelete(self):
         if len(self.driver.find_elements(By.XPATH, self.toggleOnDelete_xpath)) > 0:
@@ -255,6 +282,10 @@ class DatatagPage():
     def clear_searchbox(self):
         clear_field = self.driver.find_elements(By.XPATH, self.clear_field_xpath)
         clear_field[0].click()
+
+    def close_modal(self):
+        close = self.driver.find_elements(By.XPATH, self.close_modal_xpath)
+        close[0].click()
 
 
 

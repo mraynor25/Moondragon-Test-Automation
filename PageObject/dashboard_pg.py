@@ -22,6 +22,7 @@ class dashboardPage():
     saveXpath = "//*/div[1]/div[3]/button[2]/span[1]/span[1]"
     saveCurrentQueryXpath = "//span[contains(text(),'Save current query')]"
     toastMsgXpath = "//span[contains(text(),'Your query \"IP_Trojan_Query\" was saved')]"
+    toastMsg1Xpath = "//span[contains(text(),'Your query \"sensor_query\" was saved')]"
     shareButtonXpath = "//span[contains(text(),'Share')]"
     permalinkXpath = "//span[contains(text(),'Permalinks')]"
     radioButtonSnapshotXpath = "//label[@class='euiRadio__label']"
@@ -255,12 +256,10 @@ class dashboardPage():
         assert toast_message == "Your query \"IP_Trojan_Query\" was saved"
 
     def toastMsg2(self, toast_msg):
-
-        wait = WebDriverWait(self.driver, 5)
-        wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Your query \"sensor_query\" was saved')]"))
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsg1Xpath))
                    )
-
-        toast_message2 = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Your query \"sensor_query\" was saved')]")[0].text
+        toast_message2 = self.driver.find_elements(By.XPATH, self.toastMsg1Xpath)[0].text
         assert toast_message2 == toast_msg
 
     def shareButton(self):

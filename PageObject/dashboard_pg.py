@@ -35,8 +35,8 @@ class dashboardPage():
     DateDropdownMenuXpath = "//div[@class='euiFlexItem']/div[1]/div[1]/input[1]"
     checkDateXpath = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
     deleteIconXpath = "//button[contains(@class, 'euiListGroupItem__extraAction')]"
-    deleteButtonXpath2 = "//span[contains(text(),'Delete')]"
-    deleteButtonXpath = "//*/tbody[1]/tr[1]/td[2]/div[1]/div[1]/button[2]"
+    # deleteButtonXpath2 = "//span[contains(text(),'Delete')]"
+    deleteButtonXpath = "//span[contains(text(),'Delete')]"
     getTimeframeClassName = "euiSuperDatePicker__prettyFormat"
     applyButtonXpath = "//span[contains(text(),'Apply')]"
     addToWorkspaceXpath = "//span[contains(text(),'Add to My Workspace')]"
@@ -116,6 +116,7 @@ class dashboardPage():
     usernameTimeValueXpath = "//*/tr/td[1]/div[1]/div[1]/div[1]/div[2]/div[1]"
     ip_savedQueryXpath = "//span[contains(text(),'IP_Trojan_Query')]"
     deleteicon1Xpath = "//*/div[3]/div[1]/div[2]/div[1]/div[3]/ul[1]/li[1]/button[2]"
+    deleteicon2Xpath = "//button[@data-test-subj='delete-saved-query-sensor_query-button']"
     findDashXpath = "//*/tr[1]/td[1]/div[1]/div[1]/div[1]/div[2]/div[1]"
     deleteToastMsgXpath = "//span[@class='euiToastHeader__title']/div[1]/div[1]"
     get_destinIPXpath = "//*/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[1]/div[2]/div[1]/div[1]"
@@ -347,18 +348,13 @@ class dashboardPage():
             deleteButton[0].click()
 
     def deleteIcon2(self):
-        clickdeleteIcon1 = self.driver.find_elements(By.XPATH, self.deleteicon1Xpath)
+        clickdeleteIcon1 = self.driver.find_elements(By.XPATH, self.deleteicon2Xpath)
         if clickdeleteIcon1[0].get_attribute('title') == "Delete saved query sensor_query":
             clickdeleteIcon1[0].click()
-            time.sleep(3)
-            deleteButton = self.driver.find_elements(By.XPATH, self.delete_savedQueryButton)
+            time.sleep(2)
+            deleteButton = self.driver.find_elements(By.XPATH, self.deleteButtonXpath)
             deleteButton[0].click()
 
-
-
-    def deleteButton(self):
-        deleteButton = self.driver.find_elements(By.XPATH, self.deleteButtonXpath)
-        deleteButton[0].click()
 
     def getTimeFrame(self):
         GetTimeFrame = self.driver.find_element(By.CLASS_NAME, self.getTimeframeClassName).text

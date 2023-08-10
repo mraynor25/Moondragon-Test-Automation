@@ -126,7 +126,6 @@ class discoverPage():
     source_ip_xpath = "//*/div[1]/div[2]/div[7]/div[1]/div[1]/div[1]/span[1]"
     #networkIPBytes_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/button[1]/div[1]"
     networkIPBytes_xpath = "//*/div[2]/div[1]/div[1]/ul[1]/li[1]/div[1]/div[1]/div[1]/button[1]/span[2]/span[1]"
-    #addedfield2_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[5]/div[2]/div[1]/button[1]/div[1]"
     addedfield2_xpath = "//thead/tr[1]/th[4]/span[1]"
     firstvalue_xpath = "//*/tbody[1]/tr/td[3]/div[1]/span[1]/mark[1]"
     secvalue_xpath = "//*/tbody[1]/tr/td[4]/div[1]/span[1]"

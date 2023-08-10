@@ -42,7 +42,6 @@ class Test_IOCList(unittest.TestCase):
 
     def test_IOC_list(self):
 
-
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
         Ip.setUsername(self.username)

@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-
+# test passed aug 10 2023
 
 class Test_bulkTag_adddelete(unittest.TestCase):
     username = "analyst"
@@ -298,7 +298,7 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         time.sleep(1)
         dtp.togglecheck_completeDelete()
         time.sleep(2)
-### below might be needed verifying dropdown bulk tag not show
+
 
         hp.clickHambergerMenu()
         time.sleep(1)
@@ -335,10 +335,8 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         dap.openSaveQuery()
         time.sleep(2)
         dap.deleteIcon2()
-        time.sleep(1)
-        dp = discoverPage(self.driver)
-        dp.click_delete()
-        time.sleep(5)
+
+
 
 
 

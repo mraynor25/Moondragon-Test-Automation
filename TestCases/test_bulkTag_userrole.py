@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# test passed aug 10 2023
+# test passed aug 10 2023 completed test scripts
 
 class Test_bulkTag_adddelete(unittest.TestCase):
     username = "analyst"
@@ -335,8 +335,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         dap.openSaveQuery()
         time.sleep(2)
         dap.deleteIcon2()
-
-
 
 
 

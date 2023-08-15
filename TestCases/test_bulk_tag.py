@@ -51,7 +51,6 @@ Added Successfully"""
 
     def test_IOC_listAdd_delete(self):
 
-
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
         Ip.setUsername(self.username)

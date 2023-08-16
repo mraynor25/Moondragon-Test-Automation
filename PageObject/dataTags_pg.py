@@ -35,6 +35,14 @@ class DatatagPage():
     noitem_xpath = "//div[contains(text(),'No Items')]"
     clear_field_xpath = "//button[@aria-label='Clear input']"
     close_modal_xpath = "//button[@aria-label='Closes this modal window']"
+    createTab_xpath = "//button[contains(text(),'Create')]"
+    createHeader_xpath = "//h1[contains(text(),'Create Tag')]"
+    toggleOn_xpath = "//button[@aria-checked='true']"
+    click_togglebutton_xpath = "//button[@class='euiSwitch__button']"
+    tagnameTextbox_xpath = "//input[@placeholder='Tag name']"
+    tagname_xpath = "//*/div[1]/div[1]/div[1]/div[1]/h1[1]"
+    ownersInfo_xpath = "//*/div[1]/div[2]/div[1]/dl[1]/dt[1]"
+    userInfo_xpath = "//dd[contains(text(),'analyst2')]"
 
 
     def __init__(self, driver):
@@ -168,6 +176,22 @@ class DatatagPage():
         FieldToRef_arrow = self.driver.find_elements(By.XPATH, self.fieldToRefXpath)
         FieldToRef_arrow[0].click()
 
+    def verify_createHeaderExist(self):
+        header_name = self.driver.find_elements(By.XPATH, self.createHeader_xpath)[0].text
+        assert "Create Tag" == header_name
+
+    def checkToggleOn(self):
+        if len(self.driver.find_elements(By.XPATH, self.toggleOn_xpath)) >0:
+            assert True
+        else:
+           click_toggle_on = self.driver.find_elements(By.XPATH, self.click_togglebutton_xpath)
+           click_toggle_on[0].click()
+
+    def enter_tagName(self, tag_name):
+        enter_tagname = self.driver.find_elements(By.XPATH, self.tagnameTextbox_xpath)
+        enter_tagname[0].send_keys(tag_name)
+
+
     def refMenu(self):
         ref_menu = self.driver.find_elements(By.XPATH, self.refMenuXpath)[0].text
         return ref_menu
@@ -215,6 +239,10 @@ class DatatagPage():
         click_dataTag = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Create Data Tag')]")
         click_dataTag[0].click()
 
+    def create_imbeddedTag(self):
+        click_tag = self.driver.find_elements(By.XPATH, self.createTab_xpath)
+        click_tag[0].click()
+
     def verify_tagname(self, bulkTag_name):
         tagname = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
         assert tagname == bulkTag_name
@@ -244,7 +272,7 @@ class DatatagPage():
             assert False
 
     def click_viewButton(self):
-        viewButton = self.driver.find_elements(By.XPATH, "//span[contains(text(),'View')]")
+        viewButton = self.driver.find_elements(By.XPATH, self.view_xpath)
         viewButton[0].click()
 
 
@@ -253,11 +281,11 @@ class DatatagPage():
         deleteButton[0].click()
 
     def verify_viewTag(self):
-        tag_name = self.driver.find_elements(By.XPATH, "//*/div[1]/div[1]/div[1]/div[1]/h1[1]")[0].text
+        tag_name = self.driver.find_elements(By.XPATH, self.tagname_xpath)[0].text
         assert "Viewing: sensor tag" == tag_name
-        ownner_info = self.driver.find_elements(By.XPATH, "//*/div[1]/div[2]/div[1]/dl[1]/dt[1]")[0].text
+        ownner_info = self.driver.find_elements(By.XPATH, self.ownersInfo_xpath)[0].text
         assert "Owner: analyst" == ownner_info
-        user_info = self.driver.find_elements(By.XPATH, "//dd[contains(text(),'analyst2')]")[0].text
+        user_info = self.driver.find_elements(By.XPATH, self.userInfo_xpath)[0].text
         assert "analyst2" == user_info
 
 

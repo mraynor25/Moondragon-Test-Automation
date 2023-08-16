@@ -25,6 +25,7 @@ class bulkQueryPage():
     tagname_option_xpath = "//mark[contains(text(),'sample bulk query')]"
     tagname_option_xpath2 = "//mark[contains(text(),'sample bulk')]"
     tagname_opt_xpath = "//mark[contains(text(),'sensor tag')]"
+    tagname_opt2_xpath = "//mark[contains(text(),'Tag for over 20,000 doc')]"
     addTagButton_xpath = "//span[contains(text(),'Add Tag/s')]"
     closeButton_xpath = "//span[contains(text(),'Close')]"
     closeInspector_xpath = "//button[@aria-label='Close Inspector']"
@@ -35,6 +36,10 @@ class bulkQueryPage():
     deleteTag_xpath = "//button[contains(text(),'Delete Tag')]"
     delete_Tags_xpath = "//span[contains(text(),'Delete Tag/s')]"
     selectedTag_xpath = "//mark[@class='euiMark']"
+    headerTag_xpath = "//h2[contains(text(),'Issue Adding Tag/s')]"
+    headerDeleteTag_xpath = "//h2[contains(text(),'Issue Deleting Tag/s')]"
+    msgIssue_xpath = "//p[contains(text(),'Documents returned exceed 200,000. Please change t')]"
+
 
 
 
@@ -121,6 +126,14 @@ class bulkQueryPage():
         selectTagName = self.driver.find_elements(By.XPATH, self.tagname_opt_xpath)
         selectTagName[0].click()
 
+    def enterTagName3(self, bulkTag_name):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(bulkTag_name)
+        time.sleep(1)
+        selectTagName = self.driver.find_elements(By.XPATH, self.tagname_opt2_xpath)
+        selectTagName[0].click()
+
+
     def verify_tagNameNotExist(self, bulkTag_name):
         tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
         tag_name_dropdown[0].send_keys(bulkTag_name)
@@ -150,12 +163,6 @@ class bulkQueryPage():
         deleteExisting = self.driver.find_elements(By.XPATH, self.deleteexistingTagHeader_xpath)
         deleteExisting[0].click()
 
-    # def enterTagName2(self, bulkTag_name2):
-    #     tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
-    #     tag_name_dropdown[0].send_keys(bulkTag_name2)
-    #     time.sleep(1)
-    #     select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath2)
-    #     select_tagname[0].click()
 
     def click_addTagButton(self):
         addTagButton = self.driver.find_elements(By.XPATH, self.addTagButton_xpath)
@@ -176,9 +183,7 @@ class bulkQueryPage():
         closeButton = self.driver.find_elements(By.XPATH, self.closeButton_xpath)
         closeButton[0].click()
 
-    def verifyAddedTag2(self, bulkTag_name2):
-        addedTag = self.driver.find_elements(By.XPATH, self.addedTag_xpath)[0].text
-        assert addedTag == bulkTag_name2
+
 
     def verify_addedBulkTag(self):
         showTags = self.driver.find_elements(By.XPATH, self.showTagDocTable_xpath)
@@ -198,6 +203,22 @@ class bulkQueryPage():
     def click_delete_Tags(self):
         deleteTags = self.driver.find_elements(By.XPATH, self.delete_Tags_xpath)
         deleteTags[0].click()
+
+    def verify_IssueAddingHeaderTag_Msg(self):
+        header_msg_issue = self.driver.find_elements(By.XPATH, self.headerTag_xpath)[0].text
+        assert header_msg_issue == "Issue Adding Tag/s"
+
+
+    def verify_IssueDeletingHeaderTag_Msg(self):
+        header_msg_issue = self.driver.find_elements(By.XPATH, self.headerDeleteTag_xpath)[0].text
+        assert header_msg_issue == "Issue Deleting Tag/s"
+
+
+
+    def verify_IssueTag_Msg(self, msg):
+        msg_issue = self.driver.find_elements(By.XPATH, self.msgIssue_xpath)[0].text
+        assert msg_issue == msg
+
 
 
 

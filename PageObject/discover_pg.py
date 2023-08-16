@@ -86,6 +86,7 @@ class discoverPage():
     getAppXpath = "//tbody/tr/td[3]/div[1]/span[1]"
     ECSIndex_Xpath = "//mark[contains(text(),'ecs-*')]"
     suricataIndex_xpath = "//mark[contains(text(),'ecs-suricata')]"
+    armoresaintIndex_xpath = "//mark[contains(text(),'armoredsaint-*')]"
     button_15minXpath = "//button[contains(text(),'Last 15 minutes')]"
     button_oneMonthXpath = "//button[contains(text(),'Last 1 month')]"
     openCalenderDateXpath = "//*/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/button[1]"
@@ -153,6 +154,7 @@ class discoverPage():
     editedFilter_className = "globalFilterLabel__value"
     IsNot_xpath = "//span[contains(text(),'is not')]"
     delete_xpath = "//span[contains(text(),'Delete')]"
+    arrow_icon_doc_xpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
 
 
 
@@ -246,6 +248,12 @@ class discoverPage():
         # check to see if doc is over 200,000
         if str(countdoc) <= str("200,000"):
             assert True
+
+    def check4DocHitsMore(self, countdoc):
+        # check to see if doc is over 200,000
+        if str(countdoc) >= str("200,000"):
+            assert True
+
 
     def click_inspect(self):
         inspect_button = self.driver.find_elements(By.XPATH, self.inspectXpath)
@@ -523,6 +531,10 @@ class discoverPage():
         select_suricata = self.driver.find_elements(By.XPATH, self.suricataIndex_xpath)
         select_suricata[0].click()
 
+    def selectArmoresaint_index(self):
+        select_armoresaint = self.driver.find_elements(By.XPATH, self.armoresaintIndex_xpath)
+        select_armoresaint[0].click()
+
 
 
     def select_searched_index(self):
@@ -721,7 +733,6 @@ class discoverPage():
     def FieldToRef_id(self):
         fieldTOReferance_id = self.driver.find_elements(By.XPATH, self.get_idXpath)[0].text
         return fieldTOReferance_id
-    #fieldTOReferance_id = FieldToRef_id()
 
 
     def verify_ref(self, Ref_id):
@@ -1301,9 +1312,7 @@ class discoverPage():
         wait = WebDriverWait(self.driver, 3)
         wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsg_xpath))
                    )
-        # wait = WebDriverWait(self.driver, 6)
-        # wait.until(EC.text_to_be_present_in_element((By.XPATH, self.toastMsg_xpath), toast_msg))
-        # ToastMsg = self.driver.find_elements(By.XPATH, self.toastMsg_xpath)[0].text
+
 
     def click_refresh(self):
         refresh_button = self.driver.find_elements(By.XPATH, self.refreshButton_xpath)
@@ -1344,6 +1353,10 @@ class discoverPage():
     def click_delete(self):
         deletebutton = self.driver.find_elements(By.XPATH, self.delete_xpath)
         deletebutton[0].click()
+
+    def expand_record(self):
+        click_arrow = self.driver.find_elements(By.XPATH, self.arrow_icon_doc_xpath)
+        click_arrow[0].click()
 
 
 

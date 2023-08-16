@@ -156,14 +156,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         dtp.togglecheck_completeDelete()
         time.sleep(5)
 
-        # bp.click_addTagButton()
-        # time.sleep(1)
-        # bp.verifyAddedTag2(self.bulkTag_name)
-        # time.sleep(1)
-        # bp.click_close()
-        # time.sleep(1)
-        # bp.close_inspector()
-
 
 
 

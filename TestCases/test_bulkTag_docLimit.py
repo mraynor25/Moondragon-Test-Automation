@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-
+# Test passed Aug 16 23
 # Test Case Moon-610 Document counts over 200,000 hit for Bulk Add Tag
 
 class Test_bulkTag_adddelete(unittest.TestCase):
@@ -22,11 +22,10 @@ class Test_bulkTag_adddelete(unittest.TestCase):
     password2 = "Welcome2020!"
     index = "armoredsaint-*"
     value = "last"
-    num = "9"
+    num = "10"
     year = "y"
-
-    bulkTag_name = "tag for over 20,000 doc"
-    bulkTag_desc = "This is sample test tag for doc count hits over 20,000"
+    bulkTag_name = "Tag for over 20,000 doc"
+    bulkTag_desc = "This is sample test tag for doc count hits over 20,000."
     msg = "Documents returned exceed 200,000. Please change the query so that less documents are returned."
     user = "analyst2"
 
@@ -127,7 +126,9 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         bp.click_deleteTag()
         time.sleep(3)
         bp.enterTagName3(self.bulkTag_name)
-        time.sleep(5)
+        time.sleep(2)
+        bp.click_deleteExistingPopup()
+        time.sleep(1)
         bp.click_submit()
         time.sleep(1)
         bp.verify_IssueDeletingHeaderTag_Msg()
@@ -135,6 +136,25 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         bp.click_close()
         time.sleep(2)
 
+        hp.clickHambergerMenu()
+        time.sleep(1)
+        hp.clickWorkspace_Menu()
+        time.sleep(2)
+
+        dtp = DatatagPage(self.driver)
+        dtp.DataTagTab()
+        time.sleep(2)
+        dtp.searchTags_dataMgnt(self.bulkTag_name)
+        time.sleep(2)
+        dtp.waitSearchbutton_display()
+        dtp.click_SearchButton()
+        time.sleep(1)
+        dtp.click_settingIcon()
+        time.sleep(1)
+        dtp.click_deleteButton()
+        time.sleep(1)
+        dtp.togglecheck_completeDelete()
+        time.sleep(5)
 
         # bp.click_addTagButton()
         # time.sleep(1)
@@ -148,6 +168,7 @@ class Test_bulkTag_adddelete(unittest.TestCase):
 
 
     def tearDown(self):
+
 
 
         self.driver.close()

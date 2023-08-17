@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-
+# Moon-609, Moon-608, Moon-604 Test Cases
 # test passed aug 10 2023 completed test scripts
 
 class Test_bulkTag_adddelete(unittest.TestCase):

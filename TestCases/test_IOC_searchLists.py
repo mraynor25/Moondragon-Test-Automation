@@ -10,18 +10,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-# add checking each detail ioc window
 
-# Test passed July 28 2023
+# Test passed August 17 2023
 
 
-class Test_IOCList(unittest.TestCase):
+class Test_search_IOCList(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     username2 = "analyst2"
     password2 = "Welcome2020!"
     index = "ecs-*"
     IOC_title = "AAA IOC List"
+    lowercase_IOC_title = "aaa ioc list"
     no_results = "No items found"
 
     field_data = "source.ip"
@@ -50,7 +50,7 @@ class Test_IOCList(unittest.TestCase):
 
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
-        time.sleep(1)
+        time.sleep(2)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
@@ -103,111 +103,41 @@ class Test_IOCList(unittest.TestCase):
         ip.close_IOC_detail()
         time.sleep(1)
         ip.verify_IOCSearchResults(self.IOC_title)
+        time.sleep(1)
         ip.select_ioclistDropdown_option(self.IOC_dropdown)
         time.sleep(1)
         ip.verify_IOCSearchResults(self.IOC_title)
+        time.sleep(1)
+        ip.clear_search_input()
+        time.sleep(1)
+        ip.enter_lowercase_IOCSearchList(self.lowercase_IOC_title)
+        time.sleep(1)
+        ip.verify_IOCSearchResults(self.IOC_title)
+        time.sleep(1)
         ip.select_ioclistDropdown_option2(self.IOC_dropdown2)
         time.sleep(1)
         ip.verify_IOCSearchNoResults(self.no_results)
         time.sleep(1)
+        ip.select_ioclistDropdown_option3(self.IOC_dropdown3)
+        time.sleep(1)
+        ip.verify_IOCSearchResults(self.IOC_title)
 
-
-
-        # ip.click_copyFilter()
-        # time.sleep(2)
-        # ip.click_saveList()
-        # time.sleep(1)
-        # ip.IOCListCreated_ToastMsg()
-        # ip.close_IOCList()
-        # time.sleep(2)
-        #
-        # dp.Addfilter()
-        # time.sleep(2)
-        # dp.click_editAsQyery()
-        # time.sleep(3)
-        # dp.editAsQueryForm()
-        # time.sleep(3)
-        # dp.click_saveQuery()
-        # time.sleep(2)
-        #
-        # ip.open_IOCList()
-        # time.sleep(2)
-        # ip.IOCList_editAppendList(self.IOC_title, self.field_data, self.selectors_data, self.field_data2, self.selectors_data2, self.notes)
-        #
-        # dp.add_filter()
-        # time.sleep(2)
-        # dp.click_editAsQyery()
-        # time.sleep(3)
-        # dp.editAsQueryForm()
-        # time.sleep(3)
-        # dp.createCustomLabel()
-        # time.sleep(2)
-        # dp.enterCustomLabel(self.IOC_title)
-        # time.sleep(3)
-        # dp.click_saveQuery()
-        # time.sleep(2)
-        #
-        #
-        # Ip.logout()
-        # time.sleep(10)
-        # Ip.elasticLogin()
-        # time.sleep(1)
-        # Ip.setUsername2(self.username2)
-        # Ip.setPassword2(self.password2)
-        # Ip.clickLogin()
-        # time.sleep(7)
-        # Ip.clickdefault()
-        # time.sleep(5)
-        #
-        # hp.clickHambergerMenu()
-        # time.sleep(2)
-        # hp.clickDiscover()
-        # time.sleep(2)
-        #
-        # ip.open_IOCList()
-        # time.sleep(3)
-        # ip.verify_IOClist4Buttons(self.IOC_title)
-        # ip.click_download_IOC()
-        # time.sleep(2)
-        #
-        #
-        # Ip.logout()
-        # time.sleep(2)
-        # Ip.waituntilUsername_appear()
-        # Ip.elasticLogin()
-        # time.sleep(1)
-        # Ip.setUsername(self.username)
-        # Ip.setPassword(self.password)
-        # Ip.clickLogin()
-        # time.sleep(3)
-        # Ip.clickdefault()
-        # time.sleep(1)
-        #
-        # hp.clickHambergerMenu()
-        # time.sleep(1)
-        # hp.clickDiscover()
-        # time.sleep(1)
-        #
-        # ip.open_IOCList()
-        # time.sleep(3)
-        # ip.search_IOClist(self.IOC_title)
-        # time.sleep(2)
 
 
 
     def tearDown(self):
-        # ip = IOCListPage(self.driver)
-        # ip.select_IOCName()
-        # time.sleep(2)
-        # ip.click_more()
-        # time.sleep(1)
-        # ip.remove_IOCList()
-        # time.sleep(2)
-        # ip.open_IOCList()
-        # time.sleep(2)
-        # ip.search_IOClist(self.IOC_title)
-        # time.sleep(1)
-        # ip.verify_deletedIOCList()
+        ip = IOCListPage(self.driver)
+        ip.select_IOCName()
+        time.sleep(2)
+        ip.click_more()
+        time.sleep(1)
+        ip.remove_IOCList()
+        time.sleep(2)
+        ip.open_IOCList()
+        time.sleep(2)
+        ip.search_IOClist(self.IOC_title)
+        time.sleep(1)
+        ip.verify_deletedIOCList()
 
 
 

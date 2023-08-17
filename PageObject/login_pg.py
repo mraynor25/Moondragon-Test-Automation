@@ -32,8 +32,9 @@ class loginPage():
 
     def setUsername(self, username):
         EnterUsername2 = self.driver.find_element(By.CLASS_NAME, self.textbox_username_className)
-        EnterUsername2.clear()
-        EnterUsername2.send_keys(username)
+        if EnterUsername2.is_displayed():
+            EnterUsername2.clear()
+            EnterUsername2.send_keys(username)
 
 
     def setPassword(self, password):

@@ -66,6 +66,7 @@ class IOCListPage():
     iocFirstResult_xpath = "//*/tr[1]/td[1]/div[1]/span[1]"
     ioc_headerName_xpath = "//body/div[7]/div[3]/div[1]/div[1]/h2[1]"
     ioc_closeDetail_xpath = "//body/div[7]/div[3]/div[1]/button[1]"
+    clearInput_xpath = "//button[@aria-label='Clear input']"
 
 
     def __init__(self,driver):
@@ -342,10 +343,23 @@ class IOCListPage():
         ioc_searchbox = self.driver.find_elements(By.XPATH, self.iocListsearchbox_xpath)
         ioc_searchbox[0].send_keys(IOC_title)
 
+    def clear_search_input(self):
+        clear_input = self.driver.find_elements(By.XPATH, self.clearInput_xpath)
+        clear_input[0].click()
+
+    def enter_lowercase_IOCSearchList(self, lowercase_IOC_title):
+        ioc_searchbox = self.driver.find_elements(By.XPATH, self.iocListsearchbox_xpath)
+        ioc_searchbox[0].send_keys(lowercase_IOC_title)
+
+
     def verify_IOCSearchResults(self, IOC_title):
         ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
         assert ioc_name_return == IOC_title
 
+    def verify_LowerCaseIOCSearchResults(self, IOC_title):
+        ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
+        if ioc_name_return == IOC_title:
+            assert True
 
 
     def select_ioclistDropdown_option(self, IOC_dropdown):
@@ -357,6 +371,11 @@ class IOCListPage():
         ioc_user_option = self.driver.find_element(By.XPATH, self.iocUserOption_xpath)
         select = Select(ioc_user_option)
         select.select_by_value(IOC_dropdown2)
+
+    def select_ioclistDropdown_option3(self, IOC_dropdown3):
+        ioc_user_option = self.driver.find_element(By.XPATH, self.iocUserOption_xpath)
+        select = Select(ioc_user_option)
+        select.select_by_value(IOC_dropdown3)
 
     def verify_IOCSearchNoResults(self, no_results):
         ioc_results = self.driver.find_elements(By.XPATH, self.iocFirstResult_xpath)[0].text

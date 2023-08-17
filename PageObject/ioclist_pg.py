@@ -356,11 +356,6 @@ class IOCListPage():
         ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
         assert ioc_name_return == IOC_title
 
-    def verify_LowerCaseIOCSearchResults(self, IOC_title):
-        ioc_name_return = self.driver.find_elements(By.XPATH, self.iocNameReturn_xpath)[0].text
-        if ioc_name_return == IOC_title:
-            assert True
-
 
     def select_ioclistDropdown_option(self, IOC_dropdown):
         ioc_user_option = self.driver.find_element(By.XPATH, self.iocUserOption_xpath)

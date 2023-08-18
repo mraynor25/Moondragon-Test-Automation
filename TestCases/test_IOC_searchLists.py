@@ -23,12 +23,6 @@ class Test_search_IOCList(unittest.TestCase):
     IOC_title = "AAA IOC List"
     lowercase_IOC_title = "aaa ioc list"
     no_results = "No items found"
-
-    field_data = "source.ip"
-    selectors_data = "98.175.230.2"
-    field_data2 = "destination.ip"
-    selectors_data2 = "68.105.28.16"
-    notes = "This is a destination ip note"
     IOC_dropdown = "User"
     IOC_dropdown2 = "Expanse"
     IOC_dropdown3 = "All"
@@ -46,7 +40,6 @@ class Test_search_IOCList(unittest.TestCase):
         time.sleep(5)
 
     def test_IOC_searchlist(self):
-
 
         Ip = loginPage(self.driver)
         Ip.elasticLogin()

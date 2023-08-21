@@ -39,6 +39,7 @@ class Test_IOCList_UserRole(unittest.TestCase):
     def test_IOC_list(self):
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
+        Ip.waituntilUsername_appear()
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
@@ -64,7 +65,6 @@ class Test_IOCList_UserRole(unittest.TestCase):
         time.sleep(1)
         dp.selectYear()
         time.sleep(2)
-
         ip = IOCListPage(self.driver)
         ip.open_IOCList()
         time.sleep(2)
@@ -87,9 +87,10 @@ class Test_IOCList_UserRole(unittest.TestCase):
         time.sleep(2)
 
         Ip.logout()
-        time.sleep(4)
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
+        Ip.waituntilUsername_appear()
         Ip.setUsername2(self.username2)
         Ip.setPassword2(self.password2)
         Ip.clickLogin()
@@ -114,6 +115,7 @@ class Test_IOCList_UserRole(unittest.TestCase):
         time.sleep(7)
         Ip.elasticLogin()
         time.sleep(1)
+        Ip.waituntilUsername_appear()
         Ip.setUsername(self.username)
         Ip.setPassword(self.password)
         Ip.clickLogin()

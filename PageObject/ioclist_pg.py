@@ -57,7 +57,7 @@ class IOCListPage():
     deleteListPopup_xpath = "//button[@data-test-subj='confirmModalConfirmButton']/span[1]/span[1]"
     add_additional_user_xpath = "//p[contains(text(), 'Add Additional Users')]/ancestor::button"
     enterUsers_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
-    iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    #iocListSearchbox_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]"
     ToastListIOC_xpath = "//div[contains(text(),'IOC List deleted successfully')]"
     noitemfound_xpath = "//span[contains(text(),'No items found')]"
     iocListsearchbox_xpath = "//input[@aria-label='Use aria labels when no actual label is in use']"
@@ -67,7 +67,6 @@ class IOCListPage():
     ioc_headerName_xpath = "//body/div[7]/div[3]/div[1]/div[1]/h2[1]"
     ioc_closeDetail_xpath = "//body/div[7]/div[3]/div[1]/button[1]"
     clearInput_xpath = "//button[@aria-label='Clear input']"
-
 
     def __init__(self,driver):
         self.driver = driver
@@ -290,7 +289,7 @@ class IOCListPage():
         time.sleep(3)
 
     def search_IOClist(self, IOC_title):
-        enter_IOCName = self.driver.find_elements(By.XPATH, self.iocListSearchbox_xpath)
+        enter_IOCName = self.driver.find_elements(By.XPATH, self.iocListsearchbox_xpath)
         enter_IOCName[0].send_keys(IOC_title)
 
     def select_IOCName(self):

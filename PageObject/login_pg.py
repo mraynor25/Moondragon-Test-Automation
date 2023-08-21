@@ -25,6 +25,8 @@ class loginPage():
     def __init__(self,driver):
         self.driver = driver
 
+
+
     def elasticLogin(self):
         if len(self.driver.find_elements(By.XPATH, self.link_elasticSearch_xpath)) > 0:
             click_Elastic_login = self.driver.find_elements(By.XPATH, self.link_elasticSearch_xpath)
@@ -70,7 +72,6 @@ class loginPage():
 
 
     def setUsername2(self, username2):
-
         EnterUsername2 = self.driver.find_elements(By.XPATH, self.textbox_username_xpath)
         EnterUsername2[0].clear()
         EnterUsername2[0].send_keys(username2)

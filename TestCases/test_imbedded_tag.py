@@ -6,6 +6,7 @@ from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.discover_pg import discoverPage
 from PageObject.dataTags_pg import DatatagPage
+from PageObject.imbeddedTag_pg import ImbeddedTagPage
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
@@ -21,15 +22,12 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
     password2 = "Welcome2020!"
     index = "ecs-*"
     tag_name = "sample ecs tag"
-#     fieldname = "source.ip"
-#     field = "10.4.19.138"
-#     bulkTag_name = "sample bulk query"
-#     bulkTag_name2 = "sample bulk"
-#     bulkTag_desc = "This is my sample bulk query"
-#     user = "analyst2"
-#     toast_msg = """Tag
-# sample bulk query
-# Added Successfully"""
+    tag_name2 = "Tag for ecs"
+    detail_msg = "This is your imbedded tag message. Please add, modify, delete tag as you wish"
+    add_username = "analyst2"
+    field1 = "analyst_tags"
+    KQL = "analyst_tags: \"sample ecs tag\" AND analyst_tags: \"Tag for ecs\""
+#
 #     field1 = "analyst_tags"
 #     KQL = "analyst_tag = sample bulk query AND analyst_tag = sample bulk"
 #     analyst_tag_name = "sample bulk query, sample bulk"
@@ -89,56 +87,113 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
         dtp = DatatagPage(self.driver)
         dtp.DataTagTab()
         time.sleep(1)
-        dtp.create_imbeddedTag()
+        imp = ImbeddedTagPage(self.driver)
+        imp.create_imbeddedTag()
         time.sleep(1)
-        dtp.verify_createHeaderExist()
+        imp.verify_createHeaderExist()
         time.sleep(1)
-        dtp.checkToggleOn()
+        imp.checkToggleON()
         time.sleep(1)
-        dtp.enter_tagName(self.tag_name)
+        imp.enter_tagName(self.tag_name)
+        time.sleep(1)
+        imp.enter_details(self.detail_msg)
+        time.sleep(1)
+        imp.click_addUser()
+        time.sleep(1)
+        imp.enter_additional_username(self.add_username)
+        time.sleep(1)
+        imp.submit_tag()
+        time.sleep(1)
+        imp.verify_confirmMsg()
+        time.sleep(1)
+        imp.LookGood_button()
         time.sleep(1)
 
-        # dp.Addfilter()
-        # time.sleep(2)
-        # dp.enterField(self.fieldname)
-        # time.sleep(1)
-        # dp.selectField2()
-        # time.sleep(1)
-        # dp.loadingCheck()
-        # dp.clickarrow_addfilter()
-        # time.sleep(1)
-        # dp.selectIsMenu()
-        # time.sleep(1)
-        # dp.loadingCheck()
-        # dp.enter_addfilterField(self.field)
-        # time.sleep(2)
-        # dp.clickSave()
-        # time.sleep(2)
-        # countdoc = dp.countDocHits()
-        # dp.check4DocHitsOverlimit(countdoc)
-        # time.sleep(2)
-        # dp.click_inspect()
-        # time.sleep(1)
-        # dp.click_viewInspect()
-        # time.sleep(2)
+        imp.enter_searchbar(self.tag_name)
+        time.sleep(2)
+        imp.verify_tagnameindoc(self.tag_name)
+        time.sleep(1)
+        imp.verify_userindoc(self.add_username)
+        time.sleep(1)
+        imp.verify_ownerindoc(self.username)
+        time.sleep(1)
+        imp.verify_descindoc(self.detail_msg)
+        time.sleep(1)
 
-        # bp = bulkQueryPage(self.driver)
-        # bp.click_addBulkMenu()
-        # time.sleep(1)
-        # bp.wait4bulkTagPagetoLoad()
-        # bp.click_createTag()
-        # time.sleep(1)
-        # bp.enter_tagname(self.bulkTag_name)
-        # time.sleep(1)
-        # bp.enter_tagDescription(self.bulkTag_desc)
-        # time.sleep(1)
-        # bp.enter_additionalUser(self.user)
-        # time.sleep(2)
-        # bp.click_submit()
-        # time.sleep(1)
-        # bp.verify_confirmTag(self.bulkTag_name, self.bulkTag_desc, self.user)
-        # bp.click_looksgood()
-        # time.sleep(2)
+        imp.create_imbeddedTag()
+        time.sleep(1)
+        imp.verify_createHeaderExist()
+        time.sleep(1)
+        imp.checkToggleOFF()
+        time.sleep(1)
+        imp.enter_tagName2(self.tag_name2)
+        time.sleep(1)
+        imp.enter_details(self.detail_msg)
+        time.sleep(1)
+        imp.click_addUser()
+        time.sleep(1)
+        imp.enter_additional_username(self.add_username)
+        time.sleep(1)
+        imp.submit_tag()
+        time.sleep(1)
+        imp.verify_confirmMsg2()
+        time.sleep(1)
+        imp.LookGood_button()
+        time.sleep(4)
+        imp.clear_searchInput()
+        time.sleep(1)
+        imp.enter_searchbar2(self.tag_name2)
+        time.sleep(2)
+        imp.verify_NoSearchResult()
+        time.sleep(1)
+        imp.click_addExistingTab()
+        time.sleep(1)
+        imp.waituntilAddExistingTag_popup()
+        time.sleep(1)
+        imp.enterTagName(self.tag_name2)
+        time.sleep(2)
+        imp.click_existing_header()
+        time.sleep(1)
+        imp.submit_tag()
+        time.sleep(1)
+        imp.verify_confirmMsg2()
+        time.sleep(1)
+        imp.LookGood_button()
+        time.sleep(2)
+        imp.verify_tagname2indoc(self.tag_name2)
+        time.sleep(1)
+        imp.verify_userindoc(self.add_username)
+        time.sleep(1)
+        imp.verify_ownerindoc(self.username)
+        time.sleep(1)
+        imp.verify_descindoc(self.detail_msg)
+        time.sleep(2)
+
+        dp.search_searchfield(self.field1)
+        time.sleep(2)
+        dp.clickPlusIcon()
+        time.sleep(2)
+        dp.enterKQL(self.KQL)
+        time.sleep(2)
+        dp.clickUpdateButton()
+        time.sleep(3)
+        dp.verify_imbeddedTagsindoc(self.tag_name, self.tag_name2)
+        time.sleep(1)
+### Make sure user is able to delete the tag from workspace for teardown
+        hp.clickHambergerMenu()
+        time.sleep(1)
+        hp.clickWorkspace_Menu()
+        time.sleep(1)
+
+        dap = DatatagPage(self.driver)
+        dap.DataTagTab()
+        time.sleep(1)
+        dap.waitSearchbutton_display()
+        dap.searchTag_dataMgnt(self.tag_name)
+        time.sleep(1)
+        dap.verify_tagname()
+        dap.clear_searchbox()
+        time.sleep(5)
 
 
 
@@ -146,10 +201,8 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
 
 
 
-
         self.driver.close()
         self.driver.quit()
-
 
 
 

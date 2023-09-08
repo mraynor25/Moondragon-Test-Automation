@@ -42,8 +42,6 @@ class bulkQueryPage():
 
 
 
-
-
     def __init__(self,driver):
         self.driver = driver
 
@@ -214,10 +212,13 @@ class bulkQueryPage():
         assert header_msg_issue == "Issue Deleting Tag/s"
 
 
-
     def verify_IssueTag_Msg(self, msg):
         msg_issue = self.driver.find_elements(By.XPATH, self.msgIssue_xpath)[0].text
         assert msg_issue == msg
+
+
+
+
 
 
 

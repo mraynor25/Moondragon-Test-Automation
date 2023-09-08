@@ -20,7 +20,6 @@ class discoverPage():
     OpenIndexDropdownXpath = "//button[@data-test-subj='indexPattern-switch-link']"
     selectDropdown4yearXpath = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
     timefilter_ToggleButtonName = "shouldIncludeTimefilter"
-    #EnterSearchboxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
     enterFavIndxXpath = "//*/div[5]/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input[1]"
     EnterSearchboxXpath = "//input[@aria-label='Filter options']"
     enterIndexXpath = "//*/span[1]/span[1]/span[1]/mark[1]"
@@ -125,7 +124,6 @@ class discoverPage():
     xdip_xpath = "//*/div/div[5]/div[1]/div[1]/div[1]/span[1]"
     xdestIP2_xpath = "//*/div[2]/div[5]/div[1]/div[1]/div[1]/span[1]/a[1]"
     source_ip_xpath = "//*/div[1]/div[2]/div[7]/div[1]/div[1]/div[1]/span[1]"
-    #networkIPBytes_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/button[1]/div[1]"
     networkIPBytes_xpath = "//*/div[2]/div[1]/div[1]/ul[1]/li[1]/div[1]/div[1]/div[1]/button[1]/span[2]/span[1]"
     addedfield2_xpath = "//thead/tr[1]/th[4]/span[1]"
     firstvalue_xpath = "//*/tbody[1]/tr/td[3]/div[1]/span[1]/mark[1]"
@@ -139,7 +137,6 @@ class discoverPage():
     col3_sourceIP_xpath = "//div[contains(text(),'source.ip_public')]"
     col4_destIP_pub_xpath = "//div[contains(text(),'destination.ip_public')]"
     remove_column_xpath = "//span[contains(text(),'Remove column')]"
-    #col7_senFilename_xpath = "//tbody/tr/td[3]/div[1]"
     col7_senFilename_xpath = "/table[1]/tbody[1]/tr/td[6]/div[1]/mark[1]"
     editAsQuery = "//span[text()='Edit as Query DSL']"
     editAsQueryForm_xpath = "//textarea[@aria-label='Editor content;Press Alt+F1 for Accessibility Options.']"
@@ -155,6 +152,8 @@ class discoverPage():
     IsNot_xpath = "//span[contains(text(),'is not')]"
     delete_xpath = "//span[contains(text(),'Delete')]"
     arrow_icon_doc_xpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
+    arrow_icon_collaps_xpath = "//tbody/tr[1]/td[1]/button[1]"
+    im_tag_xpath = "//*/tbody[1]/tr/td[3]/div[1]"
 
 
 
@@ -1313,6 +1312,10 @@ class discoverPage():
         wait.until(EC.presence_of_element_located((By.XPATH, self.toastMsg_xpath))
                    )
 
+    # def verify_toastMsg(self):
+    #     toastMsg = self.driver.find_elements(By.XPATH, self.toastMsg_xpath)[0].text
+    #     assert "Tag sample ecs tag Created Successfully" == toastMsg
+
 
     def click_refresh(self):
         refresh_button = self.driver.find_elements(By.XPATH, self.refreshButton_xpath)
@@ -1357,6 +1360,19 @@ class discoverPage():
     def expand_record(self):
         click_arrow = self.driver.find_elements(By.XPATH, self.arrow_icon_doc_xpath)
         click_arrow[0].click()
+
+    def collapse_record(self):
+        click_arrow_collapse = self.driver.find_elements(By.XPATH, self.arrow_icon_collaps_xpath)
+        click_arrow_collapse[0].click()
+
+    def verify_imbeddedTagsindoc(self, tag_name, tag_name2):
+        im_tag = len(self.driver.find_elements(By.XPATH, self.im_tag_xpath))
+        for tags in range(1, im_tag + 2):
+            tag_1 = self.driver.find_elements(By.XPATH, "//*/tbody[1]/tr[" + str(tags) + "]/td[3]/div[1]")[0].text
+            assert tag_name in tag_1
+            assert tag_name2 in tag_1
+            break
+
 
 
 

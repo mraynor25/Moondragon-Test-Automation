@@ -43,7 +43,25 @@ class DatatagPage():
     tagname_xpath = "//*/div[1]/div[1]/div[1]/div[1]/h1[1]"
     ownersInfo_xpath = "//*/div[1]/div[2]/div[1]/dl[1]/dt[1]"
     userInfo_xpath = "//dd[contains(text(),'analyst2')]"
-
+    detailTextbox_xpath = "//textarea[@placeholder='Tag details']"
+    addAdditionalUser_xpath = "//p[text()='Add Additional Users']"
+    usernameInput_xpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    confirmHeader_xpath = "//h1[contains(text(),'Please Confirm Your Tag')]"
+    confirmTagname_xpath = "//dd[contains(text(),'sample ecs tag')]"
+    confirmTagname2_xpath = "//dd[contains(text(),'test tag for ecs')]"
+    confirmDetailMsg_xpath = "//dd[contains(text(),'This is your imbedded tag message. Please add, modify, delete tag as you wish')]"
+    imbedded_searchbar_xpath = "//input[@placeholder='Search...']"
+    addExistingTab_xpath = "//button[contains(text(),'Add existing')]"
+    addexistingTagHeader_xpath = "//h1[contains(text(), 'Add Existing Tag')]"
+    additionalUser_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
+    tagname_option_xpath = "//mark[contains(text(),'sample ecs tag')]"
+    tagname_option_xpath2 = "//mark[contains(text(),'test tag for ecs')]"
+    createDataTag_xpath = "//span[contains(text(),'Create Data Tag')]"
+    modal_header_xpath = "//h1[contains(text(),'Please Confirm Your Tag Selection')]"
+    tag1_modal_xpath = "//li[contains(text(),'sample ecs tag')]"
+    tag1_modal2_xpath = "//li[contains(text(),'test tag for ecs')]"
+    completeDeleteToggleOn_xpath = "//button[aria-checked='false']"
+    completeDeleteToggle_classname = "euiSwitch__button"
 
     def __init__(self, driver):
         self.driver = driver
@@ -52,7 +70,6 @@ class DatatagPage():
     def DataTagTab(self):
         DataTag = self.driver.find_elements(By.XPATH, self.DataTagXpath)
         DataTag[0].click()
-
 
     def addNewTag(self):
         Add_newtag2 = self.driver.find_elements(By.XPATH, self.addNewtagXpath)
@@ -176,21 +193,15 @@ class DatatagPage():
         FieldToRef_arrow = self.driver.find_elements(By.XPATH, self.fieldToRefXpath)
         FieldToRef_arrow[0].click()
 
-    def verify_createHeaderExist(self):
-        header_name = self.driver.find_elements(By.XPATH, self.createHeader_xpath)[0].text
-        assert "Create Tag" == header_name
 
-    def checkToggleOn(self):
-        if len(self.driver.find_elements(By.XPATH, self.toggleOn_xpath)) >0:
-            assert True
-        else:
-           click_toggle_on = self.driver.find_elements(By.XPATH, self.click_togglebutton_xpath)
-           click_toggle_on[0].click()
 
     def enter_tagName(self, tag_name):
         enter_tagname = self.driver.find_elements(By.XPATH, self.tagnameTextbox_xpath)
         enter_tagname[0].send_keys(tag_name)
 
+    def enter_tagName2(self, tag_name2):
+        enter_tagname = self.driver.find_elements(By.XPATH, self.tagnameTextbox_xpath)
+        enter_tagname[0].send_keys(tag_name2)
 
     def refMenu(self):
         ref_menu = self.driver.find_elements(By.XPATH, self.refMenuXpath)[0].text
@@ -199,7 +210,6 @@ class DatatagPage():
     def ref_menu_option(self):
         select_menu = self.driver.find_elements(By.XPATH, self.refMenuXpath)
         select_menu[0].click()
-
 
 
     def verifyTag_notfound(self, tag_1, tag_2):
@@ -226,6 +236,14 @@ class DatatagPage():
         enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
         enter_searchbox[0].send_keys(bulkTag_name2)
 
+    def searchTag_dataMgnt(self, Tag_name):
+        enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
+        enter_searchbox[0].send_keys(Tag_name)
+
+    def searchTag2_dataMgnt(self, Tag_name2):
+        enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
+        enter_searchbox[0].send_keys(Tag_name2)
+
     def waitSearchbutton_display(self):
         wait = WebDriverWait(self.driver, 7)
         wait.until(EC.presence_of_element_located((By.XPATH, self.searchButton_xpath))
@@ -236,12 +254,9 @@ class DatatagPage():
         click_search[0].click()
 
     def create_dataTag(self):
-        click_dataTag = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Create Data Tag')]")
+        click_dataTag = self.driver.find_elements(By.XPATH, self.createDataTag_xpath)
         click_dataTag[0].click()
 
-    def create_imbeddedTag(self):
-        click_tag = self.driver.find_elements(By.XPATH, self.createTab_xpath)
-        click_tag[0].click()
 
     def verify_tagname(self, bulkTag_name):
         tagname = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
@@ -250,6 +265,11 @@ class DatatagPage():
     def verify_tagname2(self, bulkTag_name2):
         tagname2 = self.driver.find_elements(By.XPATH, self.bulkTagName_xpath)[0].text
         assert tagname2 == bulkTag_name2
+
+    def settingIcon_visable(self):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.settingIcon_xpath))
+                   )
 
     def click_settingIcon(self):
         setting_icon = self.driver.find_elements(By.XPATH, self.settingIcon_xpath)
@@ -301,6 +321,10 @@ class DatatagPage():
             deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
             deleteTag[0].click()
 
+    def click_deleteTag(self):
+        deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
+        deleteTag[0].click()
+
     def verify_noItems(self):
         noItem = self.driver.find_elements(By.XPATH, self.noitem_xpath)[0].text
         print(noItem)
@@ -314,6 +338,56 @@ class DatatagPage():
     def close_modal(self):
         close = self.driver.find_elements(By.XPATH, self.close_modal_xpath)
         close[0].click()
+
+
+    def click_addUser(self):
+        addUser = self.driver.find_elements(By.XPATH, self.addAdditionalUser_xpath)
+        addUser[0].click()
+
+
+    def verify_confirmMsg2(self):
+        confirm_msg = self.driver.find_elements(By.XPATH, self.confirmHeader_xpath)[0].text
+        assert confirm_msg == "Please Confirm Your Tag"
+
+        if len(self.driver.find_elements(By.XPATH, self.confirmTagname2_xpath)) >0:
+            assert True
+
+
+
+    def click_addExistingTab(self):
+        addExisting = self.driver.find_elements(By.XPATH, self.addExistingTab_xpath)
+        addExisting[0].click()
+
+    def waituntilAddExistingTag_popup(self):
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.addexistingTagHeader_xpath))
+                   )
+
+    def enterTagName(self, tag_name, tag_name2):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(tag_name)
+        time.sleep(1)
+        select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath)
+        select_tagname[0].click()
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(tag_name2)
+        time.sleep(1)
+        select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath2)
+        select_tagname[0].click()
+
+    # def completeDelete_on(self):
+    #     if len(self.driver.find_elements(By.XPATH, self.completeDeleteToggleOn_xpath)) > 0:
+    #         set_completeButtonOn = self.driver.find_elements(By.CLASS_NAME, self.completeDeleteToggle_classname)
+    #         set_completeButtonOn[0].click()
+
+
+
+
+
+
+
+
+
 
 
 

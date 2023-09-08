@@ -8,7 +8,8 @@ import time
 
 class ImbeddedTagPage():
     # Locators of all the elements
-    createTab_xpath = "//button[contains(text(),'Create')]"
+    createTag_xpath = "//button[contains(text(),'Create')]"
+    deleteTag_xpath = "//button[contains(text(),'Delete')]"
     createHeader_xpath = "//h1[contains(text(),'Create Tag')]"
     toggleOn_xpath = "//button[@aria-checked='true']"
     click_togglebutton_xpath = "//button[@class='euiSwitch__button']"
@@ -26,6 +27,7 @@ class ImbeddedTagPage():
     imbedded_searchbar_xpath = "//input[@placeholder='Search...']"
     addExistingTab_xpath = "//button[contains(text(),'Add existing')]"
     addexistingTagHeader_xpath = "//h1[contains(text(), 'Add Existing Tag')]"
+    deleteTagHeader_xpath = "//h1[contains(text(),'Delete Tag')]"
     additionalUser_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
     tagname_option_xpath = "//mark[contains(text(),'sample ecs tag')]"
     tagname_option_xpath2 = "//mark[contains(text(),'Tag for ecs')]"
@@ -33,8 +35,7 @@ class ImbeddedTagPage():
     tag1_modal_xpath = "//li[contains(text(),'sample ecs tag')]"
     tag1_modal2_xpath = "//li[contains(text(),'Tag for ecs')]"
     imbeddedTag_xpath = "//*/tr[1]/th[1]/div[2]/span[1]"
-    imbeddedUser_xpath = "//*/tr[1]/td[1]/div[2]/span[1]"
-    imbeddedOwner_xpath = "//*/tr[1]/td[4]/div[2]/span[1]"
+    imbeddedOwner_xpath = "//tbody/tr[1]/td[4]/div[2]/span[1]"
     imbeddedDesc_xpath = "//*/tr[1]/td[6]/div[2]/span[1]"
     submitTagXpath = "//span[contains(text(),'Submit')]"
     LookgoodXpath = "//span[contains(text(),'Looks Good')]"
@@ -43,13 +44,21 @@ class ImbeddedTagPage():
 
 
 
-
     def __init__(self,driver):
         self.driver = driver
 
     def create_imbeddedTag(self):
-        click_tag = self.driver.find_elements(By.XPATH, self.createTab_xpath)
+        click_tag = self.driver.find_elements(By.XPATH, self.createTag_xpath)
         click_tag[0].click()
+
+    def delete_imbeddedTag(self):
+        click_delete_tag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
+        click_delete_tag[0].click()
+        time.sleep(1)
+
+    def delete_confirm_imbeddedTag(self):
+        cofirm_delete_tag = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Delete tag(s)')]")
+        cofirm_delete_tag[0].click()
 
     def verify_tagnameindoc(self, tag_name):
         imbeddedTagName = self.driver.find_elements(By.XPATH, self.imbeddedTag_xpath)[0].text
@@ -59,9 +68,6 @@ class ImbeddedTagPage():
         imbeddedTagName = self.driver.find_elements(By.XPATH, self.imbeddedTag_xpath)[0].text
         assert tag_name2 == imbeddedTagName
 
-    def verify_userindoc(self, add_username):
-        imbeddedUser = self.driver.find_elements(By.XPATH, self.imbeddedUser_xpath)[0].text
-        assert add_username == imbeddedUser
 
     def verify_ownerindoc(self, username):
         imbeddedOwner = self.driver.find_elements(By.XPATH, self.imbeddedOwner_xpath)[0].text
@@ -152,7 +158,7 @@ class ImbeddedTagPage():
 
     def clear_searchInput(self):
 
-        wait = WebDriverWait(self.driver, 7)
+        wait = WebDriverWait(self.driver, 6)
         wait.until(EC.presence_of_element_located((By.XPATH, self.clearInput_xpath))
                    )
 
@@ -168,6 +174,12 @@ class ImbeddedTagPage():
         wait.until(EC.presence_of_element_located((By.XPATH, self.addexistingTagHeader_xpath))
                    )
 
+    def waituntilDeleteTag_popup(self):
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.deleteTagHeader_xpath))
+                   )
+
+
     def enterTagName(self, tag_name2):
         tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
         tag_name_dropdown[0].send_keys(tag_name2)
@@ -178,6 +190,11 @@ class ImbeddedTagPage():
     def click_existing_header(self):
         add_existing_header = self.driver.find_elements(By.XPATH, self.addexistingTagHeader_xpath)
         add_existing_header[0].click()
+
+
+
+
+
 
 
 

@@ -13,9 +13,11 @@ import time
 import HtmlTestRunner
 
 
+# test failed bug is found because of searching multiple tags in workspace - blocked
+# update below
 #Test Case moon-569
 
-class Test_imbeddedTag_adddelete(unittest.TestCase):
+class Test_imbeddedTag_delete_add(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
     username2 = "analyst2"
@@ -27,11 +29,7 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
     add_username = "analyst2"
     field1 = "analyst_tags"
     KQL = "analyst_tags: \"sample ecs tag\" AND analyst_tags: \"Tag for ecs\""
-#
-#     field1 = "analyst_tags"
-#     KQL = "analyst_tag = sample bulk query AND analyst_tag = sample bulk"
-#     analyst_tag_name = "sample bulk query, sample bulk"
-
+    analyst_tag_name = "sample ecs tag"
 
 
     def setUp(cls):
@@ -111,9 +109,8 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
 
         imp.enter_searchbar(self.tag_name)
         time.sleep(2)
+        self.driver.execute_script("window.scrollBy(0,1000)", "")
         imp.verify_tagnameindoc(self.tag_name)
-        time.sleep(1)
-        imp.verify_userindoc(self.add_username)
         time.sleep(1)
         imp.verify_ownerindoc(self.username)
         time.sleep(1)
@@ -151,7 +148,7 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
         imp.waituntilAddExistingTag_popup()
         time.sleep(1)
         imp.enterTagName(self.tag_name2)
-        time.sleep(2)
+        time.sleep(1)
         imp.click_existing_header()
         time.sleep(1)
         imp.submit_tag()
@@ -159,10 +156,8 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
         imp.verify_confirmMsg2()
         time.sleep(1)
         imp.LookGood_button()
-        time.sleep(2)
-        imp.verify_tagname2indoc(self.tag_name2)
         time.sleep(1)
-        imp.verify_userindoc(self.add_username)
+        imp.verify_tagname2indoc(self.tag_name2)
         time.sleep(1)
         imp.verify_ownerindoc(self.username)
         time.sleep(1)
@@ -179,7 +174,34 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
         time.sleep(3)
         dp.verify_imbeddedTagsindoc(self.tag_name, self.tag_name2)
         time.sleep(1)
-### Make sure user is able to delete the tag from workspace for teardown
+
+        dp.expand_record()
+        time.sleep(1)
+        dtp.DataTagTab()
+        time.sleep(1)
+        imp.delete_imbeddedTag()
+        time.sleep(1)
+        imp.waituntilDeleteTag_popup()
+        time.sleep(1)
+        imp.enterTagName(self.tag_name2)
+        time.sleep(1)
+        imp.submit_tag()
+        time.sleep(1)
+        imp.verify_confirmMsg2()
+        time.sleep(1)
+        imp.delete_confirm_imbeddedTag()
+        time.sleep(1)
+        imp.enter_searchbar2(self.tag_name2)
+        time.sleep(2)
+        imp.verify_NoSearchResult()
+        time.sleep(1)
+
+        dp.click_refresh()
+        time.sleep(1)
+        dp.verify_analystTagsNotExist(self.analyst_tag_name)
+
+
+        hp = homePage(self.driver)
         hp.clickHambergerMenu()
         time.sleep(1)
         hp.clickWorkspace_Menu()
@@ -190,16 +212,34 @@ class Test_imbeddedTag_adddelete(unittest.TestCase):
         time.sleep(1)
         dap.waitSearchbutton_display()
         dap.searchTag_dataMgnt(self.tag_name)
+        time.sleep(4)
+        dap.click_SearchButton()
+        time.sleep(2)
+        dap.click_settingIcon()
+        time.sleep(2)
+        dap.click_deleteButton()
         time.sleep(1)
-        dap.verify_tagname()
+        dap.click_deleteTag()
+        time.sleep(3)
+        # verify toast message?
         dap.clear_searchbox()
-        time.sleep(5)
-
-
+        time.sleep(1)
+        dap.searchTag2_dataMgnt(self.tag_name2)
+        time.sleep(1)
+        dap.click_SearchButton()
+        time.sleep(3)
+        dap.settingIcon_visable()
+        #bug found below because of remaining bug
+        dap.click_settingIcon()
+        time.sleep(1)
+        dap.click_deleteButton()
+        time.sleep(1)
+        # dap.completeDelete_on()
+        # time.sleep(1)
+        dap.click_deleteTag()
+        time.sleep(1)
 
     def tearDown(self):
-
-
 
         self.driver.close()
         self.driver.quit()

@@ -31,6 +31,7 @@ class ImbeddedTagPage():
     additionalUser_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
     tagname_option_xpath = "//mark[contains(text(),'sample ecs tag')]"
     tagname_option_xpath2 = "//mark[contains(text(),'Tag for ecs')]"
+    tagname_option_xpath3 = "//mark[contains(text(),'Data Management tag')]"
     modal_header_xpath = "//h1[contains(text(),'Please Confirm Your Tag Selection')]"
     tag1_modal_xpath = "//li[contains(text(),'sample ecs tag')]"
     tag1_modal2_xpath = "//li[contains(text(),'Tag for ecs')]"
@@ -44,12 +45,18 @@ class ImbeddedTagPage():
 
 
 
+
     def __init__(self,driver):
         self.driver = driver
 
     def create_imbeddedTag(self):
         click_tag = self.driver.find_elements(By.XPATH, self.createTag_xpath)
         click_tag[0].click()
+
+    def click_addExistingTab(self):
+        addExisting = self.driver.find_elements(By.XPATH, self.addExistingTab_xpath)
+        addExisting[0].click()
+
 
     def delete_imbeddedTag(self):
         click_delete_tag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
@@ -165,9 +172,7 @@ class ImbeddedTagPage():
         search_input = self.driver.find_elements(By.XPATH, self.clearInput_xpath)
         search_input[0].click()
 
-    def click_addExistingTab(self):
-        addExisting = self.driver.find_elements(By.XPATH, self.addExistingTab_xpath)
-        addExisting[0].click()
+
 
     def waituntilAddExistingTag_popup(self):
         wait = WebDriverWait(self.driver, 3)
@@ -186,6 +191,17 @@ class ImbeddedTagPage():
         time.sleep(1)
         select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath2)
         select_tagname[0].click()
+
+    def enterTagName2(self, tag_name):
+        tag_name_dropdown = self.driver.find_elements(By.XPATH, self.additionalUser_xpath)
+        tag_name_dropdown[0].send_keys(tag_name)
+        time.sleep(1)
+
+    def verify_tag_nameExists(self):
+        if len(self.driver.find_elements(By.XPATH, self.tagname_option_xpath3)) > 0:
+            assert True
+            select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath3)
+            select_tagname[0].click()
 
     def click_existing_header(self):
         add_existing_header = self.driver.find_elements(By.XPATH, self.addexistingTagHeader_xpath)

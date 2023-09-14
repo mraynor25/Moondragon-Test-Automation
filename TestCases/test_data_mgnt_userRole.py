@@ -183,6 +183,45 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
 
 
     def tearDown(self):
+        hp = homePage(self.driver)
+        # hp.clickHambergerMenu()
+        # time.sleep(1)
+        # hp.clickWorkspace_Menu()
+        # time.sleep(1)
+        #
+        # dap = DatatagPage(self.driver)
+        # dap.DataTagTab()
+        # time.sleep(4)
+        # dap.waitSearchbutton_display()
+        # dap.searchTag_dataMgnt(self.tag_name)
+        # time.sleep(2)
+        # dap.click_SearchButton()
+        # time.sleep(2)
+        # dap.click_settingIcon()
+        # time.sleep(1)
+        # dap.click_deleteButton()
+        # time.sleep(1)
+        # # dap.completeDelete_on()
+        # time.sleep(1)
+        # dap.click_deleteTag()
+        # time.sleep(4)
+        # # verify toast message?
+        # dap.clear_searchbox()
+        # time.sleep(1)
+        # dap.searchTag2_dataMgnt(self.tag_name2)
+        # time.sleep(1)
+        # dap.click_SearchButton()
+        # time.sleep(3)
+        # #bug found below because of remaining bug
+        # dap.click_settingIcon()
+        # time.sleep(1)
+        # dap.click_deleteButton()
+        # time.sleep(1)
+        # # dap.completeDelete_on()
+        # # time.sleep(1)
+        # dap.click_deleteTag()
+        # time.sleep(1)
+        #
 
 
 

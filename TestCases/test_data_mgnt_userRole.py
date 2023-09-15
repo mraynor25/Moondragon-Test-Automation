@@ -20,13 +20,10 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
     username2 = "analyst2"
     password2 = "Welcome2020!"
     index = "ecs-*"
-    tag_name = "Data Management tag"
-    tag_name2 = "Data Management tag"
+    tag_name = "sample tag for data mgnt"
     detail_msg = "This is your data tag message. Please add, modify, delete tag as you wish"
     add_username = "analyst2"
-    field1 = "analyst_tags"
-    KQL = "analyst_tags: \"sample ecs tag\" AND analyst_tags: \"Tag for ecs\""
-    analyst_tag_name = "sample ecs tag"
+
 
 
     def setUp(cls):
@@ -42,7 +39,7 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         print(cls.driver.title)
         time.sleep(5)
 
-    def test_data_management(self):
+    def test_data_userrole_management(self):
 
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
@@ -52,9 +49,9 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         Ip.setPassword(self.password)
         time.sleep(1)
         Ip.clickLogin()
-        time.sleep(2)
-        Ip.clickdefault()
         time.sleep(3)
+        Ip.clickdefault()
+        time.sleep(4)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -73,15 +70,11 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         time.sleep(1)
         dap.enter_tag_detail(self.detail_msg)
         time.sleep(1)
-        dap.enter_tag_username(self.add_username)
-        time.sleep(1)
         dap.submit_tag()
         time.sleep(2)
-        dap.confirm_tagname_modal(self.tag_name)
+        dap.confirm_tagname_modal2(self.tag_name)
         time.sleep(1)
         dap.confirm_detailMsg_modal(self.detail_msg)
-        time.sleep(1)
-        dap.confirm_user_modal(self.add_username)
         time.sleep(1)
         dap.LookGood_button()
         time.sleep(1)
@@ -90,14 +83,26 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         time.sleep(1)
         dap.click_SearchButton()
         time.sleep(1)
-        dap.verify_searchedTagName(self.tag_name)
+        dap.verify_searchedTagName2(self.tag_name)
         time.sleep(1)
         dap.verify_detailMsg(self.detail_msg)
         time.sleep(1)
-        dap.verify_owner(self.username)
+
+
+
+        Ip.logout()
+        time.sleep(11)
+        Ip.elasticLogin()
         time.sleep(1)
-        dap.verify_user(self.add_username)
+        Ip.waituntilUsername_appear()
+        Ip.setUsername2(self.username2)
         time.sleep(1)
+        Ip.setPassword2(self.password2)
+        time.sleep(1)
+        Ip.clickLogin()
+        time.sleep(5)
+        Ip.clickdefault()
+        time.sleep(5)
 
         hp.clickHambergerMenu()
         time.sleep(1)
@@ -122,25 +127,10 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         time.sleep(1)
         imp.enterTagName2(self.tag_name)
         time.sleep(1)
-        imp.verify_tag_nameExists()
+        imp.verify_tag_nameNotExists()
         time.sleep(1)
-        imp.click_existing_header()
+        imp.click_close()
         time.sleep(1)
-        imp.submit_tag()
-        time.sleep(1)
-        imp.verify_confirmMsg2()
-        time.sleep(1)
-        imp.LookGood_button()
-        time.sleep(1)
-
-        imp.enter_searchbar(self.tag_name)
-        time.sleep(2)
-        self.driver.execute_script("window.scrollBy(0,1000)", "")
-        imp.verify_tagnameindoc(self.tag_name)
-        time.sleep(1)
-        imp.verify_ownerindoc(self.username)
-        time.sleep(1)
-        imp.verify_descindoc(self.detail_msg)
 
         hp.clickHambergerMenu()
         time.sleep(1)
@@ -156,73 +146,49 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         time.sleep(2)
         dap.click_settingIcon()
         time.sleep(1)
-        dap.click_deleteButton()
+        dap.verifyButtons4AdditionalUser()
         time.sleep(1)
-        dap.click_deleteTag()
+
+        Ip.logout()
+        time.sleep(11)
+        Ip.elasticLogin()
         time.sleep(1)
+        Ip.waituntilUsername_appear()
+        Ip.setUsername(self.username)
+        time.sleep(1)
+        Ip.setPassword(self.password)
+        time.sleep(1)
+        Ip.clickLogin()
+        time.sleep(2)
+        Ip.clickdefault()
+        time.sleep(3)
 
         hp.clickHambergerMenu()
         time.sleep(1)
-        hp.clickDiscover()
-        time.sleep(1)
-        dp.OpenDate()
-        time.sleep(1)
-        dp.selectFiveYear()
-        time.sleep(1)
-        dp.expand_record()
+        hp.clickWorkspace_Menu()
         time.sleep(1)
 
-        dtp.DataTagTab()
-        time.sleep(1)
-        imp.enter_searchbar(self.tag_name)
+        dap = DatatagPage(self.driver)
+        dap.DataTagTab()
+        time.sleep(5)
+        dap.waitSearchbutton_display()
+        dap.searchTag_dataMgnt(self.tag_name)
         time.sleep(2)
-        self.driver.execute_script("window.scrollBy(0,1000)", "")
-        imp.verify_NoSearchResult()
-
+        dap.click_SearchButton()
+        time.sleep(2)
+        dap.click_settingIcon()
+        time.sleep(1)
+        dap.verifyButtons4owner()
+        time.sleep(1)
 
 
 
     def tearDown(self):
-        hp = homePage(self.driver)
-        # hp.clickHambergerMenu()
-        # time.sleep(1)
-        # hp.clickWorkspace_Menu()
-        # time.sleep(1)
-        #
-        # dap = DatatagPage(self.driver)
-        # dap.DataTagTab()
-        # time.sleep(4)
-        # dap.waitSearchbutton_display()
-        # dap.searchTag_dataMgnt(self.tag_name)
-        # time.sleep(2)
-        # dap.click_SearchButton()
-        # time.sleep(2)
-        # dap.click_settingIcon()
-        # time.sleep(1)
-        # dap.click_deleteButton()
-        # time.sleep(1)
-        # # dap.completeDelete_on()
-        # time.sleep(1)
-        # dap.click_deleteTag()
-        # time.sleep(4)
-        # # verify toast message?
-        # dap.clear_searchbox()
-        # time.sleep(1)
-        # dap.searchTag2_dataMgnt(self.tag_name2)
-        # time.sleep(1)
-        # dap.click_SearchButton()
-        # time.sleep(3)
-        # #bug found below because of remaining bug
-        # dap.click_settingIcon()
-        # time.sleep(1)
-        # dap.click_deleteButton()
-        # time.sleep(1)
-        # # dap.completeDelete_on()
-        # # time.sleep(1)
-        # dap.click_deleteTag()
-        # time.sleep(1)
-        #
-
+        dap = DatatagPage(self.driver)
+        dap.click_deleteButton()
+        time.sleep(1)
+        dap.click_deleteTag()
+        time.sleep(1)
 
 
         self.driver.close()

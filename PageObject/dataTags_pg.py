@@ -65,10 +65,12 @@ class DatatagPage():
     completeDeleteToggleOn_xpath = "//button[aria-checked='false']"
     completeDeleteToggle_classname = "euiSwitch__button"
     tag_name_xpath = "//div[contains(text(),'Data Management tag')]"
+    tag_name_xpath2 = "//div[contains(text(),'sample tag for data mgnt')]"
     detailMsg_xpath = "//div[contains(text(),'This is your data tag message. Please add, modify,')]"
     owner_xpath = "//tbody/tr[1]/td[3]/div[1]"
     user_xpath = "//div[contains(text(),'analyst2')]"
     confirm_tagname_xpath = "//dd[contains(text(),'Data Management tag')]"
+    confirm_tagname_xpath2 = "//dd[contains(text(),'sample tag for data mgnt')]"
     confirm_detailMsg_xpath = "//dd[contains(text(),'This is your data tag message. Please add, modify,')]"
     confirm_user_xpath = "//dd[contains(text(),'analyst2')]"
 
@@ -247,9 +249,9 @@ class DatatagPage():
         enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
         enter_searchbox[0].send_keys(bulkTag_name2)
 
-    def searchTag_dataMgnt(self, Tag_name):
+    def searchTag_dataMgnt(self, tag_name):
         enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
-        enter_searchbox[0].send_keys(Tag_name)
+        enter_searchbox[0].send_keys(tag_name)
 
     def searchTag2_dataMgnt(self, Tag_name2):
         enter_searchbox = self.driver.find_elements(By.XPATH, self.searchBox_xpath)
@@ -403,6 +405,10 @@ class DatatagPage():
         check_tagname = self.driver.find_elements(By.XPATH, self.tag_name_xpath)[0].text
         assert check_tagname == tag_name
 
+    def verify_searchedTagName2(self, tag_name):
+        check_tagname = self.driver.find_elements(By.XPATH, self.tag_name_xpath2)[0].text
+        assert check_tagname == tag_name
+
     def verify_detailMsg(self, detail_msg):
         check_deailMsg = self.driver.find_elements(By.XPATH, self.detailMsg_xpath)[0].text
         assert check_deailMsg == detail_msg
@@ -416,9 +422,12 @@ class DatatagPage():
         assert check_user == add_username
 
 
-
     def confirm_tagname_modal(self, tag_name):
         check_tagname = self.driver.find_elements(By.XPATH, self.confirm_tagname_xpath)[0].text
+        assert check_tagname == tag_name
+
+    def confirm_tagname_modal2(self, tag_name):
+        check_tagname = self.driver.find_elements(By.XPATH, self.confirm_tagname_xpath2)[0].text
         assert check_tagname == tag_name
 
     def confirm_detailMsg_modal(self, detail_msg):

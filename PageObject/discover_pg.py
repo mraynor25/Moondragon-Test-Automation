@@ -184,7 +184,6 @@ class discoverPage():
                    )
 
     def OpenDate(self):
-
         OpenDate2 = self.driver.find_elements(By.XPATH, self.OpenDateXpath)
         OpenDate2[0].click()
 

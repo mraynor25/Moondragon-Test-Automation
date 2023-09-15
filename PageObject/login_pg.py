@@ -33,23 +33,25 @@ class loginPage():
             click_Elastic_login[0].click()
 
     def setUsername(self, username):
-        EnterUsername2 = self.driver.find_element(By.CLASS_NAME, self.textbox_username_className)
-        if EnterUsername2.is_displayed():
-            EnterUsername2.clear()
-            EnterUsername2.send_keys(username)
+        if len(self.driver.find_elements(By.CLASS_NAME, self.textbox_username_className)) > 0:
+            EnterUsername2 = self.driver.find_element(By.CLASS_NAME, self.textbox_username_className)
+            if EnterUsername2.is_displayed():
+                EnterUsername2.clear()
+                EnterUsername2.send_keys(username)
 
 
     def setPassword(self, password):
-        EnterPassword = self.driver.find_element(By.NAME, self.textbox_password_name)
-        EnterPassword.clear()
-        EnterPassword.send_keys(password)
+        if len(self.driver.find_elements(By.NAME, self.textbox_password_name)) > 0:
+            EnterPassword = self.driver.find_element(By.NAME, self.textbox_password_name)
+            EnterPassword.clear()
+            EnterPassword.send_keys(password)
 
     def clickLogin(self):
-        PressLogin = self.driver.find_elements(By.XPATH, self.button_login_xpath)
-        PressLogin[0].click()
+        if len(self.driver.find_elements(By.XPATH, self.button_login_xpath)) > 0:
+            PressLogin = self.driver.find_elements(By.XPATH, self.button_login_xpath)
+            PressLogin[0].click()
 
     def clickdefault(self):
-
         if len(self.driver.find_elements(By.XPATH, self.defaultlink_xpath)) > 0:
             clickDefault = self.driver.find_elements(By.XPATH, self.defaultlink_xpath)
             clickDefault[0].click()
@@ -72,15 +74,17 @@ class loginPage():
 
 
     def setUsername2(self, username2):
-        EnterUsername2 = self.driver.find_elements(By.XPATH, self.textbox_username_xpath)
-        EnterUsername2[0].clear()
-        EnterUsername2[0].send_keys(username2)
+        if len(self.driver.find_elements(By.XPATH, self.textbox_username_xpath)) > 0:
+            EnterUsername2 = self.driver.find_elements(By.XPATH, self.textbox_username_xpath)
+            EnterUsername2[0].clear()
+            EnterUsername2[0].send_keys(username2)
 
 
     def setPassword2(self, password2):
-        EnterPassword2 = self.driver.find_element(By.XPATH, self.textbox_password_name2_xpath)
-        EnterPassword2.clear()
-        EnterPassword2.send_keys(password2)
+        if len(self.driver.find_elements(By.XPATH, self.textbox_password_name2_xpath)) > 0:
+            EnterPassword2 = self.driver.find_element(By.XPATH, self.textbox_password_name2_xpath)
+            EnterPassword2.clear()
+            EnterPassword2.send_keys(password2)
 
 
 

@@ -11,6 +11,7 @@ class ImbeddedTagPage():
     createTag_xpath = "//button[contains(text(),'Create')]"
     deleteTag_xpath = "//button[contains(text(),'Delete')]"
     createHeader_xpath = "//h1[contains(text(),'Create Tag')]"
+    closeButton_xpath = "//span[contains(text(),'Close')]"
     toggleOn_xpath = "//button[@aria-checked='true']"
     click_togglebutton_xpath = "//button[@class='euiSwitch__button']"
     tagnameTextbox_xpath = "//input[@placeholder='Tag name']"
@@ -28,10 +29,12 @@ class ImbeddedTagPage():
     addExistingTab_xpath = "//button[contains(text(),'Add existing')]"
     addexistingTagHeader_xpath = "//h1[contains(text(), 'Add Existing Tag')]"
     deleteTagHeader_xpath = "//h1[contains(text(),'Delete Tag')]"
+    confirm_deleteTag_xpath = "//span[contains(text(),'Delete tag(s)')]"
     additionalUser_xpath = "//input[@data-test-subj='comboBoxSearchInput']"
     tagname_option_xpath = "//mark[contains(text(),'sample ecs tag')]"
     tagname_option_xpath2 = "//mark[contains(text(),'Tag for ecs')]"
     tagname_option_xpath3 = "//mark[contains(text(),'Data Management tag')]"
+    tagname_option_xpath4 = "//mark[contains(text(),'sample tag for data mgnt')]"
     modal_header_xpath = "//h1[contains(text(),'Please Confirm Your Tag Selection')]"
     tag1_modal_xpath = "//li[contains(text(),'sample ecs tag')]"
     tag1_modal2_xpath = "//li[contains(text(),'Tag for ecs')]"
@@ -57,6 +60,10 @@ class ImbeddedTagPage():
         addExisting = self.driver.find_elements(By.XPATH, self.addExistingTab_xpath)
         addExisting[0].click()
 
+    def click_close(self):
+        close_button = self.driver.find_elements(By.XPATH, self.closeButton_xpath)
+        close_button[0].click()
+
 
     def delete_imbeddedTag(self):
         click_delete_tag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
@@ -64,7 +71,7 @@ class ImbeddedTagPage():
         time.sleep(1)
 
     def delete_confirm_imbeddedTag(self):
-        cofirm_delete_tag = self.driver.find_elements(By.XPATH, "//span[contains(text(),'Delete tag(s)')]")
+        cofirm_delete_tag = self.driver.find_elements(By.XPATH, self.confirm_deleteTag_xpath)
         cofirm_delete_tag[0].click()
 
     def verify_tagnameindoc(self, tag_name):
@@ -202,6 +209,11 @@ class ImbeddedTagPage():
             assert True
             select_tagname = self.driver.find_elements(By.XPATH, self.tagname_option_xpath3)
             select_tagname[0].click()
+
+
+    def verify_tag_nameNotExists(self):
+        if len(self.driver.find_elements(By.XPATH, self.tagname_option_xpath4)) > 0:
+            assert False
 
     def click_existing_header(self):
         add_existing_header = self.driver.find_elements(By.XPATH, self.addexistingTagHeader_xpath)

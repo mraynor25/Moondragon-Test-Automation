@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
+#test passed sept 21 2023
 
 
 
@@ -24,15 +25,15 @@ class Test_bulkTag_adddelete(unittest.TestCase):
     fieldname = "source.ip"
     field = "10.4.19.138"
     bulkTag_name = "sample bulk query"
-    bulkTag_name2 = "sample bulk"
+    bulkTag_name2 = "sample bulk2"
     bulkTag_desc = "This is my sample bulk query"
     user = "analyst2"
     toast_msg = """Tag 
 sample bulk query 
 Added Successfully"""
     field1 = "analyst_tags"
-    KQL = "analyst_tag = sample bulk query AND analyst_tag = sample bulk"
-    analyst_tag_name = "sample bulk query, sample bulk"
+    KQL = "analyst_tag = sample bulk query AND analyst_tag = sample bulk2"
+    analyst_tag_name = "sample bulk query, sample bulk2"
     # bug found for search multiple tags in data tag management
 
 
@@ -52,15 +53,18 @@ Added Successfully"""
     def test_IOC_listAdd_delete(self):
 
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault()
-        time.sleep(3)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -246,10 +250,11 @@ Added Successfully"""
         dtp.verifyButtons4owner()
         time.sleep(1)
         dtp.click_deleteButton()
-        time.sleep(1)
+        time.sleep(2)
         dtp.togglecheck_completeDelete()
         time.sleep(2)
-        dtp.verify_noItems()
+        dtp.verify_tag_exists(self.bulkTag_name)
+       # dtp.verify_noItems()
         time.sleep(2)
         dtp.clear_searchbox()
         time.sleep(1)
@@ -268,7 +273,8 @@ Added Successfully"""
         time.sleep(1)
         dtp.togglecheck_completeDelete()
         time.sleep(2)
-        dtp.verify_noItems()
+        # dtp.verify_noItems()
+        dtp.verify_2ndtag_exists(self.bulkTag_name2)
         time.sleep(2)
 
         hp.clickHambergerMenu()

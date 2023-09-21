@@ -23,7 +23,7 @@ class bulkQueryPage():
     addexistingTagHeader_xpath = "//h1[contains(text(), 'Add Existing Tag')]"
     deleteexistingTagHeader_xpath = "//h1[contains(text(),'Delete Existing Tag')]"
     tagname_option_xpath = "//mark[contains(text(),'sample bulk query')]"
-    tagname_option_xpath2 = "//mark[contains(text(),'sample bulk')]"
+    tagname_option_xpath2 = "//mark[contains(text(),'sample bulk2')]"
     tagname_opt_xpath = "//mark[contains(text(),'sensor tag')]"
     tagname_opt2_xpath = "//mark[contains(text(),'Tag for over 20,000 doc')]"
     addTagButton_xpath = "//span[contains(text(),'Add Tag/s')]"
@@ -180,7 +180,6 @@ class bulkQueryPage():
     def click_close(self):
         closeButton = self.driver.find_elements(By.XPATH, self.closeButton_xpath)
         closeButton[0].click()
-
 
 
     def verify_addedBulkTag(self):

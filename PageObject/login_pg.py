@@ -56,6 +56,12 @@ class loginPage():
             clickDefault = self.driver.find_elements(By.XPATH, self.defaultlink_xpath)
             clickDefault[0].click()
 
+    def clickdefault2(self):
+        wait = WebDriverWait(self.driver, 6)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.defaultlink_xpath))
+                   )
+        clickDefault = self.driver.find_elements(By.XPATH, self.defaultlink_xpath)
+        clickDefault[0].click()
 
 
     def GetWelcomeText(self):

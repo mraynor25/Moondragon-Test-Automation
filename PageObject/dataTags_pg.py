@@ -73,6 +73,7 @@ class DatatagPage():
     confirm_tagname_xpath2 = "//dd[contains(text(),'sample tag for data mgnt')]"
     confirm_detailMsg_xpath = "//dd[contains(text(),'This is your data tag message. Please add, modify,')]"
     confirm_user_xpath = "//dd[contains(text(),'analyst2')]"
+    mytag_xpath = "//tbody/tr/td[1]/div[1]"
 
 
 
@@ -339,6 +340,19 @@ class DatatagPage():
             time.sleep(1)
             deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)
             deleteTag[0].click()
+
+    def verify_tag_exists(self, bulkTag_name):
+        mytag = len(self.driver.find_elements(By.XPATH, self.mytag_xpath))
+        for tg in range(1, mytag+1):
+            mytag_text = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tg) + "]/td[1]/div[1]")[0].text
+            assert bulkTag_name != mytag_text
+
+
+    def verify_2ndtag_exists(self, bulkTag_name2):
+        mytag = len(self.driver.find_elements(By.XPATH, self.mytag_xpath))
+        for tg in range(1, mytag + 1):
+            mytag_text = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(tg) + "]/td[1]/div[1]")[0].text
+            assert bulkTag_name2 != mytag_text
 
     def click_deleteTag(self):
         deleteTag = self.driver.find_elements(By.XPATH, self.deleteTag_xpath)

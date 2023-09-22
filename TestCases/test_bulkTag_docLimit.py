@@ -4,7 +4,6 @@ sys.path.append("C:/Users/mraynor/PycharmProjects/MoonDragonTest")
 from selenium import webdriver
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
-from PageObject.dashboard_pg import dashboardPage
 from PageObject.discover_pg import discoverPage
 from PageObject.bulkTag_pg import bulkQueryPage
 from PageObject.dataTags_pg import DatatagPage
@@ -12,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-# Test passed Aug 16 23
+# Test passed sept 22 23 modified
 # Test Case Moon-610 Document counts over 200,000 hit for Bulk Add Tag
 
 class Test_bulkTag_adddelete(unittest.TestCase):
@@ -31,7 +30,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
 
 
 
-
     def setUp(cls):
         options = Options()
         options.add_argument('--allow-running-insecure-content')
@@ -43,19 +41,22 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         cls.driver.implicitly_wait(5)
 
 
-    def test_bulkTag_additionalUser(self):
+    def test_bulkTag_docLimit(self):
+
 
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
-        Ip.waituntilUsername_appear()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault()
-        time.sleep(1)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()

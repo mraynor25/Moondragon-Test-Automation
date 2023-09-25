@@ -64,7 +64,7 @@ class IOCListPage():
     iocNameReturn_xpath = "//span[@class='euiListGroupItem__label']"
     iocUserOption_xpath = "//select[@class='euiSelect euiSelect--inGroup']"
     iocFirstResult_xpath = "//*/tr[1]/td[1]/div[1]/span[1]"
-    ioc_headerName_xpath = "//body/div[7]/div[3]/div[1]/div[1]/h2[1]"
+    ioc_headerName_xpath = "//*/div[3]/div[1]/div[1]/div[1]/div[1]/h2[1]"
     ioc_closeDetail_xpath = "//body/div[7]/div[3]/div[1]/button[1]"
     clearInput_xpath = "//button[@aria-label='Clear input']"
 

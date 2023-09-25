@@ -12,7 +12,7 @@ import re
 import time
 import unittest
 
-#test pass may 25 2023 applied discover
+#test pass sept 25 2023 modified
 
 
 class TestMethods_Xpanse(unittest.TestCase):
@@ -36,20 +36,23 @@ class TestMethods_Xpanse(unittest.TestCase):
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(14)
-        time.sleep(2)
+        cls.driver.implicitly_wait(5)
+
 
     def test_dashboard_notes(self):
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(3)
-        Ip.clickdefault()
-        time.sleep(4)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -115,17 +118,19 @@ class TestMethods_Xpanse(unittest.TestCase):
         dbp.verify_dashboardnotesNotFound(capture_username_time)
 
         Ip.logout()
-        time.sleep(8)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
-
-        # Login as another user
-
-        Ip.setUsername2(self.username2)
-        Ip.setPassword2(self.password2)
+        Ip.setUsername(self.username2)
+        time.sleep(1)
+        Ip.setPassword(self.password2)
+        time.sleep(2)
         Ip.clickLogin()
-        Ip.clickdefault()
-        time.sleep(5)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
+
 
         hp.clickHambergerMenu()
         time.sleep(2)
@@ -139,8 +144,8 @@ class TestMethods_Xpanse(unittest.TestCase):
         dbp.clickDashboard_notes()
         time.sleep(2)
         find_dashnotes = dbp.findDashNotes()
-        print(find_dashnotes)
-        print(capture_username_time)
+        # print(find_dashnotes)
+        # print(capture_username_time)
         assert find_dashnotes == capture_username_time
         time.sleep(3)
 
@@ -152,12 +157,18 @@ class TestMethods_Xpanse(unittest.TestCase):
 
         Ip.logout()
         time.sleep(5)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
-        self.driver.implicitly_wait(6)
+        time.sleep(1)
         Ip.setUsername(self.username)
+        time.sleep(1)
         Ip.setPassword(self.password)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(6)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp.clickHambergerMenu()
         time.sleep(2)

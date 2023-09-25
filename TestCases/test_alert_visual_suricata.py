@@ -14,7 +14,7 @@ import time
 import unittest
 import HtmlTestRunner
 
-#Test passed
+#Test passed sept 25 2023
 
 #Moon-154 Test Case
 class TestAlert_suricata(unittest.TestCase):
@@ -40,22 +40,24 @@ class TestAlert_suricata(unittest.TestCase):
         cls.driver.maximize_window()
 
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(10)
+        cls.driver.implicitly_wait(5)
         print(cls.driver.title)
-        time.sleep(5)
 
 
     def test_alert_suricata(self):
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(11)
-        Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()

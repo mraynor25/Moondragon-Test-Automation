@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed August 17 2023
+# Test passed sept 25 2023 modified
 
 
 class Test_search_IOCList(unittest.TestCase):
@@ -35,23 +35,23 @@ class Test_search_IOCList(unittest.TestCase):
         cls.driver.implicitly_wait(5)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(7)
-        print(cls.driver.title)
-        time.sleep(5)
+        cls.driver.implicitly_wait(5)
+
 
     def test_IOC_searchlist(self):
-
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
-        time.sleep(2)
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
-        time.sleep(3)
-        Ip.clickdefault()
         time.sleep(2)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -114,6 +114,7 @@ class Test_search_IOCList(unittest.TestCase):
         ip.select_ioclistDropdown_option3(self.IOC_dropdown3)
         time.sleep(1)
         ip.verify_IOCSearchResults(self.IOC_title)
+
 
 
 

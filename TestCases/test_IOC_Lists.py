@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed Aug 21 2023
+# Test passed sept 25 2023 modified
 
 
 class Test_IOCList(unittest.TestCase):
@@ -36,22 +36,25 @@ class Test_IOCList(unittest.TestCase):
         cls.driver.implicitly_wait(5)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(7)
-        print(cls.driver.title)
-        time.sleep(5)
+        cls.driver.implicitly_wait(5)
+
 
     def test_IOC_list(self):
 
+
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
-        time.sleep(3)
-        Ip.clickdefault()
         time.sleep(2)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -121,14 +124,18 @@ class Test_IOCList(unittest.TestCase):
 
         Ip.logout()
         time.sleep(10)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
-        Ip.setUsername2(self.username2)
-        Ip.setPassword2(self.password2)
+        Ip.setUsername(self.username2)
+        time.sleep(1)
+        Ip.setPassword(self.password2)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(7)
-        Ip.clickdefault()
-        time.sleep(5)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp.clickHambergerMenu()
         time.sleep(2)
@@ -145,14 +152,18 @@ class Test_IOCList(unittest.TestCase):
         Ip.logout()
         time.sleep(2)
         Ip.waituntilUsername_appear()
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
-        Ip.setPassword(self.password)
-        Ip.clickLogin()
-        time.sleep(3)
-        Ip.clickdefault()
         time.sleep(1)
+        Ip.setPassword(self.password)
+        time.sleep(2)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp.clickHambergerMenu()
         time.sleep(1)

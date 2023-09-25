@@ -9,11 +9,11 @@ from PageObject.home_pg import homePage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
 
-
 import time
 import unittest
 import HtmlTestRunner
 
+# Test passed sept 25 2023 modified
 # NOt added to PO update
 #Moon-64 Test Case
 class Test_decoder_dashboard(unittest.TestCase):
@@ -39,23 +39,24 @@ class Test_decoder_dashboard(unittest.TestCase):
         cls.driver.maximize_window()
 
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(15)
+        cls.driver.implicitly_wait(6)
         print(cls.driver.title)
-        time.sleep(5)
 
 
     def test_decoder_dashboard(self):
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
+        time.sleep(2)
         Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
         time.sleep(10)
-        Ip.clickdefault()
-        time.sleep(3)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()

@@ -11,14 +11,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-# Test passed sept 13 2023
+# Test passed sept 25 2023 modified
 # no Test Case data management created by teammate
 
 class Test_imbeddedTag_delete_add(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
-    username2 = "analyst2"
-    password2 = "Welcome2020!"
     index = "ecs-*"
     tag_name = "Data Management tag"
     tag_name2 = "Data Management tag"
@@ -40,21 +38,22 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         cls.driver.get('https://kibana2.moondragon.lan/')
         cls.driver.implicitly_wait(5)
         print(cls.driver.title)
-        time.sleep(5)
+
 
     def test_data_management(self):
-
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault()
-        time.sleep(3)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()

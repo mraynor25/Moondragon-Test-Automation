@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 # Moon-609, Moon-608, Moon-604 Test Cases
-# test passed aug 10 2023 completed test scripts
+# test passed sept 25 2023 completed test scripts login update
 
 class Test_bulkTag_adddelete(unittest.TestCase):
     username = "analyst"
@@ -46,16 +46,18 @@ class Test_bulkTag_adddelete(unittest.TestCase):
     def test_bulkTag_additionalUser(self):
 
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
-        Ip.waituntilUsername_appear()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
-        Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault()
-        time.sleep(1)
+        Ip.clickLogin()
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -141,17 +143,30 @@ class Test_bulkTag_adddelete(unittest.TestCase):
 
         Ip.logout()
         time.sleep(11)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
-        Ip.waituntilUsername_appear()
-        Ip.setUsername2(self.username2)
+        Ip.setUsername(self.username2)
         time.sleep(1)
-        Ip.setPassword2(self.password2)
-        time.sleep(1)
+        Ip.setPassword(self.password2)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(5)
-        Ip.clickdefault()
-        time.sleep(5)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(10)
+
+        # Ip.elasticLogin()
+        # time.sleep(1)
+        # Ip.waituntilUsername_appear()
+        # Ip.setUsername2(self.username2)
+        # time.sleep(1)
+        # Ip.setPassword2(self.password2)
+        # time.sleep(1)
+        # Ip.clickLogin()
+        # time.sleep(5)
+        # Ip.clickdefault()
+        # time.sleep(5)
 
         hp.clickHambergerMenu()
         time.sleep(2)
@@ -197,7 +212,7 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         bp.click_submit()
         time.sleep(2)
         bp.click_delete_Tags()
-        time.sleep(2)
+        time.sleep(3)
         bp.click_close()
         time.sleep(1)
         bp.close_inspector()
@@ -276,8 +291,8 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         time.sleep(1)
         Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault()
-        time.sleep(1)
+        Ip.clickdefault2()
+        time.sleep(7)
 
         hp.clickHambergerMenu()
         time.sleep(1)
@@ -333,7 +348,7 @@ class Test_bulkTag_adddelete(unittest.TestCase):
     def tearDown(self):
         dap = dashboardPage(self.driver)
         dap.openSaveQuery()
-        time.sleep(2)
+        time.sleep(3)
         dap.deleteIcon2()
 
 

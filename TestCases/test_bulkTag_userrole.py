@@ -156,17 +156,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         Ip.clickdefault2()
         time.sleep(10)
 
-        # Ip.elasticLogin()
-        # time.sleep(1)
-        # Ip.waituntilUsername_appear()
-        # Ip.setUsername2(self.username2)
-        # time.sleep(1)
-        # Ip.setPassword2(self.password2)
-        # time.sleep(1)
-        # Ip.clickLogin()
-        # time.sleep(5)
-        # Ip.clickdefault()
-        # time.sleep(5)
 
         hp.clickHambergerMenu()
         time.sleep(2)

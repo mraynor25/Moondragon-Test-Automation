@@ -11,7 +11,7 @@ import time
 import unittest
 import HtmlTestRunner
 
-#Test passed may 25 2023 applied
+#Test passed sept 26 2023 modified
 #test case, V.1.1 release (Consolidated Field Mapping for ecs-*)
 
 #Moon-154 Test Case
@@ -26,7 +26,6 @@ class Test_ecs_index(unittest.TestCase):
     field = "dm-01"
     datasource2 = "destination"
     datasource = "source"
-   # field = "destination"
     sensor = "sensor.name"
     KQL = "sensor.filename: \"/mnt/pcap/active/dm/dm-01/23/04/19/2023-04-Unit42-Wireshark-quiz.pcap\" AND source.ip: \"10.4.19.143\""
     sen_file = "sensor.filename"
@@ -56,22 +55,25 @@ class Test_ecs_index(unittest.TestCase):
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(13)
+        cls.driver.implicitly_wait(5)
         print(cls.driver.title)
-        time.sleep(5)
+
 
 
     def test_ecsIndex(self):
         Ip = loginPage(self.driver)
+        Ip.clickdefault()
+        time.sleep(3)
         Ip.elasticLogin()
+        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
-        time.sleep(1)
+        time.sleep(2)
         Ip.clickLogin()
-        time.sleep(5)
-        Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(12)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -88,7 +90,6 @@ class Test_ecs_index(unittest.TestCase):
         time.sleep(2)
         dp.numofyear(self.num)
         time.sleep(2)
-        #dp.selectFiveYear()
         dp.selectDropdown4Year()
         time.sleep(1)
         dp.clickApply()
@@ -107,7 +108,7 @@ class Test_ecs_index(unittest.TestCase):
         dp.selectIsMenu()
         time.sleep(4)
         dp.enter_addfilterField(self.field)
-        time.sleep(8)
+        time.sleep(6)
         dp.clickSave()
         time.sleep(3)
         dp.searchfield(self.datasource)

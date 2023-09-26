@@ -78,7 +78,7 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    addFilterFieldXpath = "//input[@placeholder='Enter a value']"
+    addFilterFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"

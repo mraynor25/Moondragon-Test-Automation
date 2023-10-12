@@ -14,7 +14,7 @@ import time
 import unittest
 import HtmlTestRunner
 
-#Test passed mar27 2023
+#Test passed oct 12 2023
 
 #Moon-154 Test Case
 class TestfavIndex(unittest.TestCase):
@@ -168,7 +168,7 @@ class TestfavIndex(unittest.TestCase):
         time.sleep(1)
         Ip.clickLogin()
         time.sleep(10)
-        Ip.clickdefault()
+        Ip.clickdefault2()
         time.sleep(5)
         hp.clickHambergerMenu()
         time.sleep(1)

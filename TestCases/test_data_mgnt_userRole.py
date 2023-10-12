@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-# Test passed sept 13 2023
+# Test passed oct 12 2023
 # no Test Case data management created by teammate
 
 class Test_imbeddedTag_delete_add(unittest.TestCase):
@@ -23,7 +23,6 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
     tag_name = "sample tag for data mgnt"
     detail_msg = "This is your data tag message. Please add, modify, delete tag as you wish"
     add_username = "analyst2"
-
 
 
     def setUp(cls):
@@ -49,7 +48,7 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         Ip.setPassword(self.password)
         time.sleep(1)
         Ip.clickLogin()
-        time.sleep(3)
+        time.sleep(4)
         Ip.clickdefault()
         time.sleep(4)
 
@@ -89,7 +88,6 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         time.sleep(1)
 
 
-
         Ip.logout()
         time.sleep(11)
         Ip.elasticLogin()
@@ -100,9 +98,9 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         Ip.setPassword2(self.password2)
         time.sleep(1)
         Ip.clickLogin()
-        time.sleep(5)
-        Ip.clickdefault()
-        time.sleep(5)
+        time.sleep(3)
+        Ip.clickdefault2()
+        time.sleep(4)
 
         hp.clickHambergerMenu()
         time.sleep(1)

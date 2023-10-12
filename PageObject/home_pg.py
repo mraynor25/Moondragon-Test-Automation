@@ -16,6 +16,7 @@ class homePage():
     workspaceMenu_xpath = "//*/div[1]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/span[1]"
     Expand_workspaceMenu_xpath = "//*/div[3]/nav[1]/div[4]/div[1]/div[1]/button[2]"
     workspace_linkXpath = "//h3[contains(@class, 'euiCollapsibleNavGroup__title')"
+    link_dashboardMenu2_xpath = "//*/div[3]/nav[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[2]/a[1]/span[1]"
     dataView_xpath = "//span[contains(text(),'Data Views')]"
     rulesMenu_xpath = "//span[contains(text(),'Rules')]"
     dashboardMenu_xpath = "//button[contains(text(),'Dashboard')]"
@@ -39,6 +40,11 @@ class homePage():
     def clickDashboard(self):
         ClickDashboard = self.driver.find_elements(By.XPATH, self.link_dashboardMenu_xpath)
         ClickDashboard[0].click()
+
+    def clickDashboard2(self):
+        ClickDashboard = self.driver.find_elements(By.XPATH, self.link_dashboardMenu2_xpath)
+        ClickDashboard[0].click()
+
 
     def clickDashboardMenu(self):
         dashboard_menu = self.driver.find_elements(By.XPATH, self.dashboardMenu_xpath)

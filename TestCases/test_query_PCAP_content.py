@@ -11,7 +11,7 @@ import time
 import unittest
 import HtmlTestRunner
 
-# Test pass May 23 2023
+# Test pass oct 13 2023
 
 
 class TestQuery_PCAP_content(unittest.TestCase):
@@ -19,10 +19,10 @@ class TestQuery_PCAP_content(unittest.TestCase):
     password = "Welcome2020!"
     index = "ecs-*"
     startDateValue = "Jun 2, 2021 @ 00:00:00.000"
-    KQL1 = "network.ip_bytes: 216 AND  _id: \"ExVO-YgBA8VWYOo0KVlz\""
+    KQL1 = "_id: \"42ZTKIoBfyohd0T_wwCO\""
     datasource = "network.ip_bytes"
     fieldn1 = "_id"
-    networkip_value = 216
+    networkip_value = 17,713
     _id_value = "ExVO-YgBA8VWYOo0KVlz"
     decod = "decoders-*"
     value = "last"
@@ -70,7 +70,7 @@ class TestQuery_PCAP_content(unittest.TestCase):
         Ip.clickLogin()
         time.sleep(3)
         Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(5)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()
@@ -98,7 +98,7 @@ class TestQuery_PCAP_content(unittest.TestCase):
         dp.clickNow()
         time.sleep(1)
         dp.clickUpdateButton()
-        time.sleep(3)
+        time.sleep(2)
         dp.enterKQL1(self.KQL1)
         time.sleep(1)
         dp.loadingCheck()

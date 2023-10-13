@@ -16,7 +16,7 @@ import unittest
 import HtmlTestRunner
 
 # index name is not same as CCU
-#Test passed may 24 2023 discover copy2 applied
+#Test passed oct 12 2023 discover copy2 applied
 
 #Moon-154 Test Case, Moon-98 User story
 class TestfavIndex(unittest.TestCase):
@@ -58,6 +58,8 @@ class TestfavIndex(unittest.TestCase):
         time.sleep(1)
         lp.clickLogin()
         time.sleep(3)
+        lp.clickdefault()
+        time.sleep(4)
 
 
         hp = homePage(self.driver)
@@ -87,7 +89,7 @@ class TestfavIndex(unittest.TestCase):
 
         dap = dashboardPage(self.driver)
         dap.opendate()
-        time.sleep(2)
+        time.sleep(5)
         dap.selectLastOneyear()
         time.sleep(3)
         dap.addToWorkspace()
@@ -179,6 +181,8 @@ class TestfavIndex(unittest.TestCase):
         lp.setPassword2(self.password2)
         lp.clickLogin()
         time.sleep(12)
+        lp.clickdefault2()
+        time.sleep(2)
 
         hp.clickHambergerMenu()
         hp.clickDashboard()
@@ -222,6 +226,8 @@ class TestfavIndex(unittest.TestCase):
         time.sleep(1)
         lp.clickLogin()
         time.sleep(3)
+        lp.clickdefault2()
+        time.sleep(4)
 
         hp.clickHambergerMenu()
         time.sleep(1)

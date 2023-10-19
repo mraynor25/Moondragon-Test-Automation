@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
-# Test passed sept 22 23 modified
+# Test passed oct 19 23 modified
 # Test Case Moon-610 Document counts over 200,000 hit for Bulk Add Tag
 
 class Test_bulkTag_adddelete(unittest.TestCase):
@@ -45,8 +45,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
 
 
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)

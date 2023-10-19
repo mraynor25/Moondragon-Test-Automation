@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 # Moon-609, Moon-608, Moon-604 Test Cases
-# test passed sept 25 2023 completed test scripts login update
+# test passed oct 19 2023
 
 class Test_bulkTag_adddelete(unittest.TestCase):
     username = "analyst"
@@ -46,8 +46,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
     def test_bulkTag_additionalUser(self):
 
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -143,8 +141,6 @@ class Test_bulkTag_adddelete(unittest.TestCase):
 
         Ip.logout()
         time.sleep(11)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username2)
@@ -280,7 +276,7 @@ class Test_bulkTag_adddelete(unittest.TestCase):
         time.sleep(1)
         Ip.clickLogin()
         time.sleep(2)
-        Ip.clickdefault2()
+        Ip.clickdefault()
         time.sleep(7)
 
         hp.clickHambergerMenu()

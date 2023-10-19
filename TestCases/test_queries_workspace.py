@@ -11,12 +11,11 @@ from PageObject.dashboard_pg import dashboardPage
 from PageObject.workspace_pg import workspacePage
 from selenium.webdriver.common.by import By
 
-
 import time
 import unittest
 import HtmlTestRunner
 
-#Test pass Auguest 1 2023
+#Test pass oct 13 2023
 
 class Test_decoder_dashboard(unittest.TestCase):
     username = "analyst"

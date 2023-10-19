@@ -11,7 +11,7 @@ from PageObject.visualize_pg import visualizePage
 import time
 import unittest
 
-# Test pass may 24 2023 applied discover copy2
+# Test pass oct 13 2023 applied discover copy2
 # Rapid pivoting between views of selected traffic
 #Fix the test for adding last 5 years line 88 errors chose pie chart
 

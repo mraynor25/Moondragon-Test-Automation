@@ -8,7 +8,6 @@ from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
-
 import time
 import unittest
 import HtmlTestRunner
@@ -29,7 +28,6 @@ class Test_decoder_dashboard(unittest.TestCase):
     data_query = "Lucky7"
 
 
-#Test pass May15 2023, changed filter field and value, changed 5 year
     def setUp(cls):
 
         options = Options()

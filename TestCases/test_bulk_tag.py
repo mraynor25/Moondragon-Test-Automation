@@ -12,8 +12,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-#test passed sept 21 2023
-
+#test passed oct 19 2023 modified
 
 
 class Test_bulkTag_adddelete(unittest.TestCase):
@@ -50,11 +49,9 @@ Added Successfully"""
         print(cls.driver.title)
         time.sleep(5)
 
-    def test_IOC_listAdd_delete(self):
+    def test_bulk_tag(self):
 
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)

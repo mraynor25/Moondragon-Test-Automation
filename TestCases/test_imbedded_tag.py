@@ -13,7 +13,7 @@ import time
 import HtmlTestRunner
 
 
-# test failed bug is found because of searching multiple tags in workspace - blocked
+# Test passed sept 26 2023 no longer issue with bug
 # update below
 #Test Case moon-569
 
@@ -229,13 +229,10 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         dap.click_SearchButton()
         time.sleep(3)
         dap.settingIcon_visable()
-        #bug found below because of remaining bug
         dap.click_settingIcon()
         time.sleep(1)
         dap.click_deleteButton()
         time.sleep(1)
-        # dap.completeDelete_on()
-        # time.sleep(1)
         dap.click_deleteTag()
         time.sleep(1)
 

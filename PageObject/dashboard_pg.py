@@ -36,6 +36,7 @@ class dashboardPage():
     checkDateXpath = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
     deleteIconXpath = "//button[contains(@class, 'euiListGroupItem__extraAction')]"
     deleteButtonXpath = "//span[contains(text(),'Delete')]"
+    session_deleteButtonXpath = "//tbody/tr[1]/td[2]/div[1]/div[1]/button[2]"
     getTimeframeClassName = "euiSuperDatePicker__prettyFormat"
     applyButtonXpath = "//span[contains(text(),'Apply')]"
     addToWorkspaceXpath = "//span[contains(text(),'Add to My Workspace')]"
@@ -675,7 +676,7 @@ class dashboardPage():
         delete_icon = self.driver.find_elements(By.XPATH, self.deleteIcon_sessionNotesXpath)
         delete_icon[0].click()
         time.sleep(2)
-        delete_button = self.driver.find_elements(By.XPATH, self.deleteButtonXpath)
+        delete_button = self.driver.find_elements(By.XPATH, self.session_deleteButtonXpath)
         delete_button[0].click()
 
     def delete_toastMsg(self):

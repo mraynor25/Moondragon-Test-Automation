@@ -12,7 +12,7 @@ import re
 import time
 import unittest
 
-#test pass sept 25 2023 modified
+#test pass oct 20 2023 modified
 
 
 class TestMethods_Xpanse(unittest.TestCase):
@@ -41,8 +41,6 @@ class TestMethods_Xpanse(unittest.TestCase):
 
     def test_dashboard_notes(self):
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -118,8 +116,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         dbp.verify_dashboardnotesNotFound(capture_username_time)
 
         Ip.logout()
-        Ip.clickdefault()
-        time.sleep(3)
+        time.sleep(5)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username2)
@@ -128,7 +125,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         time.sleep(2)
         Ip.clickLogin()
         time.sleep(12)
-        Ip.clickdefault2()
+        Ip.clickdefault()
         time.sleep(10)
 
 
@@ -157,8 +154,6 @@ class TestMethods_Xpanse(unittest.TestCase):
 
         Ip.logout()
         time.sleep(5)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)

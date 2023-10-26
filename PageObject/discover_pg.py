@@ -50,7 +50,8 @@ class discoverPage():
     clearSearchFieldXpath = "//button/*[contains(@class,'euiFormControlLayoutClearButton__icon')]"
     searchResult2Xpath = "//*/ul/li[1]/div[1]/div[1]/div[1]/button[1]/span[2]/span[1]"
     enterSearchXpath = "//*/form[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
-    plusIconXpath = "//button[contains(@class,'dscSidebarItem__action')]"
+    # plusIconXpath = "//button[contains(@class,'dscSidebarItem__action' and @aria-label='to table')]"
+    plusIconXpath = "//button[contains(@data-test-subj, 'fieldToggle-')]"
     #plusIconXpath = "//button[@aria-label='Add source.ip_public to table']"
     sensor_namedataXpath = "//*/tr/td[3]/div[1]/span[1]/mark[1]"
     KQL_textboxXpath = "//div[contains(@class, 'kbnQueryBar__textareaWrap')]/textarea"
@@ -78,7 +79,13 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    addFilterFieldXpath = "//input[@placeholder='Enter a value']"
+    # addFilterFieldXpath = "//input[@placeholder='Enter a value']"
+    # addFilterField_CSSselector = "#ic7343a91-7290-11ee-8834-3befa2af893e"
+    # addFilterFieldXpath = "//input[@id='ic7343a91-7290-11ee-8834-3befa2af893e']"
+    # addFilterFieldXpath = "//p[contains(text(),'Select a value')/ancestor::input"
+    addFilterFieldXpath = "//p[@class='euiComboBoxPlaceholder' and text()='Select a value']/following-sibling::div[@class='euiComboBox__input']/input"
+    # addFilterFieldXpath = "//input[@data-test-subj='comboBoxSearchInput']"
+    #addFilterFieldXpath = "//input[contains(@class, 'euiFieldNumber--fullWidth')]"
     addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"
@@ -419,6 +426,7 @@ class discoverPage():
     def clickPlusIcon(self):
         plus_icon_field = self.driver.find_elements(By.XPATH, self.plusIconXpath)
         plus_icon_field[0].click()
+
 
 
     def clickfieldTovisual(self):

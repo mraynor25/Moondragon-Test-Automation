@@ -12,7 +12,7 @@ import re
 import time
 import unittest
 
-#test pass oct 20 2023 modified
+#test pass oct 27 2023 modified
 
 
 class TestMethods_Xpanse(unittest.TestCase):
@@ -36,13 +36,11 @@ class TestMethods_Xpanse(unittest.TestCase):
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(5)
+        # cls.driver.implicitly_wait(2)
 
 
     def test_dashboard_notes(self):
         Ip = loginPage(self.driver)
-        Ip.elasticLogin()
-        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)
@@ -66,14 +64,13 @@ class TestMethods_Xpanse(unittest.TestCase):
 
         dbp = dashboardPage(self.driver)
         dbp.opendate()
-
+        time.sleep(1)
 
         dbp.selectLastOneyear()
-        time.sleep(2)
         dbp.clickAnalystNotes()
         time.sleep(2)
         dbp.clickDashboard_notes()
-        time.sleep(2)
+        time.sleep(20)
         dbp.click_addnotes()
         time.sleep(2)
         dbp.verify_dashboardComment(self.verify_comment)
@@ -116,9 +113,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         dbp.verify_dashboardnotesNotFound(capture_username_time)
 
         Ip.logout()
-        time.sleep(5)
-        Ip.elasticLogin()
-        time.sleep(1)
+        time.sleep(2)
         Ip.setUsername(self.username2)
         time.sleep(1)
         Ip.setPassword(self.password2)
@@ -144,7 +139,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         # print(find_dashnotes)
         # print(capture_username_time)
         assert find_dashnotes == capture_username_time
-        time.sleep(3)
+        time.sleep(7)
 
         dbp.delete_icon_sessionNotes()
         time.sleep(2)
@@ -180,6 +175,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         time.sleep(2)
         find_dash_notes1 = dbp.findDashNotes1()
         print(find_dash_notes1)
+        print(capture_username_time)
         assert find_dash_notes1 == capture_username_time
         dbp.delete_icon_sessionNotes()
         time.sleep(2)

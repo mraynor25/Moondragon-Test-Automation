@@ -11,6 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
+# test failed bug reported oct 30 23
 # Test passed sept 25 2023 modified
 # no Test Case data management created by teammate
 
@@ -36,16 +37,12 @@ class Test_imbeddedTag_delete_add(unittest.TestCase):
         cls.driver.implicitly_wait(5)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(5)
+        # cls.driver.implicitly_wait(5)
         print(cls.driver.title)
 
 
     def test_data_management(self):
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
-        Ip.elasticLogin()
-        time.sleep(1)
         Ip.setUsername(self.username)
         time.sleep(1)
         Ip.setPassword(self.password)

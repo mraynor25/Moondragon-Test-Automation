@@ -26,7 +26,7 @@ class homePage():
         self.driver = driver
 
     def clickHambergerMenu(self):
-        wait = WebDriverWait(self.driver, 15)
+        wait = WebDriverWait(self.driver, 20)
         wait.until(EC.presence_of_element_located((By.XPATH, self.link_homebutton_xpath))
                    )
         Homebutton = self.driver.find_elements(By.XPATH, self.link_homebutton_xpath)

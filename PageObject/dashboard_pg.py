@@ -8,8 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class dashboardPage():
     # Locators of all the elements
     opendateXpath = "//*/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
-    #selectYearXpath = "//button[contains(text(),'Last 1 year')]"
-    selectYearXpath = "//*/fieldset[2]/div[1]/ul[1]/li[10]/button[1]"
+    selectYearXpath = "//button[@data-test-subj='superDatePickerCommonlyUsed_Last_1 year']"
     selectYearXpath2 = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
     enterQueryXpath = "//div[contains(@class, 'kbnQueryBar__textareaWrap')]/textarea"
     pressUpdateXpath = "//span[contains(text(),'Update')]"

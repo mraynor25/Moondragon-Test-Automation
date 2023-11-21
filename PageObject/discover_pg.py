@@ -28,6 +28,8 @@ class discoverPage():
     discoverQueryHitXpath = "//strong[@data-test-subj='discoverQueryHits']"
     AddfilterXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
     addfilter2Xpath = "//*/div[1]/div[1]/div[1]/span[1]/span[1]/button[1]/span[1]/span[1]"
+    arkime_comm_plusIconXpath = "//button[@aria-label='Add arkime_community_id_pivot to table']"
+    arkime_filename_plusIconXpath = "//button[@aria-label='Add arkime_filename_pivot to table']"
     arrowIconXpath = "//*/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/button[1]/*[1]"
     enterFieldXpath = "//input[@data-test-subj='comboBoxSearchInput']"
     selectFieldXpath = "//*/div[1]/div[1]/div[1]/div[1]/button[2]/span[1]/span[1]/span[1]/span[1]"
@@ -79,13 +81,7 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    # addFilterFieldXpath = "//input[@placeholder='Enter a value']"
-    # addFilterField_CSSselector = "#ic7343a91-7290-11ee-8834-3befa2af893e"
-    # addFilterFieldXpath = "//input[@id='ic7343a91-7290-11ee-8834-3befa2af893e']"
-    # addFilterFieldXpath = "//p[contains(text(),'Select a value')/ancestor::input"
     addFilterFieldXpath = "//p[@class='euiComboBoxPlaceholder' and text()='Select a value']/following-sibling::div[@class='euiComboBox__input']/input"
-    # addFilterFieldXpath = "//input[@data-test-subj='comboBoxSearchInput']"
-    #addFilterFieldXpath = "//input[contains(@class, 'euiFieldNumber--fullWidth')]"
     addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"
@@ -161,6 +157,7 @@ class discoverPage():
     arrow_icon_doc_xpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
     arrow_icon_collaps_xpath = "//tbody/tr[1]/td[1]/button[1]"
     im_tag_xpath = "//*/tbody[1]/tr/td[3]/div[1]"
+    NoSearchReturnTextXpath = "//h2[contains(text(),'No results match your search criteria')]"
 
 
 
@@ -421,12 +418,21 @@ class discoverPage():
         enter_searchField = self.driver.find_element(By.XPATH, self.enterSearchXpath)
         enter_searchField.send_keys(sensor)
 
+    def addfilter_fieldname(self, fieldname):
+        enter_searchField = self.driver.find_element(By.XPATH, self.enterSearchXpath)
+        enter_searchField.send_keys(fieldname)
 
 
     def clickPlusIcon(self):
         plus_icon_field = self.driver.find_elements(By.XPATH, self.plusIconXpath)
         plus_icon_field[0].click()
 
+    def clickPlusIcon4Arkimefields(self):
+        arkime_comm_plusIcon = self.driver.find_elements(By.XPATH, self.arkime_comm_plusIconXpath)
+        arkime_comm_plusIcon[0].click()
+        time.sleep(1)
+        arkime_comm_plusIcon2 = self.driver.find_elements(By.XPATH, self.arkime_filename_plusIconXpath)
+        arkime_comm_plusIcon2[0].click()
 
 
     def clickfieldTovisual(self):
@@ -690,6 +696,13 @@ class discoverPage():
         enterKQL[0].send_keys(Keys.DELETE)
         time.sleep(2)
         enterKQL[0].send_keys(KQL3)
+
+    def enterKQL4(self, KQL4):
+        enterKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
+        enterKQL[0].send_keys(Keys.CONTROL + "a")
+        enterKQL[0].send_keys(Keys.DELETE)
+        time.sleep(2)
+        enterKQL[0].send_keys(KQL4)
 
 
     def verifySenName(self, sen_name):
@@ -1379,6 +1392,12 @@ class discoverPage():
             assert tag_name in tag_1
             assert tag_name2 in tag_1
             break
+
+    def verify_searchReturnisNot_displayed(self):
+        search_return_results = self.driver.find_elements(By.XPATH, self.NoSearchReturnTextXpath)[0].text
+        assert "No results match your search criteria" == search_return_results
+
+
 
 
 

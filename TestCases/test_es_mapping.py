@@ -11,21 +11,20 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed sept 25 2023 modified
 
 
-class Test_IOCList(unittest.TestCase):
+class Test_ElasticSearchMapping(unittest.TestCase):
     username = "analyst"
     password = "Welcome2020!"
-    username2 = "analyst2"
-    password2 = "Welcome2020!"
     index = "ecs-*"
-    IOC_title = "ABC IOC list to view"
-    field_data = "source.ip"
-    selectors_data = "98.175.230.2"
-    field_data2 = "destination.ip"
-    selectors_data2 = "68.105.28.16"
-    notes = "This is my destination ip notes"
+    sensor = "sensor.filename"
+    fieldname = "arkime"
+    KQL = "not _index: \"*v1.7.7*\" AND NOT arkime_filename_pivot : * AND sensor.filename : \"*cap\""
+    KQL2 = "not _index: \"*v1.7.7*\" AND arkime_filename_pivot : * AND sensor.filename : \"*log\""
+    KQL3 = "arkime_filename_pivot : * and NOT sensor.filename : \"*pcap\" AND NOT sensor.filename: *cap and not _index: \"*v1.7.7*\""
+    KQL4 = ". not _index: \"*v1.7.7*\" and arkime_filename_pivot : * and sensor.filename : \"*json\""
+
+
 
     def setUp(cls):
         options = Options()
@@ -39,12 +38,10 @@ class Test_IOCList(unittest.TestCase):
         cls.driver.implicitly_wait(5)
 
 
-    def test_IOC_list(self):
+    def test_elastic_mapping(self):
 
 
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -69,129 +66,50 @@ class Test_IOCList(unittest.TestCase):
         dp.enter_ECSIndex(self.index)
         dp.selectECS_index()
         time.sleep(2)
-        dp.OpenDate()
+
+        dp.add_sensor(self.sensor)
+        time.sleep(3)
+        dp.clickPlusIcon()
+        time.sleep(2)
+        dp.clearSearchField()
+        time.sleep(2)
+        dp.addfilter_fieldname(self.fieldname)
+        time.sleep(2)
+        dp.clickPlusIcon4Arkimefields()
+        time.sleep(2)
+        dp.enterKQL(self.KQL)
+        time.sleep(2)
+        dp.clickUpdateButton()
+        time.sleep(2)
+        dp.verify_searchReturnisNot_displayed()
         time.sleep(1)
-        dp.selectYear()
-        time.sleep(2)
-
-        ip = IOCListPage(self.driver)
-        ip.open_IOCList()
-        time.sleep(2)
-        ip.click_createIOCList()
-        time.sleep(2)
-        ip.load_createIOCpg()
-        ip.enter_listTitle(self.IOC_title)
-        time.sleep(2)
-        ip.select_IOCFile()
-        time.sleep(2)
-        ip.click_generateList()
-        time.sleep(2)
-        ip.verify_toast_Msg()
-        ip.click_copyFilter()
-        time.sleep(2)
-        ip.click_saveList()
+        dp.clear_KQLfield()
         time.sleep(1)
-        ip.IOCListCreated_ToastMsg()
-        ip.close_IOCList()
+        dp.enterKQL2(self.KQL2)
         time.sleep(2)
-
-        dp.Addfilter()
+        dp.clickUpdateButton()
         time.sleep(2)
-        dp.click_editAsQyery()
-        time.sleep(3)
-        dp.editAsQueryForm()
-        time.sleep(3)
-        dp.click_saveQuery()
-        time.sleep(2)
-
-        ip.open_IOCList()
-        time.sleep(2)
-        ip.IOCList_editAppendList(self.IOC_title, self.field_data, self.selectors_data, self.field_data2, self.selectors_data2, self.notes)
-
-        dp.add_filter()
-        time.sleep(2)
-        dp.click_editAsQyery()
-        time.sleep(3)
-        dp.editAsQueryForm()
-        time.sleep(3)
-        dp.createCustomLabel()
-        time.sleep(2)
-        dp.enterCustomLabel(self.IOC_title)
-        time.sleep(3)
-        dp.click_saveQuery()
-        time.sleep(2)
-
-
-        Ip.logout()
-        time.sleep(10)
-        Ip.clickdefault()
-        time.sleep(3)
-        Ip.elasticLogin()
+        dp.verify_searchReturnisNot_displayed()
         time.sleep(1)
-        Ip.setUsername(self.username2)
+        dp.clear_KQLfield()
+        dp.enterKQL3(self.KQL3)
         time.sleep(1)
-        Ip.setPassword(self.password2)
+        dp.clickUpdateButton()
         time.sleep(2)
-        Ip.clickLogin()
-        time.sleep(12)
-        Ip.clickdefault2()
-        time.sleep(4)
-
-        hp.clickHambergerMenu()
+        dp.verify_searchReturnisNot_displayed()
         time.sleep(2)
-        hp.clickDiscover()
-        time.sleep(2)
-
-        ip.open_IOCList()
-        time.sleep(3)
-        ip.verify_IOClist4Buttons(self.IOC_title)
-        ip.click_download_IOC()
-        time.sleep(2)
-
-
-        Ip.logout()
-        time.sleep(2)
-        Ip.waituntilUsername_appear()
-        Ip.clickdefault()
-        time.sleep(3)
-        Ip.elasticLogin()
+        dp.enterKQL4(self.KQL4)
         time.sleep(1)
-        Ip.setUsername(self.username)
-        time.sleep(1)
-        Ip.setPassword(self.password)
+        dp.clickUpdateButton()
         time.sleep(2)
-        Ip.clickLogin()
-        time.sleep(12)
-        Ip.clickdefault2()
-        time.sleep(4)
-
-        hp.clickHambergerMenu()
-        time.sleep(1)
-        hp.clickDiscover()
-        time.sleep(1)
-
-        ip.open_IOCList()
-        time.sleep(3)
-        ip.search_IOClist(self.IOC_title)
+        dp.verify_searchReturnisNot_displayed()
         time.sleep(2)
+
+
 
 
 
     def tearDown(self):
-        ip = IOCListPage(self.driver)
-        ip.select_IOCName()
-        time.sleep(2)
-        ip.click_more()
-        time.sleep(1)
-        ip.remove_IOCList()
-        time.sleep(2)
-        ip.open_IOCList()
-        time.sleep(2)
-        ip.search_IOClist(self.IOC_title)
-        time.sleep(1)
-        ip.verify_deletedIOCList()
-
-
 
 
         self.driver.close()

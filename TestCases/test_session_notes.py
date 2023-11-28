@@ -43,6 +43,8 @@ class TestMethods_sessionNotes(unittest.TestCase):
         time.sleep(1)
         lp.clickLogin()
         time.sleep(3)
+        lp.clickdefault()
+        time.sleep(2)
 
         hp = homePage(self.driver)
         hp.clickHambergerMenu()

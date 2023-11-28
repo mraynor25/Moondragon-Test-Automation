@@ -217,7 +217,7 @@ class TestfavIndex(unittest.TestCase):
         time.sleep(2)
 
         added2ndDash = wp.added2ndUser_workspace()
-        lp.logout4user() # could be problem with time out because of all the config errors
+        lp.logout4user()
         time.sleep(4)
         lp.elasticLogin()
         lp.setUsername(self.username)

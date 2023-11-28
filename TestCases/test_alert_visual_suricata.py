@@ -46,8 +46,6 @@ class TestAlert_suricata(unittest.TestCase):
 
     def test_alert_suricata(self):
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -96,6 +94,7 @@ class TestAlert_suricata(unittest.TestCase):
         dap.SaveQuery()
         time.sleep(1)
         dap.verify_alertRuleQuery()
+        time.sleep(1)
         dap.dashboard_menu()
         time.sleep(2)
 
@@ -106,7 +105,7 @@ class TestAlert_suricata(unittest.TestCase):
 
         dap.openSaveQuery()
         time.sleep(3)
-        dap.verifySavedQuery2()
+        dap.verifySavedQuery3()
         dap.verify_alert_suricata()
 
 

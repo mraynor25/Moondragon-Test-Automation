@@ -94,7 +94,6 @@ class loginPage():
 
 
 
-
     def logout(self):
         Logoutmenu = self.driver.find_elements(By.XPATH, self.logoutMenuXpath)
         Logoutmenu[0].click()
@@ -103,6 +102,9 @@ class loginPage():
         Logoutlink[0].click()
 
     def logout4user(self):
+        wait = WebDriverWait(self.driver, 30)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.logoutMenuXpath))
+                   )
         Logoutmenu = self.driver.find_elements(By.XPATH, self.logoutMenuXpath)
         Logoutmenu[0].click()
         time.sleep(1)

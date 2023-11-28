@@ -314,12 +314,28 @@ class dashboardPage():
             clickRunquery = self.driver.find_elements(By.XPATH, self.SensorQueryXpath)
             clickRunquery[0].click()
 
+    def verifySavedQuery3(self):
+        total_pg = len(self.driver.find_elements(By.XPATH, self.total_pgXpath))
+
+        if total_pg > 1:
+            nextpg = self.driver.find_elements(By.XPATH, "//*/div[3]/div[1]/div[2]/div[1]/nav[1]/button[" + str(total_pg) + "]")
+            nextpg[0].click()
+            time.sleep(3)
+            clickRunquery = self.driver.find_elements(By.XPATH, self.ruleQueryXpath)
+            clickRunquery[0].click()
+        else:
+            clickRunquery = self.driver.find_elements(By.XPATH, self.ruleQueryXpath)
+            clickRunquery[0].click()
+
 
     def verifyQuery(self):
         Verifyquery = self.driver.find_elements(By.XPATH, self.enterQueryXpath)[0].text
         assert "destination.ip: 194.5.249.157 or rule.category: A Network Trojan was detected" == Verifyquery
 
     def verify_alertRuleQuery(self):
+        wait = WebDriverWait(self.driver, 4)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.ruleQuery_alertMsgXpath))
+                   )
         alert_message = self.driver.find_elements(By.XPATH, self.ruleQuery_alertMsgXpath)[0].text
         assert "Your query \"Rule_Query\" was saved" == alert_message
 
@@ -647,7 +663,9 @@ class dashboardPage():
 
 
     def click_SessionNotesTab(self):
-
+        wait = WebDriverWait(self.driver, 30)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.session_notesXpath))
+                   )
         SessionNotes_tab = self.driver.find_elements(By.XPATH, self.session_notesXpath)
         SessionNotes_tab[0].click()
         time.sleep(2)

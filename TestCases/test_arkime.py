@@ -19,21 +19,23 @@ import HtmlTestRunner
 
 class Test_arkime(unittest.TestCase):
     username = "analyst"
-    password = "Welcome2020"
+    password = "Welcome2020!"
     IndexName = "ecs-zeek-*"
-    KQL2 = "sensor.filename : \"dd-03-230131.cap\""
-    fieldname = "arkime filename pivot"
+    # KQL2 = "sensor.filename : \"dd-03-230131.cap\""
+    KQL2 = "sensor.filename : \"/mnt/pcap/active/dm/dm-01/23/01/18/part-2-IcedID-C2-then-Cobalt-Strike-carved-and-sanitized.pcap\""
+    fieldname = "arkime_filename_pivot"
     fieldname2 = "sensor.filename"
-    Query = "file == \"*dd-03-230131.cap\" && port.dst == 80 && ip.dst == 144.121.162.12"
-    file_data = "/mnt/pcap/active/dd/dd-03/23/01/31/dd-03-230131.cap"
-    ip_dst = "144.121.162.12"
-    port_dst = "80"
-    Query2 = "file == \"*dd-03-230131.cap\" && packets == 1"
-    pockets = "1"
-    pockets_integer = 1
-    Query3 = "tags == dd && tags == dd-03"
-    sen_name = "dd-03"
-    ops_check = "dd"
+    Query = "file == \"*part-2-IcedID-C2-then-Cobalt-Strike-carved-and-sanitized.pcap\" && port.dst == 443 && ip.dst == 80.77.25.65"
+    # file_data = "/mnt/pcap/active/dd/dd-03/23/01/31/dd-03-230131.cap"
+    file_data = "/mnt/pcap/active/dm/dm-01/23/01/18/part-2-IcedID-C2-then-Cobalt-Strike-carved-and-sanitized.pcap"
+    ip_dst = "80.77.25.65"
+    port_dst = "443"
+    Query2 = "file == \"*part-2-IcedID-C2-then-Cobalt-Strike-carved-and-sanitized.pcap\" && packets == 21"
+    pockets = "21"
+    pockets_integer = 21
+    Query3 = "tags == dm && tags == dm-01"
+    sen_name = "dm-01"
+    ops_check = "dm"
 
 
 
@@ -43,15 +45,13 @@ class Test_arkime(unittest.TestCase):
         options.add_argument('--ignore-certificate-errors')
         cls.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         cls.driver.implicitly_wait(15)
-        # self.driver.maximize_window()
+        cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
         cls.driver.implicitly_wait(20)
         print(cls.driver.title)
         time.sleep(5)
 
     def test_arkime_query(self):
-
-
 
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
@@ -68,7 +68,7 @@ class Test_arkime(unittest.TestCase):
         hp.clickHambergerMenu()
         time.sleep(1)
         hp.clickDiscover()
-        time.sleep(3)
+        time.sleep(2)
 
         dp = discoverPage(self.driver)
         dp.openIndex()
@@ -76,7 +76,7 @@ class Test_arkime(unittest.TestCase):
         dp.enterIndex(self.IndexName)
         time.sleep(2)
         dp.selectZeek_index()
-        time.sleep(7)
+        time.sleep(2)
         dp.OpenDate()
         time.sleep(1)
         dp.selectYear()
@@ -85,8 +85,10 @@ class Test_arkime(unittest.TestCase):
         time.sleep(3)
         dp.enterQuery_1(self.KQL2)
         time.sleep(1)
-        dp.search_searchfield(self.fieldname)
+        dp.clickUpdateButton()
         time.sleep(2)
+        dp.search_searchfield(self.fieldname)
+        time.sleep(3)
         dp.add_searchResults_click_plusicon()
         time.sleep(2)
         dp.clearSearchField()
@@ -96,14 +98,14 @@ class Test_arkime(unittest.TestCase):
         dp.add_searchResults_click_plusicon()
         time.sleep(2)
         dp.clickUpdateButton()
-        time.sleep(10)
+        time.sleep(3)
         dp.clickArkime_link()
-        time.sleep(6)
+        time.sleep(4)
 
 
         ap = arkimePage(self.driver)
         ap.switchToArkime_pg()
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(7)
         ap.verifyActualFile_ToggleTag(self.file_data)
         ap.clearSearchbox()
         time.sleep(1)

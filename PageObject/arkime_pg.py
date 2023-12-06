@@ -26,7 +26,7 @@ class arkimePage():
     packets_label_xpath = "/div[3]/table[1]/thead[1]/tr[1]/th/span[1]"
     packet_button_xpath = "//*/form[1]/fieldset[1]/span[1]/div[1]/div[1]/button[1]"
     raw_packetOption_xpath = "//a[contains(text(), 'Show Raw Packets')]"
-    actual_file_data_xpath = "//*/dd[11]/span[1]/span[1]/span[1]/span[1]/a[1]/span[1]"
+    actual_file_data_xpath = "//*/dd[12]/span[1]/span[1]/span[1]/span[1]/a[1]/span[1]"
     count_packets_xpath = "//tbody/tr/td[1]/div[1]/div[3]/div/div[1]/div[1]"
     sen_name_xpath = "//*/tr/td[12]/span[1]/span[1]/span[1]/span[1]/div[1]/div[18]/div[1]/span[1]/span[2]/span[1]/span[1]/span[1]/span[1]/a[1]/span[1]"
     ops_xpath = "//*/tr/td[12]/span[1]/span[1]/span[1]/span[1]/div[1]/div[18]/div[1]/span[1]/span[1]/span[1]/span[1]/span[1]/span[1]/a[1]/span[1]"
@@ -172,6 +172,7 @@ class arkimePage():
             time.sleep(3)
 
             count_pocket = len(self.driver.find_elements(By.XPATH, self.count_packets_xpath))
+            print(count_pocket)
             assert count_pocket == pockets_integer
             time.sleep(2)
 

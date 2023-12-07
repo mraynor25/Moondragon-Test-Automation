@@ -52,9 +52,9 @@ class loginPage():
             PressLogin[0].click()
 
     def clickdefault(self):
-        # if len(self.driver.find_elements(By.XPATH, self.defaultlink_xpath)) > 0:
-        clickDefault = self.driver.find_elements(By.XPATH, self.defaultlink_xpath)
-        clickDefault[0].click()
+        if len(self.driver.find_elements(By.XPATH, self.defaultlink_xpath)) > 0:
+            clickDefault = self.driver.find_elements(By.XPATH, self.defaultlink_xpath)
+            clickDefault[0].click()
 
     def clickdefault2(self):
         wait = WebDriverWait(self.driver, 30)

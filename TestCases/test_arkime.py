@@ -11,7 +11,7 @@ from PageObject.arkime_pg import arkimePage
 
 from selenium import webdriver
 import HtmlTestRunner
-
+# bug found dec 7 23  Moon-812
 # test failed due to arkime filename pivot does not exist in the lab may15 2023
 
 #Feature Moon-385 Automate ability to test Arkime

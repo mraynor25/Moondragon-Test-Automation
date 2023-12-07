@@ -63,7 +63,6 @@ class discoverPage():
     sen_ipdataxpath = "//*/tbody/tr/td[5]/div[1]/span[1]"
     selectIndexXpath = "//mark[@class='euiMark']"
     removeFilterXpath = "//*/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]/button[2]/*[1]"
-    #expand_arrow_iconXpath = "//tbody/tr[1]/td[1]/button[1]/span[1]/span[1]/*[1]"
     expand_arrow_iconXpath = "//*/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/span[1]/button[1]"
     table_tabXpath = "//span[contains(text(),'Table')]"
     get_idXpath = "//div[@class='kbnDocViewer__value']"
@@ -104,7 +103,7 @@ class discoverPage():
     pagin_row100Xpath = "//*/div[2]/div[1]/div[1]/div[1]/button[3]/span[1]/span[1]"
     sensorNameXpath = "//mark[text()='sensor.name']"
     ecsArkimeLink_linktext = "Arkime Filename Pivot"
-    arkimeLinkXpath = "//*/div[2]/div[4]/div[1]/div[1]/div[1]/span[1]/a[1]"
+    arkimeLinkXpath = "//tbody/tr[1]/td[3]/div[1]/a[1]"
     decoderIndexXpath = "//mark[contains(text(),'decoders-*')]"
     indexnameXpath = "//input[@aria-label='Filter options']"
     pcapdataXpath = "//mark[contains(text(), 'fj-16-210725.cap')]"
@@ -158,6 +157,9 @@ class discoverPage():
     arrow_icon_collaps_xpath = "//tbody/tr[1]/td[1]/button[1]"
     im_tag_xpath = "//*/tbody[1]/tr/td[3]/div[1]"
     NoSearchReturnTextXpath = "//h2[contains(text(),'No results match your search criteria')]"
+    nutcrackerXpath = "//tbody/tr/td[5]/div[1]/a[1]"
+    nutcrackerLinkText = "Nutcracker Pivot"
+    arkimeXpath = "//tbody/tr/td[4]/div[1]/a[1]"
 
 
 
@@ -423,6 +425,11 @@ class discoverPage():
         enter_searchField.send_keys(fieldname)
 
 
+    def addfilter_fieldname2(self, fieldname2):
+        enter_searchField = self.driver.find_element(By.XPATH, self.enterSearchXpath)
+        enter_searchField.send_keys(fieldname2)
+
+
     def clickPlusIcon(self):
         plus_icon_field = self.driver.find_elements(By.XPATH, self.plusIconXpath)
         plus_icon_field[0].click()
@@ -431,6 +438,10 @@ class discoverPage():
         arkime_comm_plusIcon = self.driver.find_elements(By.XPATH, self.arkime_comm_plusIconXpath)
         arkime_comm_plusIcon[0].click()
         time.sleep(1)
+        arkime_comm_plusIcon2 = self.driver.find_elements(By.XPATH, self.arkime_filename_plusIconXpath)
+        arkime_comm_plusIcon2[0].click()
+
+    def clickPlusIcon4Arkimefield(self):
         arkime_comm_plusIcon2 = self.driver.find_elements(By.XPATH, self.arkime_filename_plusIconXpath)
         arkime_comm_plusIcon2[0].click()
 
@@ -964,6 +975,11 @@ class discoverPage():
         EnterUserKQL[0].clear()
         EnterUserKQL[0].send_keys(KQL)
 
+    def enterKQL_1(self, KQL_1):
+        EnterUserKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
+        EnterUserKQL[0].clear()
+        EnterUserKQL[0].send_keys(KQL_1)
+
     def toggleOn_savedQueryTimefilter(self):
         timefilter_toggle = self.driver.find_elements(By.NAME, self.timefilter_ToggleButtonName)
         timefilter_toggle[0].click()
@@ -1269,8 +1285,6 @@ class discoverPage():
                 assert (source_ip_pub2 == col_3.text or destin_ip_pub == col_4.text)
 
 
-
-
     def verify_dest_ip_pub(self, destin_ip_pub):
         table_col_dest = self.driver.find_elements(By.XPATH, self.table_col_dest_xpath)
         for col_4 in table_col_dest:
@@ -1396,6 +1410,28 @@ class discoverPage():
     def verify_searchReturnisNot_displayed(self):
         search_return_results = self.driver.find_elements(By.XPATH, self.NoSearchReturnTextXpath)[0].text
         assert "No results match your search criteria" == search_return_results
+
+    def verify_nutcraker_value(self, valueofnutcracker):
+
+        nut_value = len(self.driver.find_elements(By.XPATH, self.nutcrackerXpath))
+
+        for nut in range(1, nut_value + 1, 2):
+            nut_value_link = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(nut) + "]/td[5]/div[1]/a[1]")[0].text
+            assert nut_value_link == valueofnutcracker
+
+
+    def verify_arkime_value(self, valueofArkime):
+        ark_value = len(self.driver.find_elements(By.XPATH, self.arkimeXpath))
+
+        for ark in range(1, ark_value + 1, 2):
+            arkime_value_link = self.driver.find_elements(By.XPATH, "//tbody/tr[" + str(ark) + "]/td[4]/div[1]/a[1]")[0].text
+            assert valueofArkime == arkime_value_link
+
+
+
+
+
+
 
 
 

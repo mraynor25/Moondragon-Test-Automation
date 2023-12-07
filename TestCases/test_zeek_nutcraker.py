@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-
+# Test passed Dec 7 2023
 
 class Test_ElasticSearchMapping(unittest.TestCase):
     username = "analyst"
@@ -23,7 +23,6 @@ class Test_ElasticSearchMapping(unittest.TestCase):
     valueofnutcracker = "Nutcracker Pivot"
     valueofArkime = "Arkime Filename Pivot"
     KQL = "nutcracker_pivot : * AND sensor.filename : *pcap"
-    # KQL = "not _index: \"*v1.7.7*\" AND NOT arkime_filename_pivot : * AND sensor.filename : \"*cap\""
     KQL2 = "nutcracker_pivot : * AND sensor.filename : *log AND not _index: \"*v1.7.8*\""
     KQL3 = "nutcracker_pivot : * AND sensor.filename : *cap AND not _index: \"*v1.7.8*\""
     # KQL4 = "not _index: \"*v1.7.7*\" and arkime_filename_pivot : * and sensor.filename : \"*json\""
@@ -96,10 +95,6 @@ class Test_ElasticSearchMapping(unittest.TestCase):
         time.sleep(2)
 
 
-        # dp.enterKQL(self.KQL)
-        # time.sleep(2)
-        # dp.clickUpdateButton()
-        # time.sleep(2)
         dp.clear_KQLfield()
         time.sleep(1)
         dp.enterKQL2(self.KQL2)
@@ -119,21 +114,7 @@ class Test_ElasticSearchMapping(unittest.TestCase):
         dp.verify_arkime_value(self.valueofArkime)
         time.sleep(2)
 
-        # dp.verify_searchReturnisNot_displayed()
-        # time.sleep(1)
-        # dp.clear_KQLfield()
-        # dp.enterKQL3(self.KQL3)
-        # time.sleep(1)
-        # dp.clickUpdateButton()
-        # time.sleep(2)
-        # dp.verify_searchReturnisNot_displayed()
-        # time.sleep(2)
-        # dp.enterKQL4(self.KQL4)
-        # time.sleep(1)
-        # dp.clickUpdateButton()
-        # time.sleep(2)
-        # dp.verify_searchReturnisNot_displayed()
-        # time.sleep(2)
+
 
 
 

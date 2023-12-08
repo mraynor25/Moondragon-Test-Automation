@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed sept 25 2023 modified
+# Test passed dec 8 2023
 
 
 class Test_IOCList(unittest.TestCase):

@@ -12,7 +12,7 @@ import re
 import time
 import unittest
 
-#test pass oct 27 2023 modified
+#test pass Dec 8 2023 
 
 
 class TestMethods_Xpanse(unittest.TestCase):
@@ -174,8 +174,8 @@ class TestMethods_Xpanse(unittest.TestCase):
         dbp.clickDashboard_notes()
         time.sleep(2)
         find_dash_notes1 = dbp.findDashNotes1()
-        print(find_dash_notes1)
-        print(capture_username_time)
+        # print(find_dash_notes1)
+        # print(capture_username_time)
         assert find_dash_notes1 == capture_username_time
         dbp.delete_icon_sessionNotes()
         time.sleep(2)

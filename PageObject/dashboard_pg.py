@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class dashboardPage():
     # Locators of all the elements
-    opendateXpath = "//*/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]/span[1]"
+    opendateXpath = "//button[@aria-label='Date quick select']/span[1]/*[1]"
     selectYearXpath = "//button[@data-test-subj='superDatePickerCommonlyUsed_Last_1 year']"
     selectYearXpath2 = "//*/fieldset[1]/div[3]/div[3]/div[1]/div[1]/select[1]"
     enterQueryXpath = "//div[contains(@class, 'kbnQueryBar__textareaWrap')]/textarea"
@@ -722,16 +722,11 @@ class dashboardPage():
         dash_note_submit[0].click()
 
     def verify_entered_dashnotes(self, dash_notes):
-        # dashNotes = self.driver.find_elements(By.XPATH, "//*/tr/td[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]")
-        # for n in dashNotes:
-        #     if self.driver.find_elements(By.XPATH, "//*/tr[" + str(n) + "]/td[1]/div[1]/div[1]/div[1]/div[2]/div[1]")[0].text == capture_username_time:
-        #         assert n[0].text == dash_notes
-        #     else:
-        #         assert False
+
 
         entered_dashNotes = self.driver.find_elements(By.XPATH, self.addedDashNotes1Xpath)[0].text
         assert entered_dashNotes == dash_notes
-        print(entered_dashNotes)
+        # print(entered_dashNotes)
 
 
 

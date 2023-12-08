@@ -11,8 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-# Test passed sept 25 2023 modified
-
+# Test passed dec 8 2023
 
 class Test_search_IOCList(unittest.TestCase):
     username = "analyst"
@@ -40,8 +39,6 @@ class Test_search_IOCList(unittest.TestCase):
 
     def test_IOC_searchlist(self):
         Ip = loginPage(self.driver)
-        Ip.clickdefault()
-        time.sleep(3)
         Ip.elasticLogin()
         time.sleep(1)
         Ip.setUsername(self.username)
@@ -49,7 +46,6 @@ class Test_search_IOCList(unittest.TestCase):
         Ip.setPassword(self.password)
         time.sleep(2)
         Ip.clickLogin()
-        time.sleep(12)
         Ip.clickdefault2()
         time.sleep(10)
 

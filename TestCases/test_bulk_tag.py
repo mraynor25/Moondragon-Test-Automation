@@ -12,7 +12,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
-#test passed oct 19 2023 modified
+#test passed dec 8 2023 modified
 
 
 class Test_bulkTag_adddelete(unittest.TestCase):

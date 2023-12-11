@@ -10,6 +10,7 @@ from PageObject.dashboardSearch_pg import dashboardSearchPage
 from PageObject.dashboard_pg import dashboardPage
 import time
 
+#Test passed dec 11 2023
 
 class TestMethods_Xpanse(unittest.TestCase):
     username = "analyst"
@@ -29,9 +30,9 @@ class TestMethods_Xpanse(unittest.TestCase):
         cls.driver.implicitly_wait(15)
         cls.driver.maximize_window()
         cls.driver.get('https://kibana2.moondragon.lan/')
-        cls.driver.implicitly_wait(20)
+        cls.driver.implicitly_wait(5)
         print(cls.driver.title)
-        time.sleep(5)
+
 
     def test_saveShare_query(self):
         Ip = loginPage(self.driver)
@@ -41,8 +42,8 @@ class TestMethods_Xpanse(unittest.TestCase):
         Ip.setPassword(self.password)
         time.sleep(1)
         Ip.clickLogin()
-        time.sleep(3)
-        Ip.clickdefault()
+        time.sleep(5)
+        Ip.clickdefault2()
         time.sleep(2)
 
         hp = homePage(self.driver)
@@ -54,10 +55,11 @@ class TestMethods_Xpanse(unittest.TestCase):
         dsp = dashboardSearchPage(self.driver)
         dsp.enterSearchDashboard(self.dashboard_name)
         dsp.clickSuricatalink()
+        time.sleep(1)
 
         dap = dashboardPage(self.driver)
         dap.opendate()
-        time.sleep(6)
+        time.sleep(2)
         dap.select_Year()
         time.sleep(2)
         dap.enterKQL_query(self.Query_1)
@@ -81,7 +83,7 @@ class TestMethods_Xpanse(unittest.TestCase):
         dap.radioButton_snapshot()
         time.sleep(1)
         dap.copyLink()
-        time.sleep(3)
+        time.sleep(10)
 
         Ip.logout()
         time.sleep(11)

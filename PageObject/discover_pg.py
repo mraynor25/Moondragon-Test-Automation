@@ -971,6 +971,11 @@ class discoverPage():
         clickFav_indexOption = self.driver.find_elements(By.XPATH, self.fav_indexoptionXpath)
         clickFav_indexOption[0].click()
 
+    def enterPreKQL(self, pre_KQL):
+        EnterUserKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
+        EnterUserKQL[0].clear()
+        EnterUserKQL[0].send_keys(pre_KQL)
+
     def enterKQL(self, KQL):
         EnterUserKQL = self.driver.find_elements(By.XPATH, self.KQL_textboxXpath)
         EnterUserKQL[0].clear()

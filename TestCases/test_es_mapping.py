@@ -5,12 +5,13 @@ from selenium import webdriver
 from PageObject.login_pg import loginPage
 from PageObject.home_pg import homePage
 from PageObject.discover_pg import discoverPage
-from PageObject.ioclist_pg import IOCListPage
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import HtmlTestRunner
 
+# Moon-743 user story
+# Test Passed dec 11 modified
 
 
 class Test_ElasticSearchMapping(unittest.TestCase):
@@ -19,11 +20,11 @@ class Test_ElasticSearchMapping(unittest.TestCase):
     index = "ecs-*"
     sensor = "sensor.filename"
     fieldname = "arkime"
-    KQL = "not _index: \"*v1.7.7*\" AND NOT arkime_filename_pivot : * AND sensor.filename : \"*cap\""
-    KQL2 = "not _index: \"*v1.7.7*\" AND arkime_filename_pivot : * AND sensor.filename : \"*log\""
-    KQL3 = "arkime_filename_pivot : * and NOT sensor.filename : \"*pcap\" AND NOT sensor.filename: *cap and not _index: \"*v1.7.7*\""
-    KQL4 = ". not _index: \"*v1.7.7*\" and arkime_filename_pivot : * and sensor.filename : \"*json\""
-
+    pre_KQL = "arkime_filename_pivot : *"
+    KQL = "not _index: \"*v1.7.8*\" AND NOT arkime_filename_pivot : * AND sensor.filename : \"*cap\""
+    KQL2 = "not _index: \"*v1.7.8*\" AND arkime_filename_pivot : * AND sensor.filename : \"*log\""
+    KQL3 = "arkime_filename_pivot : * and NOT sensor.filename : \"*pcap\" AND NOT sensor.filename: *cap and not _index: \"*v1.7.8*\""
+    KQL4 = "not _index: \"*v1.7.8*\" and arkime_filename_pivot : * and sensor.filename : \"*json\""
 
 
     def setUp(cls):
@@ -39,7 +40,6 @@ class Test_ElasticSearchMapping(unittest.TestCase):
 
 
     def test_elastic_mapping(self):
-
 
         Ip = loginPage(self.driver)
         Ip.elasticLogin()
@@ -67,6 +67,10 @@ class Test_ElasticSearchMapping(unittest.TestCase):
         dp.selectECS_index()
         time.sleep(2)
 
+        dp.enterPreKQL(self.pre_KQL)
+        time.sleep(2)
+        dp.clickUpdateButton()
+        time.sleep(2)
         dp.add_sensor(self.sensor)
         time.sleep(3)
         dp.clickPlusIcon()
@@ -77,6 +81,8 @@ class Test_ElasticSearchMapping(unittest.TestCase):
         time.sleep(2)
         dp.clickPlusIcon4Arkimefields()
         time.sleep(2)
+        dp.clear_KQLfield()
+        time.sleep(1)
         dp.enterKQL(self.KQL)
         time.sleep(2)
         dp.clickUpdateButton()

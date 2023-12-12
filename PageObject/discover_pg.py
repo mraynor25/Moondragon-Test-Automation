@@ -80,8 +80,10 @@ class discoverPage():
     fav_indexoptionXpath = "//mark[contains(text(),'favorited-dashboards*')]"
     numofrecXpath = "//strong[@data-test-subj='discoverQueryHits']"
     select_IndexXpath = "//*/ul[1]/li[2]/span[1]/span[1]/span[1]/mark[1]"
-    # addFilterFieldXpath = "//p[@class='euiComboBoxPlaceholder' and text()='Select a value']/following-sibling::div[@class='euiComboBox__input']/input"
-    addFilterFieldXpath = "//div[@class='euiFormControlLayout__childrenWrapper']/input[@placeholder='Enter a value']"
+    addFilterFieldXpath = "//p[@class='euiComboBoxPlaceholder' and text()='Select a value']/following-sibling::div[@class='euiComboBox__input']/input"
+    # addFilterFieldXpath = "//div[@class='euiFormControlLayout__childrenWrapper']/child::input[@placeholder='Enter a value']"
+    #addFilterFieldXpath = "//input[contains(@class, 'euiFieldNumber--fullWidth') and @placeholder='Enter a value']"
+    # addFilterFieldXpath = "//*/div[@class='euiFormRow__fieldWrapper']/div[1]/div[1]/input[1]"
     addedFilterValFieldXpath = "//*/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     getSensorXpath = "//tbody/tr/td[4]/div[1]/span[1]"
     getSensorFileXpath = "//tbody/tr/td[5]/div[1]/span[1]"
@@ -317,9 +319,9 @@ class discoverPage():
         Enter_dropdown = self.driver.find_elements(By.XPATH, self.enterDropdownXpath)
         Enter_dropdown[0].send_keys(data)
 
-    def enter_addedFilterField(self, addedfilter_field):
-        EnterField = self.driver.find_elements_by_xpath("//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]")
-        EnterField[0].send_keys(addedfilter_field)
+    # def enter_addedFilterField(self, addedfilter_field):
+    #     EnterField = self.driver.find_elements_by_xpath("//*/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]")
+    #     EnterField[0].send_keys(addedfilter_field)
 
 
     def enter_addfilterField(self, field):

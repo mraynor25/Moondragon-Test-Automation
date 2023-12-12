@@ -11,7 +11,8 @@ import time
 import unittest
 import HtmlTestRunner
 
-
+# Test scripts modified for test data and locator
+# line 161 gives error because there is no suricata data available therefore, test failed dec 12 2023
 #Test passed oct 26 2023 modified
 #test case, V.1.1 release (Consolidated Field Mapping for ecs-*)
 
@@ -28,7 +29,7 @@ class Test_ecs_index(unittest.TestCase):
     datasource2 = "destination"
     datasource = "source"
     sensor = "sensor.name"
-    KQL = "sensor.filename: \"/mnt/pcap/active/dm/dm-01/23/08/17/dm-01-230817.pcap\" AND source.ip: \"172.16.160.128\""
+    KQL = "source.ip: 10.4.19.136 and sensor.filename : \"/mnt/pcap/active/mr/dm-01/230419/zeek/interface/timestamp/dns.log\""
     sen_file = "sensor.filename"
     source = "source.ip"
     sen_name = "dm-01"
@@ -104,6 +105,7 @@ class Test_ecs_index(unittest.TestCase):
         time.sleep(2)
         dp.selectIsMenu()
         time.sleep(3)
+
         dp.enter_addfilterField(self.field)
         time.sleep(5)
         dp.clickSave()
@@ -147,6 +149,10 @@ class Test_ecs_index(unittest.TestCase):
         time.sleep(2)
         dp.removeFilter()
         time.sleep(4)
+        dp.clear_KQLfield()
+        time.sleep(1)
+        dp.clickUpdateButton()
+        time.sleep(1)
         dp.Addfilter()
         time.sleep(2)
         dp.clickarrowIcon()
@@ -154,6 +160,7 @@ class Test_ecs_index(unittest.TestCase):
         dp.enterSensorName(self.sen_name)
         time.sleep(2)
         dp.select_sensorName_addfilter()
+        time.sleep(1)
         dp.clickarrowIcon()
         time.sleep(3)
         dp.selectIsMenu()
